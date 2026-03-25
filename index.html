@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elton Group - Refonte Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Official Elton Brand Colors (from dev.elton.ci) */
+            --elton-blue: #1a73b5;
+            --elton-red: #e5003d;
+            --elton-secondary: #e7f0f7;
+            --elton-dark: #333333;
+            /* Aliases */
+            --primary-blue: #1a73b5;
+            --accent: #e5003d;
+            --bg-color: #ffffff;
+            --bg-sections: #e7f0f7;
+            --text-color: #333333;
+            --nav-bg: rgba(26, 115, 181, 0.97);
+            --glass-bg: rgba(26, 115, 181, 0.08);
+            --glass-border: rgba(26, 115, 181, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="elton-warm"] {
+            --bg-color: #e7f0f7;
+            --bg-sections: #ffffff;
+            --text-color: #333333;
+            --glass-bg: rgba(26, 115, 181, 0.05);
+            --nav-bg: rgba(26, 115, 181, 0.97);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color) url('bg-waves.svg') repeat-y center top;
+            background-size: 100% auto;
+            background-attachment: fixed;
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        h1, h2, h3, h4, h5, h6, .brand {
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            background: white;
+            border-radius: 8px;
+            padding: 4px 10px;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--elton-red);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 200px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            color: var(--primary-blue);
+            text-decoration: none;
+            padding: 10px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown a:last-child { border-bottom: none; }
+        .dropdown a:hover { color: var(--elton-red); padding-left: 5px; }
+
+        .btn-client {
+            background: var(--elton-red);
+            color: #ffffff !important;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .btn-client:hover {
+            transform: translateY(-2px);
+            background: #c90036;
+            box-shadow: 0 6px 20px rgba(229,0,61,0.35);
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 100px 10%;
+            position: relative;
+        }
+
+        .vibrant-bg {
+            background: linear-gradient(135deg, #1a73b5 0%, #0d4f82 100%);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--elton-red);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--elton-blue);
+            box-shadow: 0 12px 30px rgba(26,115,181,0.15);
+        }
+
+        .card icon-box {
+            color: var(--elton-red);
+            margin-bottom: 20px;
+        }
+
+        /* --- CHAT WIDGET --- */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chat-window.active { display: flex !important; }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .color-inputs {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="color"] {
+            border: none;
+            width: 100%;
+            height: 35px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn-reset {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #eee;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-reset:hover { background: #ddd; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #001021;
+            color: white;
+            padding: 80px 10%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--elton-red);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 25px;
+            color: var(--elton-red);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover { color: white; }
+
+        .btn-footer-map {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--elton-red);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            border: none;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .btn-footer-map:hover {
+            background: #c90036;
+        }
+
+        /* --- UTILS --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header .translate {
+            position: absolute;
+            top: 20px;
+            right: 5%;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes heroTextIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .hero-slide {
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-slide.active {
+            display: block;
+            text-align: center;
+        }
+
+        .icon-box {
+            transition: var(--transition);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.2) rotate(5deg);
+            animation-play-state: paused;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <!-- Header / Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <img src="elton_logo_official.png" alt="Elton Group - Une nouvelle vision du service">
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link">Accueil</a></li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">À propos <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="#qui-sommes-nous">Qui sommes-nous</a>
+                    <a href="#mot-president">Mot du Président</a>
+                    <a href="#mot-dg">Mot du DG</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Nos Produits <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="#lubrifiants">Lubrifiants</a>
+                    <a href="#carburants">Carburants</a>
+                    <a href="#actualites">Nos Offres</a>
+                </div>
+            </li>
+            <li><a href="#carrieres" class="nav-link">Carrières</a></li>
+            <li><a href="#actualites" class="nav-link">Actualités</a></li>
+            <li><a href="#footer" class="nav-link">Contact</a></li>
+            <li class="nav-item">
+                <a href="#" class="nav-link btn-client">Espace Client <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="#assistance">Assistance</a>
+                    <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
+                    <a href="#station-map">Trouver une station</a>
+                </div>
+            </li>
+        </ul>
+
+        <div id="google_translate_element" style="display: none;"></div>
+        <div class="translate">
+            <i data-lucide="languages" style="color: white; cursor: pointer;"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <video autoplay muted loop playsinline id="hero-video" poster="hero_fallback.jpg">
+            <source src="hero_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" style="width: 100%; max-width: 1000px; margin: 0 auto; padding-bottom: 120px;">
+            <!-- Slide 1 -->
+            <div class="hero-slide active">
+                <h1 style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">L'énergie de <br><span style="color: var(--elton-red);">l'Émergence</span></h1>
+                <p style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">Leader de la distribution pétrolière au Sénégal, nous accompagnons votre mobilité avec excellence.</p>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="hero-slide">
+                <h1 style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">Expertise & <br><span style="color: var(--elton-red);">Performance</span></h1>
+                <p style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">Des carburants et lubrifiants de pointe conçus pour la longévité de votre moteur.</p>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-slide">
+                <h1 style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">Innovation & <br><span style="color: var(--elton-red);">Proximité</span></h1>
+                <p style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">Un réseau modernisé et des services digitaux exclusifs pour simplifier votre quotidien.</p>
+            </div>
+
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 30px;">
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="#qui-sommes-nous" class="btn-client" style="text-decoration: none; padding: 15px 40px; min-width: 200px;">Découvrir Elton</a>
+                    <a href="#station-map" class="btn-client" style="background: transparent; color: white !important; border: 2px solid white; text-decoration: none; padding: 15px 40px; min-width: 200px;">Nos Stations</a>
+                </div>
+                
+                <!-- Hero Dots -->
+                <div style="display: flex; justify-content: center; gap: 12px;">
+                    <span class="hero-dot active" style="width: 35px; height: 5px; background: var(--elton-red); border-radius: 5px; cursor: pointer; transition: 0.4s;" data-index="0"></span>
+                    <span class="hero-dot" style="width: 35px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 5px; cursor: pointer; transition: 0.4s;" data-index="1"></span>
+                    <span class="hero-dot" style="width: 35px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 5px; cursor: pointer; transition: 0.4s;" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section id="qui-sommes-nous" class="vibrant-bg reveal">
+        <h2 class="section-title">Qui Sommes-Nous ?</h2>
+        <div class="grid">
+            <div class="card reveal" style="transition-delay: 0.1s;">
+                <i data-lucide="shield-check" class="icon-box" style="width: 48px; height: 48px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                <h3>Excellence & Qualité</h3>
+                <p>Première société multinationale sénégalaise de distribution de produits pétroliers, Elton Group s'engage chaque jour pour l'excellence opérationnelle et la satisfaction client.</p>
+            </div>
+            <div class="card reveal" style="transition-delay: 0.3s;">
+                <i data-lucide="users" class="icon-box" style="width: 48px; height: 48px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                <h3>Vision Africaine</h3>
+                <p>Ancrés dans nos valeurs, nous développons une identité chaleureuse et dynamique, fidèle à notre héritage tout en étant tournés vers l'avenir technologique.</p>
+            </div>
+            <div class="card reveal" style="transition-delay: 0.5s;" id="mot-president">
+                <i data-lucide="quote" class="icon-box" style="width: 48px; height: 48px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                <h3>Mot du Président</h3>
+                <p>"Notre mission est de fournir une énergie accessible et durable pour soutenir la croissance de nos partenaires et de notre pays."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lubricants Section -->
+    <section id="lubrifiants" class="reveal" style="padding: 100px 20px; background: var(--bg-sections);">
+        <div class="container" style="text-align: center; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center;">
+            <h2 class="section-title">Nos Lubrifiants</h2>
+            <br>
+            <h3 style="color: var(--elton-blue); font-family: 'Ubuntu', sans-serif; margin-bottom: 10px;">À quoi sert Huile moteur et Lubrifiant ?</h3>
+            <p style="max-width: 800px; text-align: center; color: var(--elton-dark);">Les différentes fonctions que les huiles moteur assurent sont primordiales pour préserver le bon état du moteur. Découvrez nos huiles et lubrifiants très haute performance adaptés à tous vos besoins.</p>
+            <br>
+            <a href="#" class="btn-client reveal" style="background: transparent; color: var(--elton-blue) !important; border: 2px solid var(--elton-blue); text-decoration: none;">Commander en ligne</a>
+        </div>
+        <div class="grid">
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.1s;">
+                <div style="height: 200px; background: url('lub1.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Haute Performance</h3>
+                    <p style="margin-bottom: 20px;">Nos huiles synthétiques garantissent une protection maximale de votre moteur dans toutes les conditions.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">Découvrir la gamme <i data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.2s;">
+                <div style="height: 200px; background: url('lub2.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Protection Longue Durée</h3>
+                    <p style="margin-bottom: 20px;">Une formule unique qui réduit l'usure et prolonge la durée de vie de vos équipements industriels.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.3s;">
+                <div style="height: 200px; background: url('lub1.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Économie de Carburant</h3>
+                    <p style="margin-bottom: 20px;">Des lubrifiants optimisés pour réduire les frottements internes et abaisser votre consommation.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.4s;">
+                <div style="height: 200px; background: url('lub2.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Huiles Industrielles</h3>
+                    <p style="margin-bottom: 20px;">Une gamme complète répondant aux spécifications les plus exigeantes de l'industrie.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fuels Section -->
+    <section id="carburants" class="container reveal" style="padding: 100px 20px;">
+        <div style="text-align: center; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center;">
+            <h2 class="section-title">Nos Carburants</h2>
+            <br>
+            <h3 style="color: var(--elton-blue); font-family: 'Ubuntu', sans-serif; margin-bottom: 10px;">Super Sans Plomb ELTON</h3>
+            <p style="max-width: 700px; text-align: center; color: var(--elton-dark);">L'essence Super sans plomb est un mélange d'hydrocarbures, il est utilisé comme carburant à haute performance dans les moteurs à combustion interne. Des produits de qualité pour une performance optimale et durable.</p>
+            <br>
+            <a href="#" class="btn-client reveal" style="background: transparent; color: var(--elton-blue) !important; border: 2px solid var(--elton-blue); text-decoration: none;">Commander</a>
+        </div>
+        <div class="grid">
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.1s;">
+                <div style="height: 200px; background: url('car1.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Super Sans Plomb</h3>
+                    <p style="margin-bottom: 20px;">Un carburant additivé pour nettoyer les injecteurs, réduire la consommation et améliorer les performances.</p>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.2s;">
+                <div style="height: 200px; background: url('car2.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Gasoil Premium</h3>
+                    <p style="margin-bottom: 20px;">Formulé pour les moteurs diesel modernes, il protège contre la corrosion et assure un démarrage optimal.</p>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.3s;">
+                <div style="height: 200px; background: url('car1.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Pétrole Lampant</h3>
+                    <p style="margin-bottom: 20px;">Un produit de haute pureté destiné aux usages domestiques et à certains équipements spécifiques.</p>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.4s;">
+                <div style="height: 200px; background: url('car2.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Gasoil Pêche</h3>
+                    <p style="margin-bottom: 20px;">Carburant spécialement adapté aux exigences des professionnels du secteur maritime et de la pêche.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="actualites" class="reveal">
+        <h2 class="section-title">Actualités & Nouveautés</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 50px auto; color: var(--elton-dark); font-family: 'Poppins', sans-serif;">Restez informé des dernières actualités et promotions de notre réseau de stations, nos services et nos équipes sur le terrain.</p>
+        <div class="grid">
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.1s;">
+                <div style="height: 200px; background: url('hero_fallback.jpg') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <span style="font-size: 0.7rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase;">PROMOTION</span>
+                    <h4 style="margin: 10px 0; font-size: 1.1rem;">Lavage à vapeur Quick Wash Bio</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 20px;">Découvrez notre nouveau service de lavage écologique à vapeur pour un nettoyage en profondeur.</p>
+                    <a href="#" style="color: var(--primary-blue); font-weight: 800; text-decoration: none; font-size: 0.8rem;">LIRE LA SUITE</a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.2s;">
+                <div style="height: 200px; background: url('station.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <span style="font-size: 0.7rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase;">ÉVÉNEMENT</span>
+                    <h4 style="margin: 10px 0; font-size: 1.1rem;">Lancement de la Carte Elton Gold</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 20px;">Une nouvelle expérience de paiement et de fidélité pour nos clients privilégiés.</p>
+                    <a href="#" style="color: var(--primary-blue); font-weight: 800; text-decoration: none; font-size: 0.8rem;">LIRE LA SUITE</a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.3s;">
+                <div style="height: 200px; background: var(--elton-blue); display: flex; align-items: center; justify-content: center;">
+                    <i data-lucide="coffee" style="width: 80px; height: 80px; color: var(--elton-red);"></i>
+                </div>
+                <div style="padding: 30px;">
+                    <span style="font-size: 0.7rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase;">SERVICES</span>
+                    <h4 style="margin: 10px 0; font-size: 1.1rem;">Elton Oasis : Un moment de détente</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 20px;">Profitez de nos espaces cafés et boutiques lors de votre prochain passage en station.</p>
+                    <a href="#" style="color: var(--primary-blue); font-weight: 800; text-decoration: none; font-size: 0.8rem;">LIRE LA SUITE</a>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div style="text-align: center;">
+            <a href="#" class="btn-client" style="text-decoration: none;">Voir toutes les actualités</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="temoignages" class="vibrant-bg" style="text-align: center; position: relative;">
+        <h2 class="section-title">L'Expérience de nos Clients</h2>
+        
+        <div class="testimonial-wrapper" style="position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding-bottom: 20px;">
+            <div id="testimonial-slides" style="display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); width: 100%;">
+                
+                <!-- Slide 1 -->
+                <div class="slide" style="min-width: 100%; box-sizing: border-box; padding: 20px 40px;">
+                    <i data-lucide="quote" style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
+                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Le service chez Elton est incomparable. Les stations sont propres, le personnel est chaleureux et la boutique propose une qualité exceptionnelle."</p>
+                    <h4 style="color: var(--elton-red);">Amadou Diop</h4>
+                    <span style="font-size: 0.8rem; opacity: 0.7;">Client Fidèle depuis 2018</span>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="slide" style="min-width: 100%; box-sizing: border-box; padding: 20px 40px;">
+                    <i data-lucide="quote" style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
+                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Avec la carte Elton, la gestion du carburant de mon entreprise est devenue un jeu d'enfant. Le service client est toujours très réactif et pro."</p>
+                    <h4 style="color: var(--elton-red);">Fatou Ndiaye</h4>
+                    <span style="font-size: 0.8rem; opacity: 0.7;">Gérante de Flotte B2B</span>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="slide" style="min-width: 100%; box-sizing: border-box; padding: 20px 40px;">
+                    <i data-lucide="quote" style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
+                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Mes pauses sur l'autoroute ne se font plus qu'aux stations Oasis. Le café est excellent et l'entretien auto super rapide. Une vraie pause détente."</p>
+                    <h4 style="color: var(--elton-red);">Cheikh Fall</h4>
+                    <span style="font-size: 0.8rem; opacity: 0.7;">Voyageur Fréquent</span>
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <button id="slider-prev" style="position: absolute; top: 45%; left: -10px; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; color: white; padding: 10px; z-index: 10; transition: 0.3s;"><i data-lucide="chevron-left" style="width: 40px; height: 40px;"></i></button>
+            <button id="slider-next" style="position: absolute; top: 45%; right: -10px; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; color: white; padding: 10px; z-index: 10; transition: 0.3s;"><i data-lucide="chevron-right" style="width: 40px; height: 40px;"></i></button>
+            
+            <!-- Dots -->
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                <span class="slide-dot" style="width: 12px; height: 12px; border-radius: 50%; background: var(--elton-red); cursor: pointer; transition: 0.3s;" data-index="0"></span>
+                <span class="slide-dot" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s;" data-index="1"></span>
+                <span class="slide-dot" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s;" data-index="2"></span>
+            </div>
+            
+            <style>
+                #slider-prev:hover, #slider-next:hover { color: var(--elton-red) !important; transform: translateY(-50%) scale(1.1); }
+                .slide-dot:hover { background: white !important; }
+            </style>
+        </div>
+    </section>
+
+    <!-- Map & Services Section -->
+    <section id="station-map">
+        <h2 class="section-title">Nos Stations Services</h2>
+        <div style="background: url('station.png') no-repeat center center; background-size: cover; height: 600px; border-radius: 20px; display: flex; align-items: center; justify-content: center; position: relative; border: 4px solid var(--primary-blue);">
+            <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; text-align: center; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                <i data-lucide="map-pin" style="color: var(--primary-blue); width: 40px; height: 40px;"></i>
+                <h3 style="color: var(--primary-blue); margin: 10px 0;">Trouvez la station la plus proche</h3>
+                <p style="color: #666; font-size: 0.9rem; text-align: center;">Accédez à notre réseau de stations premium et profitez de tous nos services.</p>
+                <button class="btn-client" style="border: none; cursor: pointer; margin-top: 15px;">Ouvrir la carte</button>
+            </div>
+            
+            <!-- Floating Service Icons Simulation -->
+            <div style="position: absolute; bottom: 30px; left: 30px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); display: flex; gap: 20px;">
+                <div style="text-align: center;"><i data-lucide="droplets" title="Lavage" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Lavage</div></div>
+                <div style="text-align: center;"><i data-lucide="shopping-cart" title="Boutique" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Boutique</div></div>
+                <div style="text-align: center;"><i data-lucide="coffee" title="Restaurant" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Espace Café</div></div>
+                <div style="text-align: center;"><i data-lucide="wrench" title="Espace Auto" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Entretien</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="carrieres" class="reveal" style="padding: 100px 5%;">
+        <h2 class="section-title">Carrières & Recrutement</h2>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Why Join Us? -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px;">
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;" class="hover-lift">
+                    <i data-lucide="zap" style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                    <h4 style="color: var(--elton-blue); margin-bottom: 10px;">Innovation & Énergie</h4>
+                    <p style="font-size: 0.9rem; color: #666;">Participez à la transformation énergétique du Sénégal avec des projets innovants.</p>
+                </div>
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;" class="hover-lift">
+                    <i data-lucide="graduation-cap" style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                    <h4 style="color: var(--elton-blue); margin-bottom: 10px;">Formation Continue</h4>
+                    <p style="font-size: 0.9rem; color: #666;">Développez vos compétences avec nos programmes d'accompagnement personnalisés.</p>
+                </div>
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;" class="hover-lift">
+                    <i data-lucide="users" style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                    <h4 style="color: var(--elton-blue); margin-bottom: 10px;">Impact Local</h4>
+                    <p style="font-size: 0.9rem; color: #666;">Rejoignez une entreprise fière de ses racines et engagée pour sa communauté.</p>
+                </div>
+            </div>
+
+            <!-- Job Listings -->
+            <div style="background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+                <div style="padding: 30px; border-bottom: 1px solid rgba(26,115,181,0.1); display: flex; justify-content: space-between; align-items: center; background: rgba(26,115,181,0.05);">
+                    <h3 style="margin: 0; color: var(--elton-blue); font-family: 'Ubuntu', sans-serif;">Offres d'emploi actuelles (3)</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <span style="background: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--elton-blue); border: 1px solid rgba(26,115,181,0.2);">CDI</span>
+                        <span style="background: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--elton-blue); border: 1px solid rgba(26,115,181,0.2);">Dakar</span>
+                    </div>
+                </div>
+
+                <!-- Job Item 1 -->
+                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.3s;" class="job-item">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div style="width: 50px; height: 50px; background: rgba(26,115,181,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-blue);">
+                            <i data-lucide="activity"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Analyste Exploitation Pétrolière</h4>
+                            <div style="display: flex; gap: 15px; margin-top: 5px; color: #888; font-size: 0.85rem;">
+                                <span><i data-lucide="map-pin" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Dakar, Sénégal</span>
+                                <span><i data-lucide="clock" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Il y a 2 jours</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-client" style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
+                </div>
+
+                <!-- Job Item 2 -->
+                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.3s;" class="job-item">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div style="width: 50px; height: 50px; background: rgba(229,0,61,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-red);">
+                            <i data-lucide="shield"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Responsable HSE</h4>
+                            <div style="display: flex; gap: 15px; margin-top: 5px; color: #888; font-size: 0.85rem;">
+                                <span><i data-lucide="map-pin" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Dakar, Sénégal</span>
+                                <span><i data-lucide="clock" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Il y a 5 jours</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-client" style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
+                </div>
+
+                <!-- Job Item 3 -->
+                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;" class="job-item">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div style="width: 50px; height: 50px; background: rgba(26,115,181,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-blue);">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Chargé de Clientèle Grands Comptes</h4>
+                            <div style="display: flex; gap: 15px; margin-top: 5px; color: #888; font-size: 0.85rem;">
+                                <span><i data-lucide="map-pin" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Dakar / Remote</span>
+                                <span><i data-lucide="clock" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Il y a 1 semaine</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-client" style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 40px; color: #666; font-size: 0.95rem;">
+                Vous n'avez pas trouvé d'offre correspondante ? <a href="#" style="color: var(--elton-red); font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s;" onmouseover="this.style.borderBottomColor='var(--elton-red)'" onmouseout="this.style.borderBottomColor='transparent'">Envoyer une candidature spontanée</a>
+            </p>
+        </div>
+
+        <style>
+            .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important; }
+            .job-item:hover { background: rgba(26,115,181,0.02); }
+        </style>
+    </section>
+
+    <!-- Prenez rendez-vous Section (NEW) -->
+    <section id="rendez-vous" style="position: relative; padding: 100px 20px; text-align: center; color: white;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('appointment_bg.jpg') no-repeat center center/cover; z-index: 0;"></div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(26,115,181,0.9) 0%, rgba(26,115,181,0.7) 100%); z-index: 1;"></div>
+        
+        <div class="container" style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Ubuntu', sans-serif;">Prenez rendez-vous avec <span style="color: var(--elton-red);">ELTON OIL</span></h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; text-align: center;">Planifiez facilement un rendez-vous avec nos experts et obtenez des conseils personnalisés pour tous vos besoins en produits pétroliers. Choisissez le créneau qui vous convient et laissez-nous vous accompagner dans votre projet.</p>
+            <a href="#" class="btn-client" style="text-decoration: none; padding: 15px 40px; font-size: 1.1rem; background: var(--elton-red);">Réserver maintenant</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" style="background: url('bg-waves.svg') no-repeat center bottom; background-size: cover; padding: 80px 5% 40px; border-top: 1px solid rgba(0,0,0,0.05); position: relative; margin-top: 50px;">
+        <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; max-width: 1200px; margin: 0 auto 60px auto;">
+            <div>
+                <img src="elton_logo_official.png" alt="Elton" style="height: 60px; width: auto; background: transparent; margin-bottom: 25px;">
+                <p style="color: #4a5568; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6;">L'énergie de l'émergence. Leader de la distribution pétrolière au Sénégal, nous vous accompagnons avec qualité, innovation et proximité.</p>
+                <div class="social-icons" style="display: flex; gap: 15px;">
+                    <a href="#" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i data-lucide="facebook"></i></a>
+                    <a href="#" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i data-lucide="linkedin"></i></a>
+                    <a href="#" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i data-lucide="instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
+                <h4 style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">Liens Rapides</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Accueil</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> À Propos</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Produits</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Carrières</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
+                <h4 style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">Nos Services</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> E-Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Lubrifiants</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Oasis Elton</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Assistance</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact" style="font-family: 'Poppins', sans-serif;">
+                <h4 style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">Contact & Accès</h4>
+                <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; color: #4a5568; font-size: 0.95rem;">
+                    <div style="display: flex; gap: 10px; align-items: flex-start;"><i data-lucide="map-pin" style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>Siège Elton Group<br>Dakar, Sénégal</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="phone" style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>+221 33 000 00 00</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="mail" style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>contact@elton.ci</span></div>
+                </div>
+                <a href="#station-map" class="hover-scale" style="display: inline-flex; align-items: center; gap: 10px; background: var(--elton-red); color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 15px rgba(229,0,61,0.3);">
+                    <i data-lucide="map"></i> Trouver une station
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom-bar" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; color: #666; font-size: 0.9rem;">
+            <div>&copy; 2026 Elton Group. L'énergie de l'émergence.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Mentions Légales</a>
+                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Politique de Confidentialité</a>
+            </div>
+        </div>
+        
+        <style>
+            .social-icons a:hover { background: var(--elton-red) !important; color: white !important; transform: translateY(-5px); }
+            .footer-link-item:hover { color: var(--elton-blue) !important; transform: translateX(5px); }
+            .hover-scale:hover { background: white !important; color: var(--elton-red) !important; transform: scale(1.05); }
+            @media (max-width: 768px) {
+                .footer-grid { grid-template-columns: 1fr !important; }
+                .footer-bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+            }
+        </style>
+    </footer>
+
+    <!-- Assistance Chat Widget -->
+    <div id="chat-widget" style="position: fixed; bottom: 30px; right: 30px; z-index: 2000; font-family: 'Poppins', sans-serif;">
+        <div id="chat-btn" title="Besoin d'aide ?" style="width: 60px; height: 60px; background: var(--elton-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px rgba(26,115,181,0.4); transition: var(--transition);">
+            <i data-lucide="message-circle" style="color: white; width: 30px; height: 30px;"></i>
+        </div>
+        <div class="chat-window" id="chat-window" style="position: absolute; bottom: 80px; right: 0; width: 350px; background: white; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; animation: slideUp 0.3s ease;">
+            <div style="background: var(--elton-blue); color: white; padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <h4 style="margin: 0; font-family: 'Ubuntu', sans-serif; display: flex; align-items: center; gap: 10px;"><i data-lucide="headset"></i> Assistant Elton</h4>
+                <i data-lucide="x" id="chat-close" style="cursor: pointer;"></i>
+            </div>
+            <div id="chat-messages" style="padding: 20px; height: 300px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 15px;">
+                <div style="background: var(--elton-secondary); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; color: var(--elton-dark); font-size: 0.9rem;">
+                    Bonjour ! 👋 Comment pouvons-nous vous aider aujourd'hui ?
+                </div>
+            </div>
+            <div style="padding: 15px; background: white; border-top: 1px solid #eee; display: flex; gap: 10px;">
+                <input type="text" id="chat-input" placeholder="Écrivez votre message..." style="flex: 1; border: 1px solid #ddd; padding: 10px 15px; border-radius: 20px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; outline: none;">
+                <button id="chat-send" style="background: var(--elton-red); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer;">
+                    <i data-lucide="send" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide icons with a failsafe
+        function initIcons() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons({
+                    attrs: {
+                        'stroke-width': 2,
+                        'stroke': 'currentColor',
+                        'width': 22,
+                        'height': 22
+                    }
+                });
+            }
+        }
+        
+        // Initial call
+        initIcons();
+        // Failsafe on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', initIcons);
+        // Secondary failsafe if window takes time to load (images/etc)
+        window.onload = initIcons;
+
+        // Chat Widget Logic
+        const chatBtn = document.getElementById('chat-btn');
+        const chatWindow = document.getElementById('chat-window');
+        const chatClose = document.getElementById('chat-close');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+
+        const toggleChat = () => chatWindow.classList.toggle('active');
+        chatBtn.addEventListener('click', toggleChat);
+        chatClose.addEventListener('click', toggleChat);
+
+        const sendMessage = () => {
+            const text = chatInput.value.trim();
+            if(!text) return;
+            
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.style.cssText = "background: var(--elton-blue); color: white; padding: 10px 15px; border-radius: 15px 15px 0 15px; max-width: 80%; align-self: flex-end; font-size: 0.9rem;";
+            userMsg.textContent = text;
+            chatMessages.appendChild(userMsg);
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulate bot reply
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.style.cssText = "background: var(--elton-secondary); color: var(--elton-dark); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; font-size: 0.9rem;";
+                botMsg.textContent = "Merci pour votre message. Un conseiller Elton vous répondra dans un court instant.";
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        };
+
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') sendMessage();
+        });
+
+        // Google Translate Simulation
+        function googleTranslateElementInit() {
+            // This would normally call the Google Translate API
+            console.log("Google Translate Initialized");
+        }
+        
+        // Testimonials Carousel Logic
+        const tSlides = document.getElementById('testimonial-slides');
+        const tPrev = document.getElementById('slider-prev');
+        const tNext = document.getElementById('slider-next');
+        const tDots = document.querySelectorAll('.slide-dot');
+        let tIndex = 0;
+        let slideInterval;
+
+        const updateCarousel = () => {
+            tSlides.style.transform = `translateX(-${tIndex * 100}%)`;
+            tDots.forEach((dot, i) => {
+                dot.style.background = i === tIndex ? 'var(--elton-red)' : 'rgba(255,255,255,0.3)';
+            });
+        };
+
+        const goToNext = () => { tIndex = (tIndex + 1) % 3; updateCarousel(); };
+        const goToPrev = () => { tIndex = (tIndex - 1 + 3) % 3; updateCarousel(); };
+
+        if(tNext && tPrev) {
+            tNext.addEventListener('click', () => { goToNext(); resetInterval(); });
+            tPrev.addEventListener('click', () => { goToPrev(); resetInterval(); });
+            tDots.forEach(dot => dot.addEventListener('click', (e) => { 
+                tIndex = parseInt(e.target.dataset.index); 
+                updateCarousel(); 
+                resetInterval();
+            }));
+            
+            const resetInterval = () => {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(goToNext, 6000);
+            };
+            resetInterval();
+        }
+
+        // Scroll Reveal Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Hero Slider Logic
+        const hSlides = document.querySelectorAll('.hero-slide');
+        const hDots = document.querySelectorAll('.hero-dot');
+        let hIndex = 0;
+        let hInterval;
+
+        const updateHero = () => {
+            hSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === hIndex);
+            });
+            hDots.forEach((dot, i) => {
+                dot.style.background = i === hIndex ? 'var(--elton-red)' : 'rgba(255,255,255,0.3)';
+            });
+        };
+
+        const nextHero = () => { hIndex = (hIndex + 1) % hSlides.length; updateHero(); };
+        
+        const startHeroRotation = () => {
+            hInterval = setInterval(nextHero, 5000);
+        };
+
+        hDots.forEach(dot => dot.addEventListener('click', (e) => {
+            clearInterval(hInterval);
+            hIndex = parseInt(e.target.dataset.index);
+            updateHero();
+            startHeroRotation();
+        }));
+
+        startHeroRotation();
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
