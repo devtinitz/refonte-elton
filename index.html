@@ -463,6 +463,29 @@
             .nav-links { display: none; }
             .hero-content h1 { font-size: 2.5rem; }
             .footer-grid { grid-template-columns: 1fr; }
+            
+            /* High-Fidelity Grids Responsive */
+            #qui-sommes-nous .grid, 
+            #actualites .grid, 
+            #assistance .grid, 
+            #offres .grid,
+            #carrieres .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            #mot-president, #mot-dg, #offres .card {
+                flex-direction: column !important;
+                height: auto !important;
+                min-height: auto !important;
+            }
+            
+            #mot-president div, #mot-dg div, #offres .card div {
+                width: 100% !important;
+            }
+            
+            #mot-president div:first-child, #mot-dg div:first-child, #offres .card div:first-child {
+                height: 200px !important;
+            }
         }
     </style>
 </head>
@@ -489,7 +512,7 @@
                 <div class="dropdown">
                     <a href="#lubrifiants">Lubrifiants</a>
                     <a href="#carburants">Carburants</a>
-                    <a href="#actualites">Nos Offres</a>
+                    <a href="#offres">Nos Offres</a>
                 </div>
             </li>
             <li><a href="#carrieres" class="nav-link">Carrières</a></li>
@@ -620,80 +643,67 @@
         </div>
     </section>
 
-    <!-- Fuels Section -->
-    <section id="carburants" class="container reveal" style="padding: 100px 20px;">
-        <div style="text-align: center; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center;">
-            <h2 class="section-title">Nos Carburants</h2>
-            <br>
-            <h3 style="color: var(--elton-blue); font-family: 'Ubuntu', sans-serif; margin-bottom: 10px;">Super Sans Plomb ELTON</h3>
-            <p style="max-width: 700px; text-align: center; color: var(--elton-dark);">L'essence Super sans plomb est un mélange d'hydrocarbures, il est utilisé comme carburant à haute performance dans les moteurs à combustion interne. Des produits de qualité pour une performance optimale et durable.</p>
-            <br>
-            <a href="#" class="btn-client reveal" style="background: transparent; color: var(--elton-blue) !important; border: 2px solid var(--elton-blue); text-decoration: none;">Commander</a>
-        </div>
-        <div class="grid">
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.1s;">
-                <div style="height: 200px; background: url('car1.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Super Sans Plomb</h3>
-                    <p style="margin-bottom: 20px;">Un carburant additivé pour nettoyer les injecteurs, réduire la consommation et améliorer les performances.</p>
+    <!-- Commercial Offers Section (NEW) -->
+    <section id="offres" class="reveal" style="padding: 100px 5%; background: linear-gradient(135deg, rgba(26,115,181,0.05) 0%, rgba(229,0,61,0.02) 100%);">
+        <h2 class="section-title">Nos Offres Exclusive</h2>
+        <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto;">
+            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; background: white; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.05); display: flex; flex-direction: row; height: 300px;">
+                <div style="width: 40%; background: var(--elton-blue); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <i data-lucide="credit-card" style="width: 100px; height: 100px; color: rgba(255,255,255,0.2); transform: rotate(-15deg);"></i>
+                </div>
+                <div style="width: 60%; padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+                    <span style="color: var(--elton-red); font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;"> Fidélité </span>
+                    <h3 style="margin: 10px 0;">Carte Elton Pass</h3>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Simplifiez vos paiements et cumulez des points à chaque passage en station. Des remises exclusives toute l'année.</p>
+                    <a href="#" class="btn-client" style="align-self: flex-start; text-decoration: none; padding: 10px 25px; font-size: 0.85rem;">Souscrire maintenant</a>
                 </div>
             </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.2s;">
-                <div style="height: 200px; background: url('car2.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Gasoil Premium</h3>
-                    <p style="margin-bottom: 20px;">Formulé pour les moteurs diesel modernes, il protège contre la corrosion et assure un démarrage optimal.</p>
+            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; background: white; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.05); display: flex; flex-direction: row; height: 300px;">
+                <div style="width: 40%; background: var(--elton-red); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <i data-lucide="shopping-bag" style="width: 100px; height: 100px; color: rgba(255,255,255,0.2); transform: rotate(15deg);"></i>
                 </div>
-            </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.3s;">
-                <div style="height: 200px; background: url('car1.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Pétrole Lampant</h3>
-                    <p style="margin-bottom: 20px;">Un produit de haute pureté destiné aux usages domestiques et à certains équipements spécifiques.</p>
-                </div>
-            </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.4s;">
-                <div style="height: 200px; background: url('car2.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Gasoil Pêche</h3>
-                    <p style="margin-bottom: 20px;">Carburant spécialement adapté aux exigences des professionnels du secteur maritime et de la pêche.</p>
+                <div style="width: 60%; padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+                    <span style="color: var(--elton-blue); font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;"> Boutique Oasis </span>
+                    <h3 style="margin: 10px 0;">Le Pack Voyageur</h3>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Profitez d'un combo Café + Croissant + Entretien Pare-brise à prix réduit pour vos trajets longue distance.</p>
+                    <a href="#" class="btn-client" style="align-self: flex-start; text-decoration: none; padding: 10px 25px; font-size: 0.85rem; background: var(--elton-blue);">Découvrir l'offre</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- News Section -->
-    <section id="actualites" class="reveal">
+    <section id="actualites" class="reveal" style="padding: 100px 5%;">
         <h2 class="section-title">Actualités & Nouveautés</h2>
         <p style="text-align: center; max-width: 600px; margin: 0 auto 50px auto; color: var(--elton-dark); font-family: 'Poppins', sans-serif;">Restez informé des dernières actualités et promotions de notre réseau de stations, nos services et nos équipes sur le terrain.</p>
-        <div class="grid">
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.1s;">
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;">
+            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; transition-delay: 0.1s; display: flex; flex-direction: column;">
                 <div style="height: 200px; background: url('hero_fallback.jpg') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <span style="font-size: 0.7rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase;">PROMOTION</span>
-                    <h4 style="margin: 10px 0; font-size: 1.1rem;">Lavage à vapeur Quick Wash Bio</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 20px;">Découvrez notre nouveau service de lavage écologique à vapeur pour un nettoyage en profondeur.</p>
-                    <a href="#" style="color: var(--primary-blue); font-weight: 800; text-decoration: none; font-size: 0.8rem;">LIRE LA SUITE</a>
+                <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column;">
+                    <span style="font-size: 0.7rem; color: var(--elton-red); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">PROMOTION</span>
+                    <h4 style="margin: 10px 0; font-size: 1.15rem; color: var(--elton-blue);">Lavage à vapeur Quick Wash Bio</h4>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Découvrez notre nouveau service de lavage écologique à vapeur pour un nettoyage en profondeur sans produits chimiques.</p>
+                    <a href="#" style="color: var(--elton-red); font-weight: 800; text-decoration: none; font-size: 0.8rem; margin-top: auto; display: inline-flex; align-items: center; gap: 5px;">LIRE LA SUITE <i data-lucide="arrow-right" style="width: 14px;"></i></a>
                 </div>
             </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.2s;">
+            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; transition-delay: 0.2s; display: flex; flex-direction: column;">
                 <div style="height: 200px; background: url('station.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <span style="font-size: 0.7rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase;">ÉVÉNEMENT</span>
-                    <h4 style="margin: 10px 0; font-size: 1.1rem;">Lancement de la Carte Elton Gold</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 20px;">Une nouvelle expérience de paiement et de fidélité pour nos clients privilégiés.</p>
-                    <a href="#" style="color: var(--primary-blue); font-weight: 800; text-decoration: none; font-size: 0.8rem;">LIRE LA SUITE</a>
+                <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column;">
+                    <span style="font-size: 0.7rem; color: var(--elton-red); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">ÉVÉNEMENT</span>
+                    <h4 style="margin: 10px 0; font-size: 1.15rem; color: var(--elton-blue);">Lancement de la Carte Elton Gold</h4>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Une nouvelle expérience de paiement et de fidélité pour nos clients privilégiés. Accédez à un univers d'avantages exclusifs.</p>
+                    <a href="#" style="color: var(--elton-red); font-weight: 800; text-decoration: none; font-size: 0.8rem; margin-top: auto; display: inline-flex; align-items: center; gap: 5px;">LIRE LA SUITE <i data-lucide="arrow-right" style="width: 14px;"></i></a>
                 </div>
             </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.3s;">
+            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; transition-delay: 0.3s; display: flex; flex-direction: column;">
                 <div style="height: 200px; background: var(--elton-blue); display: flex; align-items: center; justify-content: center;">
                     <i data-lucide="coffee" style="width: 80px; height: 80px; color: var(--elton-red);"></i>
                 </div>
-                <div style="padding: 30px;">
-                    <span style="font-size: 0.7rem; color: var(--primary-blue); font-weight: 800; text-transform: uppercase;">SERVICES</span>
-                    <h4 style="margin: 10px 0; font-size: 1.1rem;">Elton Oasis : Un moment de détente</h4>
-                    <p style="font-size: 0.9rem; margin-bottom: 20px;">Profitez de nos espaces cafés et boutiques lors de votre prochain passage en station.</p>
-                    <a href="#" style="color: var(--primary-blue); font-weight: 800; text-decoration: none; font-size: 0.8rem;">LIRE LA SUITE</a>
+                <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column;">
+                    <span style="font-size: 0.7rem; color: var(--elton-red); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">SERVICES</span>
+                    <h4 style="margin: 10px 0; font-size: 1.15rem; color: var(--elton-blue);">Elton Oasis : Détente & Fraîcheur</h4>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Profitez de nos nouveaux espaces cafés et boutiques modernisés lors de votre prochain passage dans notre réseau.</p>
+                    <a href="#" style="color: var(--elton-red); font-weight: 800; text-decoration: none; font-size: 0.8rem; margin-top: auto; display: inline-flex; align-items: center; gap: 5px;">LIRE LA SUITE <i data-lucide="arrow-right" style="width: 14px;"></i></a>
                 </div>
             </div>
         </div>
@@ -869,6 +879,47 @@
             .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important; }
             .job-item:hover { background: rgba(26,115,181,0.02); }
         </style>
+    <!-- Assistance & Help Center Section (NEW) -->
+    <section id="assistance" class="reveal" style="padding: 100px 5%; background: var(--bg-sections);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title">Besoin d'Assistance ?</h2>
+            <p style="color: #666; margin-bottom: 60px; font-family: 'Poppins', sans-serif;">Nos experts sont à votre écoute pour vous accompagner et répondre à toutes vos questions.</p>
+            
+            <div class="grid" style="grid-template-columns: repeat(4, 1fr); gap: 30px;">
+                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
+                    <div style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
+                        <i data-lucide="help-circle"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">FAQ</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Obtenez des réponses immédiates aux questions fréquentes.</p>
+                    <a href="#" style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Consulter <i data-lucide="external-link" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
+                    <div style="width: 60px; height: 60px; background: rgba(229,0,61,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-red);">
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">Support Technique</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Assistance experte pour vos besoins en lubrifiants & carburants.</p>
+                    <a href="#" style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Ouvrir un ticket <i data-lucide="chevron-right" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
+                    <div style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
+                        <i data-lucide="alert-circle"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">Réclamations</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Votre satisfaction est notre priorité. Écrivez-nous directement.</p>
+                    <a href="#footer" style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Nous contacter <i data-lucide="mail" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white; border: 2px solid var(--elton-blue);">
+                    <div style="width: 60px; height: 60px; background: var(--elton-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: white;">
+                        <i data-lucide="message-square"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">Chat en Direct</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Parlez à un conseiller Elton en temps réel maintenant.</p>
+                    <a href="javascript:void(0)" onclick="toggleChat()" style="color: var(--elton-blue); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Démarrer le chat <i data-lucide="play" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Prenez rendez-vous Section (NEW) -->
