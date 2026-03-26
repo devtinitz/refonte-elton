@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elton Group - Refonte Prototype</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
@@ -51,7 +54,13 @@
             transition: var(--transition);
         }
 
-        h1, h2, h3, h4, h5, h6, .brand {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .brand {
             font-family: 'Ubuntu', sans-serif;
             font-weight: 700;
             letter-spacing: 0.5px;
@@ -94,7 +103,6 @@
             padding: 4px 10px;
         }
 
-
         .nav-links {
             display: flex;
             gap: 30px;
@@ -130,7 +138,7 @@
             width: 200px;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
@@ -152,8 +160,14 @@
             border-bottom: 1px solid #eee;
         }
 
-        .dropdown a:last-child { border-bottom: none; }
-        .dropdown a:hover { color: var(--elton-red); padding-left: 5px; }
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            color: var(--elton-red);
+            padding-left: 5px;
+        }
 
         .btn-client {
             background: var(--elton-red);
@@ -168,7 +182,7 @@
         .btn-client:hover {
             transform: translateY(-2px);
             background: #c90036;
-            box-shadow: 0 6px 20px rgba(229,0,61,0.35);
+            box-shadow: 0 6px 20px rgba(229, 0, 61, 0.35);
         }
 
         /* --- HERO SECTION --- */
@@ -183,7 +197,7 @@
             overflow: hidden;
         }
 
-        #hero-video {
+        .hero-video {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -194,6 +208,12 @@
             transform: translate(-50%, -50%);
             z-index: -1;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-video.active {
+            opacity: 1;
         }
 
         .hero-overlay {
@@ -273,7 +293,7 @@
         .card:hover {
             transform: translateY(-8px);
             border-color: var(--elton-blue);
-            box-shadow: 0 12px 30px rgba(26,115,181,0.15);
+            box-shadow: 0 12px 30px rgba(26, 115, 181, 0.15);
         }
 
         .card icon-box {
@@ -283,10 +303,20 @@
 
         /* --- CHAT WIDGET --- */
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .chat-window.active { display: flex !important; }
+
+        .chat-window.active {
+            display: flex !important;
+        }
 
         .control-group {
             margin-bottom: 20px;
@@ -323,7 +353,9 @@
             transition: 0.2s;
         }
 
-        .btn-reset:hover { background: #ddd; }
+        .btn-reset:hover {
+            background: #ddd;
+        }
 
         /* --- FOOTER --- */
         footer {
@@ -365,7 +397,9 @@
             transition: 0.2s;
         }
 
-        .footer-links a:hover { color: white; }
+        .footer-links a:hover {
+            color: white;
+        }
 
         .btn-footer-map {
             display: inline-flex;
@@ -389,13 +423,27 @@
 
         /* --- UTILS --- */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header .translate {
@@ -406,13 +454,27 @@
 
         /* --- ANIMATIONS --- */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .reveal {
@@ -427,14 +489,29 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         @keyframes heroTextIn {
-            0% { opacity: 0; transform: translateY(20px) scale(0.98); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .hero-slide {
@@ -458,288 +535,750 @@
             animation-play-state: paused;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links { display: none; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .footer-grid { grid-template-columns: 1fr; }
-            
-            /* High-Fidelity Grids Responsive */
-            #qui-sommes-nous .grid, 
-            #actualites .grid, 
-            #assistance .grid, 
-            #offres .grid,
-            #carrieres .grid {
+        /* ─── HAMBURGER MENU ─── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1100;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.35s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        /* Mobile nav overlay */
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(26, 115, 181, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            overflow-y: auto;
+            padding: 100px 20px 40px;
+        }
+
+        .mobile-nav-overlay.active {
+            display: flex;
+        }
+
+        .mobile-nav-overlay a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Ubuntu', sans-serif;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .mobile-nav-overlay a:hover {
+            color: var(--elton-red);
+        }
+
+        .mobile-nav-overlay .mobile-divider {
+            width: 60px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+
+        .mobile-nav-overlay .mobile-section-label {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* ─── TABLET (max 1024px) ─── */
+        @media (max-width: 1024px) {
+            section {
+                padding: 80px 5% !important;
+            }
+
+            .section-title {
+                font-size: 2rem !important;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            #actualites .grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        /* ─── MOBILE (max 768px) ─── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 4%;
+                height: 70px !important;
+            }
+
+            .logo img {
+                height: 44px !important;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            /* Hide the desktop assistance button in nav */
+            nav>a.hover-scale {
+                display: none !important;
+            }
+
+            nav>.translate {
+                display: none !important;
+            }
+
+            .btn-client {
+                padding: 6px 14px !important;
+                font-size: 0.75rem !important;
+                letter-spacing: 0;
+            }
+
+            section {
+                padding: 60px 4% !important;
+            }
+
+            .section-title {
+                font-size: 1.7rem !important;
+            }
+
+            .grid {
                 grid-template-columns: 1fr !important;
             }
-            
-            #mot-president, #mot-dg, #offres .card {
+
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-bottom-bar {
+                flex-direction: column !important;
+                gap: 15px !important;
+                text-align: center !important;
+            }
+
+            /* Leadership & offers card layout */
+            #mot-president,
+            #mot-dg,
+            #offres .card {
                 flex-direction: column !important;
                 height: auto !important;
                 min-height: auto !important;
             }
-            
-            #mot-president div, #mot-dg div, #offres .card div {
+
+            #mot-president>div,
+            #mot-dg>div,
+            #offres .card>div {
                 width: 100% !important;
             }
-            
-            #mot-president div:first-child, #mot-dg div:first-child, #offres .card div:first-child {
-                height: 200px !important;
+
+            #mot-president>div:first-child,
+            #mot-dg>div:first-child,
+            #offres .card>div:first-child {
+                height: 180px !important;
+            }
+
+            /* Hero buttons stack */
+            #hero .hero-content>div:first-of-type {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+
+            #hero .btn-client {
+                min-width: unset !important;
+                width: 90vw;
+                max-width: 320px;
+            }
+
+            /* Testimonials font */
+            .slide p {
+                font-size: 1.1rem !important;
+            }
+
+            /* Station map height */
+            #station-map div[style*="height: 600px"] {
+                height: 340px !important;
+            }
+
+            #station-map div[style*="bottom: 30px; left: 30px"] {
+                display: none !important;
+            }
+
+            /* Carrieres job rows */
+            .job-item {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 15px !important;
+            }
+
+            /* Floating button collapse */
+            #sticky-assistance-container {
+                bottom: 90px;
+                right: 18px;
+            }
+
+            #assistance-text {
+                display: none;
+            }
+
+            #btn-assistance {
+                padding: 15px;
+                border-radius: 50%;
+            }
+
+            /* Chat window full-width */
+
+        }
+
+        /* ─── SMALL MOBILE (max 480px) ─── */
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.4rem !important;
+            }
+
+            section {
+                padding: 40px 4% !important;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem !important;
+            }
+
+            .btn-client {
+                padding: 10px 18px !important;
+                font-size: 0.85rem !important;
+            }
+
+            .card {
+                padding: 25px !important;
+            }
+
+            /* About histoire section */
+            #histoire .container {
+                flex-direction: column !important;
+            }
+
+            #histoire img {
+                height: 260px !important;
+            }
+
+            /* Activities cards */
+            #activites .grid>div {
+                min-height: 320px !important;
             }
         }
     </style>
 </head>
+
 <body id="main-body">
 
     <!-- Header / Navigation -->
     <nav>
-        <a href="#" class="logo">
+        <a href="index.html" class="logo">
             <img src="elton_logo_official.png" alt="Elton Group - Une nouvelle vision du service">
         </a>
 
         <ul class="nav-links">
-            <li><a href="#" class="nav-link">Accueil</a></li>
+            <li><a href="index.html" class="nav-link">Accueil</a></li>
             <li class="nav-item">
-                <a href="#" class="nav-link">À propos <i data-lucide="chevron-down"></i></a>
+                <a href="about.html" class="nav-link">À propos <i data-lucide="chevron-down"></i></a>
                 <div class="dropdown">
-                    <a href="#qui-sommes-nous">Qui sommes-nous</a>
-                    <a href="#mot-president">Mot du Président</a>
-                    <a href="#mot-dg">Mot du DG</a>
+                    <a href="about.html">Qui sommes-nous</a>
+                    <a href="about.html#mot-president">Mot du Président</a>
+                    <a href="about.html#mot-dg">Mot du DG</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Nos Produits <i data-lucide="chevron-down"></i></a>
+                <a href="products.html" class="nav-link">Nos Produits <i data-lucide="chevron-down"></i></a>
                 <div class="dropdown">
-                    <a href="#lubrifiants">Lubrifiants</a>
-                    <a href="#carburants">Carburants</a>
-                    <a href="#offres">Nos Offres</a>
+                    <a href="products.html#lubrifiants">Lubrifiants</a>
+                    <a href="products.html#carburants">Carburants</a>
+                    <a href="products.html#offres">Nos Offres</a>
                 </div>
             </li>
-            <li><a href="#carrieres" class="nav-link">Carrières</a></li>
-            <li><a href="#actualites" class="nav-link">Actualités</a></li>
-            <li><a href="#footer" class="nav-link">Contact</a></li>
+            <li><a href="careers.html" class="nav-link">Carrières</a></li>
+            <li><a href="news.html" class="nav-link">Actualités</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
             <li class="nav-item">
                 <a href="#" class="nav-link btn-client">Espace Client <i data-lucide="chevron-down"></i></a>
                 <div class="dropdown">
-                    <a href="#assistance">Assistance</a>
+                    <a href="contact.html#assistance">Assistance</a>
                     <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
-                    <a href="#station-map">Trouver une station</a>
+                    <a href="contact.html#station-map">Trouver une station</a>
                 </div>
             </li>
         </ul>
 
         <div id="google_translate_element" style="display: none;"></div>
-        <div class="translate">
+        <div class="translate" style="display:flex; align-items:center; gap:12px;">
             <i data-lucide="languages" style="color: white; cursor: pointer;"></i>
         </div>
+
+        <!-- Hamburger button -->
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <span class="mobile-section-label">Navigation</span>
+        <a href="index.html">Accueil</a>
+        <div class="mobile-divider"></div>
+        <a href="about.html">À Propos</a>
+        <a href="about.html#mot-president">Mot du Président</a>
+        <a href="about.html#mot-dg">Mot du DG</a>
+        <div class="mobile-divider"></div>
+        <a href="products.html">Nos Produits</a>
+        <a href="products.html#lubrifiants">Lubrifiants</a>
+        <a href="products.html#carburants">Carburants</a>
+        <div class="mobile-divider"></div>
+        <a href="careers.html">Carrières</a>
+        <a href="news.html">Actualités</a>
+        <a href="contact.html">Contact</a>
+        <div class="mobile-divider"></div>
+        <span class="mobile-section-label">Espace Client</span>
+        <a href="contact.html#assistance">Assistance</a>
+        <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
+        <a href="contact.html#station-map">Trouver une station</a>
+    </div>
 
     <!-- Hero Section -->
     <section id="hero">
-        <video autoplay muted loop playsinline id="hero-video" poster="hero_fallback.jpg">
-            <source src="hero_video.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline class="hero-video active" poster="hero_fallback.jpg">
+            <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518661/1_qjnrek.mp4" type="video/mp4">
+        </video>
+
+        <video autoplay muted loop playsinline class="hero-video" poster="hero_fallback.jpg">
+            <source src=https://res.cloudinary.com/dulkosnbo/video/upload/v1774518671/2_vbxucx.mp4" type="video/mp4">
+        </video>
+
+        <video autoplay muted loop playsinline class="hero-video" poster="hero_fallback.jpg">
+            <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518670/3_drutaa.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content" style="width: 100%; max-width: 1000px; margin: 0 auto; padding-bottom: 120px;">
             <!-- Slide 1 -->
             <div class="hero-slide active">
-                <h1 style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">L'énergie de <br><span style="color: var(--elton-red);">l'Émergence</span></h1>
-                <p style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">Leader de la distribution pétrolière au Sénégal, nous accompagnons votre mobilité avec excellence.</p>
+                <h1
+                    style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">
+                    L'énergie de <br><span style="color: var(--elton-red);">l'Émergence</span></h1>
+                <p
+                    style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">
+                    Leader de la distribution pétrolière au Sénégal, nous accompagnons votre mobilité avec excellence.
+                </p>
             </div>
-            
+
             <!-- Slide 2 -->
             <div class="hero-slide">
-                <h1 style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">Expertise & <br><span style="color: var(--elton-red);">Performance</span></h1>
-                <p style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">Des carburants et lubrifiants de pointe conçus pour la longévité de votre moteur.</p>
+                <h1
+                    style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">
+                    Expertise & <br><span style="color: var(--elton-red);">Performance</span></h1>
+                <p
+                    style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">
+                    Des carburants et lubrifiants de pointe conçus pour la longévité de votre moteur.</p>
             </div>
 
             <!-- Slide 3 -->
             <div class="hero-slide">
-                <h1 style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">Innovation & <br><span style="color: var(--elton-red);">Proximité</span></h1>
-                <p style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">Un réseau modernisé et des services digitaux exclusifs pour simplifier votre quotidien.</p>
+                <h1
+                    style="text-shadow: 2px 2px 20px rgba(0,0,0,0.6); font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 800;">
+                    Innovation & <br><span style="color: var(--elton-red);">Proximité</span></h1>
+                <p
+                    style="text-shadow: 1px 1px 10px rgba(0,0,0,0.6); font-size: 1.3rem; margin: 25px auto; max-width: 700px; font-weight: 400; opacity: 0.9;">
+                    Un réseau modernisé et des services digitaux exclusifs pour simplifier votre quotidien.</p>
             </div>
 
-            <div style="position: absolute; bottom: 0; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 30px;">
+            <div
+                style="position: absolute; bottom: 0; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 30px;">
                 <div style="display: flex; gap: 20px; justify-content: center;">
-                    <a href="#qui-sommes-nous" class="btn-client" style="text-decoration: none; padding: 15px 40px; min-width: 200px;">Découvrir Elton</a>
-                    <a href="#station-map" class="btn-client" style="background: transparent; color: white !important; border: 2px solid white; text-decoration: none; padding: 15px 40px; min-width: 200px;">Nos Stations</a>
+                    <a href="#qui-sommes-nous" class="btn-client"
+                        style="text-decoration: none; padding: 15px 40px; min-width: 200px;">Découvrir Elton</a>
+                    <a href="#station-map" class="btn-client"
+                        style="background: transparent; color: white !important; border: 2px solid white; text-decoration: none; padding: 15px 40px; min-width: 200px;">Nos
+                        Stations</a>
                 </div>
-                
+
                 <!-- Hero Dots -->
                 <div style="display: flex; justify-content: center; gap: 12px;">
-                    <span class="hero-dot active" style="width: 35px; height: 5px; background: var(--elton-red); border-radius: 5px; cursor: pointer; transition: 0.4s;" data-index="0"></span>
-                    <span class="hero-dot" style="width: 35px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 5px; cursor: pointer; transition: 0.4s;" data-index="1"></span>
-                    <span class="hero-dot" style="width: 35px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 5px; cursor: pointer; transition: 0.4s;" data-index="2"></span>
+                    <span class="hero-dot active"
+                        style="width: 35px; height: 5px; background: var(--elton-red); border-radius: 5px; cursor: pointer; transition: 0.4s;"
+                        data-index="0"></span>
+                    <span class="hero-dot"
+                        style="width: 35px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 5px; cursor: pointer; transition: 0.4s;"
+                        data-index="1"></span>
+                    <span class="hero-dot"
+                        style="width: 35px; height: 5px; background: rgba(255,255,255,0.3); border-radius: 5px; cursor: pointer; transition: 0.4s;"
+                        data-index="2"></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Content Sections -->
-    <section id="qui-sommes-nous" class="vibrant-bg reveal">
-        <h2 class="section-title">Qui Sommes-Nous ?</h2>
-        <div class="grid">
-            <div class="card reveal" style="transition-delay: 0.1s;">
-                <i data-lucide="shield-check" class="icon-box" style="width: 48px; height: 48px; color: var(--elton-red); margin-bottom: 20px;"></i>
-                <h3>Excellence & Qualité</h3>
-                <p>Première société multinationale sénégalaise de distribution de produits pétroliers, Elton Group s'engage chaque jour pour l'excellence opérationnelle et la satisfaction client.</p>
+    <!-- Content Sections: Qui sommes-nous & Leadership -->
+    <section id="qui-sommes-nous" class="reveal" style="padding: 100px 5%; background: var(--bg-color);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 class="section-title">Qui Sommes-Nous ?</h2>
+                <p
+                    style="color: var(--elton-dark); font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+                    Première société multinationale sénégalaise de distribution de produits pétroliers, Elton Group
+                    s'engage chaque jour pour l'excellence opérationnelle et la satisfaction client.
+                </p>
             </div>
-            <div class="card reveal" style="transition-delay: 0.3s;">
-                <i data-lucide="users" class="icon-box" style="width: 48px; height: 48px; color: var(--elton-red); margin-bottom: 20px;"></i>
-                <h3>Vision Africaine</h3>
-                <p>Ancrés dans nos valeurs, nous développons une identité chaleureuse et dynamique, fidèle à notre héritage tout en étant tournés vers l'avenir technologique.</p>
-            </div>
-            <div class="card reveal" style="transition-delay: 0.5s;" id="mot-president">
-                <i data-lucide="quote" class="icon-box" style="width: 48px; height: 48px; color: var(--elton-red); margin-bottom: 20px;"></i>
-                <h3>Mot du Président</h3>
-                <p>"Notre mission est de fournir une énergie accessible et durable pour soutenir la croissance de nos partenaires et de notre pays."</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Lubricants Section -->
-    <section id="lubrifiants" class="reveal" style="padding: 100px 20px; background: var(--bg-sections);">
-        <div class="container" style="text-align: center; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center;">
-            <h2 class="section-title">Nos Lubrifiants</h2>
-            <br>
-            <h3 style="color: var(--elton-blue); font-family: 'Ubuntu', sans-serif; margin-bottom: 10px;">À quoi sert Huile moteur et Lubrifiant ?</h3>
-            <p style="max-width: 800px; text-align: center; color: var(--elton-dark);">Les différentes fonctions que les huiles moteur assurent sont primordiales pour préserver le bon état du moteur. Découvrez nos huiles et lubrifiants très haute performance adaptés à tous vos besoins.</p>
-            <br>
-            <a href="#" class="btn-client reveal" style="background: transparent; color: var(--elton-blue) !important; border: 2px solid var(--elton-blue); text-decoration: none;">Commander en ligne</a>
-        </div>
-        <div class="grid">
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.1s;">
-                <div style="height: 200px; background: url('lub1.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Haute Performance</h3>
-                    <p style="margin-bottom: 20px;">Nos huiles synthétiques garantissent une protection maximale de votre moteur dans toutes les conditions.</p>
-                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">Découvrir la gamme <i data-lucide="arrow-right"></i></a>
+            <!-- Vision & Excellence Cards -->
+            <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px; margin-bottom: 60px;">
+                <div class="card reveal hover-lift"
+                    style="display: flex; gap: 20px; align-items: flex-start; padding: 40px; background: white; border: none; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                    <div
+                        style="background: rgba(26,115,181,0.1); padding: 15px; border-radius: 12px; color: var(--elton-blue); flex-shrink: 0;">
+                        <i data-lucide="shield-check" style="width: 32px; height: 32px;"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--elton-blue); margin-bottom: 10px; font-size: 1.3rem;">Excellence &
+                            Qualité</h3>
+                        <p style="color: #555; font-size: 0.95rem; line-height: 1.6;">Nous nous engageons
+                            quotidiennement à fournir des produits et services de la plus haute qualité pour garantir la
+                            satisfaction totale de nos clients à travers le réseau.</p>
+                    </div>
+                </div>
+
+                <div class="card reveal hover-lift"
+                    style="display: flex; gap: 20px; align-items: flex-start; padding: 40px; background: white; border: none; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                    <div
+                        style="background: rgba(229,0,61,0.1); padding: 15px; border-radius: 12px; color: var(--elton-red); flex-shrink: 0;">
+                        <i data-lucide="globe" style="width: 32px; height: 32px;"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--elton-red); margin-bottom: 10px; font-size: 1.3rem;">Vision Africaine
+                        </h3>
+                        <p style="color: #555; font-size: 0.95rem; line-height: 1.6;">Fiers de nos racines sénégalaises,
+                            nous développons une identité forte, alliant chaleur humaine et rigueur internationale pour
+                            accompagner l'émergence du continent.</p>
+                    </div>
                 </div>
             </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.2s;">
-                <div style="height: 200px; background: url('lub2.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Protection Longue Durée</h3>
-                    <p style="margin-bottom: 20px;">Une formule unique qui réduit l'usure et prolonge la durée de vie de vos équipements industriels.</p>
-                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i data-lucide="arrow-right"></i></a>
+
+            <!-- Leadership Messages -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;" id="leadership-grid">
+                <!-- President Card -->
+                <div id="mot-president" class="card reveal hover-lift"
+                    style="padding: 0; overflow: hidden; display: flex; flex-direction: row; text-align: left; min-height: 300px; background: white; border: none; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                    <div
+                        style="width: 40%; background: url('president.png') center/cover; position: relative; color: white; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; text-align: center;">
+                        <div
+                            style="position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(0deg, rgba(10,79,130,1) 0%, rgba(10,79,130,0) 100%); z-index: 0;">
+                        </div>
+                        <div style="z-index: 1;">
+                            <div style="font-weight: 800; font-size: 1.1rem; margin-bottom: 5px;">Pr. Papa Madiaw NDIAYE
+                            </div>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">Président du C.A.</div>
+                        </div>
+                    </div>
+                    <div
+                        style="width: 60%; padding: 40px; position: relative; display: flex; flex-direction: column; justify-content: center;">
+                        <i data-lucide="quote"
+                            style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; color: rgba(229,0,61,0.05);"></i>
+                        <h4
+                            style="color: var(--elton-blue); margin-bottom: 15px; font-family: 'Ubuntu', sans-serif; font-size: 1.2rem;">
+                            Mot du Président</h4>
+                        <p style="font-style: italic; color: #555; line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                            "Notre ambition est de faire d'Elton une référence absolue de l'énergie en Afrique, en
+                            alliant innovation constante et respect de nos engagements historiques envers nos
+                            partenaires."</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.3s;">
-                <div style="height: 200px; background: url('lub1.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Économie de Carburant</h3>
-                    <p style="margin-bottom: 20px;">Des lubrifiants optimisés pour réduire les frottements internes et abaisser votre consommation.</p>
-                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i data-lucide="arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.4s;">
-                <div style="height: 200px; background: url('lub2.png') center/cover;"></div>
-                <div style="padding: 30px;">
-                    <h3 style="margin-bottom: 15px;">Huiles Industrielles</h3>
-                    <p style="margin-bottom: 20px;">Une gamme complète répondant aux spécifications les plus exigeantes de l'industrie.</p>
-                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i data-lucide="arrow-right"></i></a>
+
+                <!-- DG Card -->
+                <div id="mot-dg" class="card reveal hover-lift"
+                    style="padding: 0; overflow: hidden; display: flex; flex-direction: row; text-align: left; min-height: 300px; background: white; border: none; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                    <div
+                        style="width: 40%; background: url('director.png') center/cover; position: relative; color: white; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; text-align: center;">
+                        <div
+                            style="position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(0deg, rgba(166,0,41,1) 0%, rgba(166,0,41,0) 100%); z-index: 0;">
+                        </div>
+                        <div style="z-index: 1;">
+                            <div style="font-weight: 800; font-size: 1.1rem; margin-bottom: 5px;">M. Babacar TALL</div>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">Directeur Général</div>
+                        </div>
+                    </div>
+                    <div
+                        style="width: 60%; padding: 40px; position: relative; display: flex; flex-direction: column; justify-content: center;">
+                        <i data-lucide="quote"
+                            style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; color: rgba(26,115,181,0.05);"></i>
+                        <h4
+                            style="color: var(--elton-red); margin-bottom: 15px; font-family: 'Ubuntu', sans-serif; font-size: 1.2rem;">
+                            Mot du D.G.</h4>
+                        <p style="font-style: italic; color: #555; line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                            "Chez Elton, nous plaçons l'humain au cœur de nos stations. Chaque visiteur doit vivre une
+                            expérience de service unique, fluide et de la plus haute qualité."</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Commercial Offers Section (NEW) -->
-    <section id="offres" class="reveal" style="padding: 100px 5%; background: linear-gradient(135deg, rgba(26,115,181,0.05) 0%, rgba(229,0,61,0.02) 100%);">
+    <section id="offres" class="reveal"
+        style="padding: 100px 5%; background: linear-gradient(135deg, rgba(26,115,181,0.05) 0%, rgba(229,0,61,0.02) 100%);">
         <h2 class="section-title">Nos Offres Exclusive</h2>
         <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto;">
-            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; background: white; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.05); display: flex; flex-direction: row; height: 300px;">
-                <div style="width: 40%; background: var(--elton-blue); display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                    <i data-lucide="credit-card" style="width: 100px; height: 100px; color: rgba(255,255,255,0.2); transform: rotate(-15deg);"></i>
+            <div class="card reveal hover-lift"
+                style="padding: 0; overflow: hidden; background: white; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.05); display: flex; flex-direction: row; height: 300px;">
+                <div
+                    style="width: 40%; background: var(--elton-blue); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <i data-lucide="credit-card"
+                        style="width: 100px; height: 100px; color: rgba(255,255,255,0.2); transform: rotate(-15deg);"></i>
                 </div>
                 <div style="width: 60%; padding: 40px; display: flex; flex-direction: column; justify-content: center;">
-                    <span style="color: var(--elton-red); font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;"> Fidélité </span>
+                    <span
+                        style="color: var(--elton-red); font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">
+                        Fidélité </span>
                     <h3 style="margin: 10px 0;">Carte Elton Pass</h3>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Simplifiez vos paiements et cumulez des points à chaque passage en station. Des remises exclusives toute l'année.</p>
-                    <a href="#" class="btn-client" style="align-self: flex-start; text-decoration: none; padding: 10px 25px; font-size: 0.85rem;">Souscrire maintenant</a>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Simplifiez vos paiements et cumulez
+                        des points à chaque passage en station. Des remises exclusives toute l'année.</p>
+                    <a href="#" class="btn-client"
+                        style="align-self: flex-start; text-decoration: none; padding: 10px 25px; font-size: 0.85rem;">Souscrire
+                        maintenant</a>
                 </div>
             </div>
-            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; background: white; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.05); display: flex; flex-direction: row; height: 300px;">
-                <div style="width: 40%; background: var(--elton-red); display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                    <i data-lucide="shopping-bag" style="width: 100px; height: 100px; color: rgba(255,255,255,0.2); transform: rotate(15deg);"></i>
+            <div class="card reveal hover-lift"
+                style="padding: 0; overflow: hidden; background: white; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.05); display: flex; flex-direction: row; height: 300px;">
+                <div
+                    style="width: 40%; background: var(--elton-red); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <i data-lucide="shopping-bag"
+                        style="width: 100px; height: 100px; color: rgba(255,255,255,0.2); transform: rotate(15deg);"></i>
                 </div>
                 <div style="width: 60%; padding: 40px; display: flex; flex-direction: column; justify-content: center;">
-                    <span style="color: var(--elton-blue); font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;"> Boutique Oasis </span>
+                    <span
+                        style="color: var(--elton-blue); font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">
+                        Boutique Oasis </span>
                     <h3 style="margin: 10px 0;">Le Pack Voyageur</h3>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Profitez d'un combo Café + Croissant + Entretien Pare-brise à prix réduit pour vos trajets longue distance.</p>
-                    <a href="#" class="btn-client" style="align-self: flex-start; text-decoration: none; padding: 10px 25px; font-size: 0.85rem; background: var(--elton-blue);">Découvrir l'offre</a>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Profitez d'un combo Café + Croissant
+                        + Entretien Pare-brise à prix réduit pour vos trajets longue distance.</p>
+                    <a href="#" class="btn-client"
+                        style="align-self: flex-start; text-decoration: none; padding: 10px 25px; font-size: 0.85rem; background: var(--elton-blue);">Découvrir
+                        l'offre</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- News Section -->
-    <section id="actualites" class="reveal" style="padding: 100px 5%;">
-        <h2 class="section-title">Actualités & Nouveautés</h2>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto 50px auto; color: var(--elton-dark); font-family: 'Poppins', sans-serif;">Restez informé des dernières actualités et promotions de notre réseau de stations, nos services et nos équipes sur le terrain.</p>
-        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;">
-            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; transition-delay: 0.1s; display: flex; flex-direction: column;">
-                <div style="height: 200px; background: url('hero_fallback.jpg') center/cover;"></div>
-                <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column;">
-                    <span style="font-size: 0.7rem; color: var(--elton-red); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">PROMOTION</span>
-                    <h4 style="margin: 10px 0; font-size: 1.15rem; color: var(--elton-blue);">Lavage à vapeur Quick Wash Bio</h4>
-                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Découvrez notre nouveau service de lavage écologique à vapeur pour un nettoyage en profondeur sans produits chimiques.</p>
-                    <a href="#" style="color: var(--elton-red); font-weight: 800; text-decoration: none; font-size: 0.8rem; margin-top: auto; display: inline-flex; align-items: center; gap: 5px;">LIRE LA SUITE <i data-lucide="arrow-right" style="width: 14px;"></i></a>
+    <!-- News Section -->
+    <section id="actualites" class="reveal"
+        style="padding: 120px 5%; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <div style="margin-bottom: 70px;">
+                <h2 class="section-title">Actualités & Nouveautés</h2>
+                <p
+                    style="color: #64748b; max-width: 600px; margin: 20px auto 0; font-family: 'Poppins', sans-serif; font-size: 1.1rem; line-height: 1.6;">
+                    Explorez l'univers Elton : innovations, engagements communautaires et offres exclusives pour une
+                    mobilité réinventée.
+                </p>
+            </div>
+
+            <div class="grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                <!-- News Card 1 -->
+                <div class="card reveal hover-lift"
+                    style="padding: 0; overflow: hidden; border-radius: 30px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(26, 115, 181, 0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.04); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column;">
+                    <div
+                        style="height: 260px; background: url('hero_fallback.jpg') center/cover; position: relative; overflow: hidden;">
+                        <div
+                            style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4));">
+                        </div>
+                        <span
+                            style="position: absolute; top: 25px; left: 25px; background: var(--elton-red); color: white; padding: 10px 22px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; box-shadow: 0 10px 20px rgba(229,0,61,0.3); text-transform: uppercase;">Promotion</span>
+                    </div>
+                    <div style="padding: 40px; flex: 1; display: flex; flex-direction: column; text-align: left;">
+                        <span
+                            style="font-size: 0.8rem; color: #94a3b8; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="calendar" style="width: 14px;"></i> 24 Mars 2026
+                        </span>
+                        <h4
+                            style="color: var(--elton-blue); font-size: 1.4rem; margin-bottom: 18px; font-family: 'Ubuntu', sans-serif; font-weight: 700; line-height: 1.3;">
+                            Lavage à vapeur Quick Wash Bio</h4>
+                        <p style="color: #64748b; font-size: 1rem; line-height: 1.7; margin-bottom: 30px;">Une
+                            technologie de pointe pour un nettoyage en profondeur de votre véhicule, respectueux de
+                            l'environnement.</p>
+                        <a href="news.html" class="news-link"
+                            style="margin-top: auto; color: var(--elton-red); text-decoration: none; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transition: 0.3s;">
+                            Découvrir l'offre <i data-lucide="arrow-right" style="width: 20px;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="card reveal hover-lift"
+                    style="padding: 0; overflow: hidden; border-radius: 30px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(26, 115, 181, 0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.04); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column;">
+                    <div
+                        style="height: 260px; background: url('station.png') center/cover; position: relative; overflow: hidden;">
+                        <div
+                            style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4));">
+                        </div>
+                        <span
+                            style="position: absolute; top: 25px; left: 25px; background: #fbbf24; color: #78350f; padding: 10px 22px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; box-shadow: 0 10px 20px rgba(251,191,36,0.3); text-transform: uppercase;">Événement</span>
+                    </div>
+                    <div style="padding: 40px; flex: 1; display: flex; flex-direction: column; text-align: left;">
+                        <span
+                            style="font-size: 0.8rem; color: #94a3b8; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="calendar" style="width: 14px;"></i> 20 Mars 2026
+                        </span>
+                        <h4
+                            style="color: var(--elton-blue); font-size: 1.4rem; margin-bottom: 18px; font-family: 'Ubuntu', sans-serif; font-weight: 700; line-height: 1.3;">
+                            Lancement de la Carte Elton Gold</h4>
+                        <p style="color: #64748b; font-size: 1rem; line-height: 1.7; margin-bottom: 30px;">Accédez à un
+                            univers de privilèges exclusifs et simplifiez la gestion de votre budget carburant.</p>
+                        <a href="news.html" class="news-link"
+                            style="margin-top: auto; color: var(--elton-red); text-decoration: none; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transition: 0.3s;">
+                            En savoir plus <i data-lucide="arrow-right" style="width: 20px;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="card reveal hover-lift"
+                    style="padding: 0; overflow: hidden; border-radius: 30px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(26, 115, 181, 0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.04); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column;">
+                    <div
+                        style="height: 260px; background: var(--elton-blue); display: flex; align-items: center; justify-content: center; position: relative;">
+                        <i data-lucide="coffee"
+                            style="width: 100px; height: 100px; color: rgba(255,255,255,0.15); filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));"></i>
+                        <span
+                            style="position: absolute; top: 25px; left: 25px; background: var(--primary-blue); color: white; padding: 10px 22px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; box-shadow: 0 10px 20px rgba(26,115,181,0.3); text-transform: uppercase;">Services</span>
+                    </div>
+                    <div style="padding: 40px; flex: 1; display: flex; flex-direction: column; text-align: left;">
+                        <span
+                            style="font-size: 0.8rem; color: #94a3b8; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="calendar" style="width: 14px;"></i> 15 Mars 2026
+                        </span>
+                        <h4
+                            style="color: var(--elton-blue); font-size: 1.4rem; margin-bottom: 18px; font-family: 'Ubuntu', sans-serif; font-weight: 700; line-height: 1.3;">
+                            Elton Oasis : Détente & Fraîcheur</h4>
+                        <p style="color: #64748b; font-size: 1rem; line-height: 1.7; margin-bottom: 30px;">Nos espaces
+                            boutiques et cafés se modernisent pour vous offrir une pause régénérante sur la route.</p>
+                        <a href="news.html" class="news-link"
+                            style="margin-top: auto; color: var(--elton-red); text-decoration: none; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transition: 0.3s;">
+                            Lire la suite <i data-lucide="arrow-right" style="width: 20px;"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; transition-delay: 0.2s; display: flex; flex-direction: column;">
-                <div style="height: 200px; background: url('station.png') center/cover;"></div>
-                <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column;">
-                    <span style="font-size: 0.7rem; color: var(--elton-red); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">ÉVÉNEMENT</span>
-                    <h4 style="margin: 10px 0; font-size: 1.15rem; color: var(--elton-blue);">Lancement de la Carte Elton Gold</h4>
-                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Une nouvelle expérience de paiement et de fidélité pour nos clients privilégiés. Accédez à un univers d'avantages exclusifs.</p>
-                    <a href="#" style="color: var(--elton-red); font-weight: 800; text-decoration: none; font-size: 0.8rem; margin-top: auto; display: inline-flex; align-items: center; gap: 5px;">LIRE LA SUITE <i data-lucide="arrow-right" style="width: 14px;"></i></a>
-                </div>
-            </div>
-            <div class="card reveal hover-lift" style="padding: 0; overflow: hidden; transition-delay: 0.3s; display: flex; flex-direction: column;">
-                <div style="height: 200px; background: var(--elton-blue); display: flex; align-items: center; justify-content: center;">
-                    <i data-lucide="coffee" style="width: 80px; height: 80px; color: var(--elton-red);"></i>
-                </div>
-                <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column;">
-                    <span style="font-size: 0.7rem; color: var(--elton-red); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">SERVICES</span>
-                    <h4 style="margin: 10px 0; font-size: 1.15rem; color: var(--elton-blue);">Elton Oasis : Détente & Fraîcheur</h4>
-                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Profitez de nos nouveaux espaces cafés et boutiques modernisés lors de votre prochain passage dans notre réseau.</p>
-                    <a href="#" style="color: var(--elton-red); font-weight: 800; text-decoration: none; font-size: 0.8rem; margin-top: auto; display: inline-flex; align-items: center; gap: 5px;">LIRE LA SUITE <i data-lucide="arrow-right" style="width: 14px;"></i></a>
-                </div>
+
+            <div style="margin-top: 80px;">
+                <a href="news.html" class="btn-client"
+                    style="text-decoration: none; padding: 22px 60px; border-radius: 50px; font-size: 1.1rem; letter-spacing: 0.5px; box-shadow: 0 15px 35px rgba(229,0,61,0.25); background: linear-gradient(135deg, var(--elton-red) 0%, #c90036 100%);">Toutes
+                    les actualités</a>
             </div>
         </div>
-        <br><br>
-        <div style="text-align: center;">
-            <a href="#" class="btn-client" style="text-decoration: none;">Voir toutes les actualités</a>
-        </div>
+
+        <style>
+            .hover-lift:hover {
+                transform: translateY(-12px) !important;
+                box-shadow: 0 30px 60px rgba(26, 115, 181, 0.12) !important;
+            }
+
+            .news-link:hover {
+                gap: 18px !important;
+                color: var(--elton-blue) !important;
+            }
+
+            @media (max-width: 1024px) {
+                #actualites .grid {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                #actualites .grid {
+                    grid-template-columns: 1fr !important;
+                }
+
+                .section-title {
+                    font-size: 2rem !important;
+                }
+            }
+        </style>
     </section>
+
 
     <!-- Testimonials Section -->
     <section id="temoignages" class="vibrant-bg" style="text-align: center; position: relative;">
         <h2 class="section-title">L'Expérience de nos Clients</h2>
-        
-        <div class="testimonial-wrapper" style="position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding-bottom: 20px;">
-            <div id="testimonial-slides" style="display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); width: 100%;">
-                
+
+        <div class="testimonial-wrapper"
+            style="position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding-bottom: 20px;">
+            <div id="testimonial-slides"
+                style="display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); width: 100%;">
+
                 <!-- Slide 1 -->
                 <div class="slide" style="min-width: 100%; box-sizing: border-box; padding: 20px 40px;">
-                    <i data-lucide="quote" style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
-                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Le service chez Elton est incomparable. Les stations sont propres, le personnel est chaleureux et la boutique propose une qualité exceptionnelle."</p>
+                    <i data-lucide="quote"
+                        style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
+                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Le
+                        service chez Elton est incomparable. Les stations sont propres, le personnel est chaleureux et
+                        la boutique propose une qualité exceptionnelle."</p>
                     <h4 style="color: var(--elton-red);">Amadou Diop</h4>
                     <span style="font-size: 0.8rem; opacity: 0.7;">Client Fidèle depuis 2018</span>
                 </div>
-                
+
                 <!-- Slide 2 -->
                 <div class="slide" style="min-width: 100%; box-sizing: border-box; padding: 20px 40px;">
-                    <i data-lucide="quote" style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
-                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Avec la carte Elton, la gestion du carburant de mon entreprise est devenue un jeu d'enfant. Le service client est toujours très réactif et pro."</p>
+                    <i data-lucide="quote"
+                        style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
+                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Avec la
+                        carte Elton, la gestion du carburant de mon entreprise est devenue un jeu d'enfant. Le service
+                        client est toujours très réactif et pro."</p>
                     <h4 style="color: var(--elton-red);">Fatou Ndiaye</h4>
                     <span style="font-size: 0.8rem; opacity: 0.7;">Gérante de Flotte B2B</span>
                 </div>
-                
+
                 <!-- Slide 3 -->
                 <div class="slide" style="min-width: 100%; box-sizing: border-box; padding: 20px 40px;">
-                    <i data-lucide="quote" style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
-                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Mes pauses sur l'autoroute ne se font plus qu'aux stations Oasis. Le café est excellent et l'entretien auto super rapide. Une vraie pause détente."</p>
+                    <i data-lucide="quote"
+                        style="width: 60px; height: 60px; color: var(--elton-red); opacity: 0.5; margin-bottom: 30px;"></i>
+                    <p style="font-size: 1.5rem; text-align: center; font-style: italic; margin-bottom: 30px;">"Mes
+                        pauses sur l'autoroute ne se font plus qu'aux stations Oasis. Le café est excellent et
+                        l'entretien auto super rapide. Une vraie pause détente."</p>
                     <h4 style="color: var(--elton-red);">Cheikh Fall</h4>
                     <span style="font-size: 0.8rem; opacity: 0.7;">Voyageur Fréquent</span>
                 </div>
@@ -747,284 +1286,689 @@
             </div>
 
             <!-- Controls -->
-            <button id="slider-prev" style="position: absolute; top: 45%; left: -10px; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; color: white; padding: 10px; z-index: 10; transition: 0.3s;"><i data-lucide="chevron-left" style="width: 40px; height: 40px;"></i></button>
-            <button id="slider-next" style="position: absolute; top: 45%; right: -10px; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; color: white; padding: 10px; z-index: 10; transition: 0.3s;"><i data-lucide="chevron-right" style="width: 40px; height: 40px;"></i></button>
-            
+            <button id="slider-prev"
+                style="position: absolute; top: 45%; left: -10px; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; color: white; padding: 10px; z-index: 10; transition: 0.3s;"><i
+                    data-lucide="chevron-left" style="width: 40px; height: 40px;"></i></button>
+            <button id="slider-next"
+                style="position: absolute; top: 45%; right: -10px; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; color: white; padding: 10px; z-index: 10; transition: 0.3s;"><i
+                    data-lucide="chevron-right" style="width: 40px; height: 40px;"></i></button>
+
             <!-- Dots -->
             <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
-                <span class="slide-dot" style="width: 12px; height: 12px; border-radius: 50%; background: var(--elton-red); cursor: pointer; transition: 0.3s;" data-index="0"></span>
-                <span class="slide-dot" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s;" data-index="1"></span>
-                <span class="slide-dot" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s;" data-index="2"></span>
+                <span class="slide-dot"
+                    style="width: 12px; height: 12px; border-radius: 50%; background: var(--elton-red); cursor: pointer; transition: 0.3s;"
+                    data-index="0"></span>
+                <span class="slide-dot"
+                    style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s;"
+                    data-index="1"></span>
+                <span class="slide-dot"
+                    style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s;"
+                    data-index="2"></span>
             </div>
-            
+
             <style>
-                #slider-prev:hover, #slider-next:hover { color: var(--elton-red) !important; transform: translateY(-50%) scale(1.1); }
-                .slide-dot:hover { background: white !important; }
+                #slider-prev:hover,
+                #slider-next:hover {
+                    color: var(--elton-red) !important;
+                    transform: translateY(-50%) scale(1.1);
+                }
+
+                .slide-dot:hover {
+                    background: white !important;
+                }
             </style>
         </div>
     </section>
 
     <!-- Map & Services Section -->
-    <section id="station-map">
-        <h2 class="section-title">Nos Stations Services</h2>
-        <div style="background: url('station.png') no-repeat center center; background-size: cover; height: 600px; border-radius: 20px; display: flex; align-items: center; justify-content: center; position: relative; border: 4px solid var(--primary-blue);">
-            <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; text-align: center; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                <i data-lucide="map-pin" style="color: var(--primary-blue); width: 40px; height: 40px;"></i>
-                <h3 style="color: var(--primary-blue); margin: 10px 0;">Trouvez la station la plus proche</h3>
-                <p style="color: #666; font-size: 0.9rem; text-align: center;">Accédez à notre réseau de stations premium et profitez de tous nos services.</p>
-                <button class="btn-client" style="border: none; cursor: pointer; margin-top: 15px;">Ouvrir la carte</button>
+    <!-- Advanced Station Finder UI -->
+    <section id="station-map" class="reveal" style="padding: 100px 5%; background: var(--bg-sections);">
+        <h2 class="section-title" style="margin-bottom: 50px;">Nos Stations Services</h2>
+        <div
+            style="max-width: 1240px; margin: 0 auto; height: 750px; position: relative; border-radius: 30px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.15); border: 8px solid white;">
+
+            <!-- Background Map (OSM) -->
+            <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-4.038696289062501%2C5.248104153547565%2C-3.8802337646484375%2C5.373289099015822&layer=mapnik&marker=5.298697361985939%2C-3.9617919921875"
+                width="100%" height="100%" style="border:0; display:block; filter: grayscale(0.2) contrast(1.1);"
+                allowfullscreen loading="lazy"></iframe>
+
+            <!-- Left Sidebar -->
+            <div id="map-sidebar"
+                style="position: absolute; top: 30px; left: 30px; width: 380px; height: calc(100% - 60px); background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow: hidden; z-index: 10; border: 1px solid rgba(255,255,255,0.5);">
+                <!-- Search Bar -->
+                <div style="padding: 25px; border-bottom: 1px solid #f0f0f0;">
+                    <div style="position: relative;">
+                        <i data-lucide="search"
+                            style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 18px; color: #999;"></i>
+                        <input type="text" placeholder="Rechercher une station..."
+                            style="width: 100%; padding: 14px 14px 14px 45px; border-radius: 12px; border: 1.5px solid #eee; font-family: 'Poppins', sans-serif; font-size: 0.9rem; outline: none; background: #fafafa; transition: 0.3s; box-sizing: border-box;"
+                            onfocus="this.style.borderColor='var(--elton-blue)'; this.style.background='white';">
+                    </div>
+                    <div style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--elton-blue); font-size: 0.85rem; font-weight: 600; cursor: pointer;"
+                        onmouseover="this.style.color='var(--elton-red)'"
+                        onmouseout="this.style.color='var(--elton-blue)'">
+                        <i data-lucide="map-pin" style="width: 16px;"></i> Utiliser ma position
+                    </div>
+                </div>
+
+                <!-- Station List -->
+                <div style="flex: 1; overflow-y: auto; padding: 15px;" class="custom-scrollbar">
+                    <!-- Station Card 1 (Active) -->
+                    <div class="map-station-card active"
+                        style="padding: 18px; border-radius: 18px; background: white; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.3s; border: 2px solid var(--elton-blue); box-shadow: 0 8px 20px rgba(26,115,181,0.08);">
+                        <div
+                            style="width: 48px; height: 48px; border-radius: 10px; border: 1.5px solid var(--elton-blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: white;">
+                            <img src="elton_logo_official.png" style="width: 32px; object-fit: contain;">
+                        </div>
+                        <div style="flex: 1;">
+                            <h4
+                                style="font-size: 0.9rem; margin-bottom: 4px; color: var(--elton-blue); font-weight: 700;">
+                                SS Elton Oasis Bagnon</h4>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span
+                                    style="font-size: 0.7rem; font-weight: 700; color: #16a34a; background: rgba(22,163,74,0.1); padding: 2px 8px; border-radius: 4px;">OUVERT</span>
+                                <span style="font-size: 0.75rem; font-weight: 600; color: #666;">16.4 km</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Station Card 2 -->
+                    <div class="map-station-card"
+                        style="padding: 18px; border-radius: 18px; background: white; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.3s; border: 1px solid #eee;">
+                        <div
+                            style="width: 48px; height: 48px; border-radius: 10px; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <img src="elton_logo_official.png" style="width: 32px; filter: grayscale(1); opacity: 0.5;">
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 4px; color: #333; font-weight: 600;">SS Elton
+                                Songon</h4>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span
+                                    style="font-size: 0.7rem; font-weight: 700; color: #16a34a; background: rgba(22,163,74,0.1); padding: 2px 8px; border-radius: 4px;">OUVERT</span>
+                                <span style="font-size: 0.75rem; font-weight: 600; color: #666;">20.0 km</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Station Card 3 (Closed) -->
+                    <div class="map-station-card"
+                        style="padding: 18px; border-radius: 18px; background: white; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.3s; border: 1px solid #eee;">
+                        <div
+                            style="width: 48px; height: 48px; border-radius: 10px; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <img src="elton_logo_official.png" style="width: 32px; filter: grayscale(1); opacity: 0.5;">
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 4px; color: #333; font-weight: 600;">SS Elton
+                                Bassam</h4>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span
+                                    style="font-size: 0.7rem; font-weight: 700; color: var(--elton-red); background: rgba(229,0,61,0.05); padding: 2px 8px; border-radius: 4px;">FERMÉ</span>
+                                <span style="font-size: 0.75rem; font-weight: 600; color: #666;">31.4 km</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Station Card 4 -->
+                    <div class="map-station-card"
+                        style="padding: 18px; border-radius: 18px; background: white; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.3s; border: 1px solid #eee;">
+                        <div
+                            style="width: 48px; height: 48px; border-radius: 10px; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <img src="elton_logo_official.png" style="width: 32px; filter: grayscale(1); opacity: 0.5;">
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 4px; color: #333; font-weight: 600;">SS Elton
+                                N'zianouan</h4>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span
+                                    style="font-size: 0.7rem; font-weight: 700; color: #16a34a; background: rgba(22,163,74,0.1); padding: 2px 8px; border-radius: 4px;">OUVERT</span>
+                                <span style="font-size: 0.75rem; font-weight: 600; color: #666;">114.9 km</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Floating Service Icons Simulation -->
-            <div style="position: absolute; bottom: 30px; left: 30px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); display: flex; gap: 20px;">
-                <div style="text-align: center;"><i data-lucide="droplets" title="Lavage" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Lavage</div></div>
-                <div style="text-align: center;"><i data-lucide="shopping-cart" title="Boutique" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Boutique</div></div>
-                <div style="text-align: center;"><i data-lucide="coffee" title="Restaurant" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Espace Café</div></div>
-                <div style="text-align: center;"><i data-lucide="wrench" title="Espace Auto" style="color: var(--primary-blue);"></i><div style="font-size: 0.7rem; color: #666;">Entretien</div></div>
+
+            <!-- Floating InfoWindow Marker (Simulated) -->
+            <div id="map-infowindow"
+                style="position: absolute; top: 120px; left: 450px; width: 340px; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); z-index: 10; overflow: hidden; animation: mapBounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
+                <div style="padding: 22px; position: relative;">
+                    <div style="position: absolute; right: 15px; top: 15px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #999; transition: 0.3s;"
+                        onmouseover="this.style.color='var(--elton-red)'" onmouseout="this.style.color='#999'">
+                        <i data-lucide="x" style="width: 16px;"></i>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div
+                            style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--elton-blue); display: flex; align-items: center; justify-content: center; background: white;">
+                            <img src="elton_logo_official.png" style="width: 28px;">
+                        </div>
+                        <h4
+                            style="font-family: 'Ubuntu', sans-serif; font-size: 1rem; color: var(--elton-blue); margin: 0; font-weight: 700;">
+                            SS Elton Oasis Bagnon</h4>
+                    </div>
+                    <p style="font-size: 0.82rem; color: #888; margin-bottom: 18px;">Horaires : 00:00 - 23:59</p>
+                    <button
+                        style="width: 100%; background: var(--elton-blue); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; box-shadow: 0 4px 15px rgba(26,115,181,0.2);"
+                        onmouseover="this.style.background='#155c8c'; this.style.transform='translateY(-2px)';"
+                        onmouseout="this.style.background='var(--elton-blue)'; this.style.transform='translateY(0)';">
+                        <i data-lucide="navigation" style="width: 18px;"></i>
+                        Tracer l'itinéraire sur la carte
+                    </button>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <button
+                            style="background: white; border: 1.5px solid #eee; padding: 10px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: var(--elton-blue); cursor: pointer; display: flex; align-items:center; justify-content: center; gap: 6px; transition: 0.3s;"
+                            onmouseover="this.style.borderColor='var(--elton-blue)';">
+                            <i data-lucide="map-pin" style="width: 14px;"></i> Ma position
+                        </button>
+                        <button
+                            style="background: white; border: 1.5px solid #eee; padding: 10px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: #666; cursor: pointer; display: flex; align-items:center; justify-content: center; gap: 6px; transition: 0.3s;"
+                            onmouseover="this.style.borderColor='#ccc';">
+                            <i data-lucide="search" style="width: 14px;"></i> Saisir départ
+                        </button>
+                    </div>
+                </div>
             </div>
+
+            <!-- Service Icons Bar (Requested by User) -->
+            <div
+                style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: white; padding: 15px 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); display: flex; gap: 40px; z-index: 20; border: 1px solid #eee;">
+                <div style="text-align: center; cursor: pointer; transition: 0.3s;" class="hover-scale">
+                    <div style="color: var(--elton-blue); margin-bottom: 8px;"><i data-lucide="droplets"
+                            style="width: 28px; height: 28px;"></i></div>
+                    <div style="font-size: 0.8rem; font-weight: 600; color: #555;">Lavage</div>
+                </div>
+                <div style="text-align: center; cursor: pointer; transition: 0.3s;" class="hover-scale">
+                    <div style="color: var(--elton-blue); margin-bottom: 8px;"><i data-lucide="shopping-cart"
+                            style="width: 28px; height: 28px;"></i></div>
+                    <div style="font-size: 0.8rem; font-weight: 600; color: #555;">Boutique</div>
+                </div>
+                <div style="text-align: center; cursor: pointer; transition: 0.3s;" class="hover-scale">
+                    <div style="color: var(--elton-blue); margin-bottom: 8px;"><i data-lucide="coffee"
+                            style="width: 28px; height: 28px;"></i></div>
+                    <div style="font-size: 0.8rem; font-weight: 600; color: #555;">Espace Café</div>
+                </div>
+                <div style="text-align: center; cursor: pointer; transition: 0.3s;" class="hover-scale">
+                    <div style="color: var(--elton-blue); margin-bottom: 8px;"><i data-lucide="wrench"
+                            style="width: 28px; height: 28px;"></i></div>
+                    <div style="font-size: 0.8rem; font-weight: 600; color: #555;">Entretien</div>
+                </div>
+            </div>
+
+            <!-- Custom Styles for Scrollbar and Animations -->
+            <style>
+                @keyframes mapBounceIn {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.3) translateY(20px);
+                    }
+
+                    70% {
+                        transform: scale(1.05) translateY(-5px);
+                    }
+
+                    100% {
+                        opacity: 1;
+                        transform: scale(1) translateY(0);
+                    }
+                }
+
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: #ddd;
+                    border-radius: 10px;
+                }
+
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: #ccc;
+                }
+
+                .map-station-card:hover {
+                    border-color: var(--elton-blue) !important;
+                    transform: translateY(-3px);
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+                }
+
+                @media (max-width: 900px) {
+                    #map-sidebar {
+                        width: calc(100% - 40px);
+                        left: 20px;
+                        top: 20px;
+                        height: 350px;
+                    }
+
+                    #map-infowindow {
+                        display: none;
+                    }
+
+                    #station-map>div {
+                        height: 950px;
+                    }
+                }
+            </style>
         </div>
     </section>
 
     <section id="carrieres" class="reveal" style="padding: 100px 5%;">
         <h2 class="section-title">Carrières & Recrutement</h2>
         <div style="max-width: 1200px; margin: 0 auto;">
-            
+
             <!-- Why Join Us? -->
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px;">
-                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;" class="hover-lift">
-                    <i data-lucide="zap" style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;"
+                    class="hover-lift">
+                    <i data-lucide="zap"
+                        style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
                     <h4 style="color: var(--elton-blue); margin-bottom: 10px;">Innovation & Énergie</h4>
-                    <p style="font-size: 0.9rem; color: #666;">Participez à la transformation énergétique du Sénégal avec des projets innovants.</p>
+                    <p style="font-size: 0.9rem; color: #666;">Participez à la transformation énergétique du Sénégal
+                        avec des projets innovants.</p>
                 </div>
-                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;" class="hover-lift">
-                    <i data-lucide="graduation-cap" style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;"
+                    class="hover-lift">
+                    <i data-lucide="graduation-cap"
+                        style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
                     <h4 style="color: var(--elton-blue); margin-bottom: 10px;">Formation Continue</h4>
-                    <p style="font-size: 0.9rem; color: #666;">Développez vos compétences avec nos programmes d'accompagnement personnalisés.</p>
+                    <p style="font-size: 0.9rem; color: #666;">Développez vos compétences avec nos programmes
+                        d'accompagnement personnalisés.</p>
                 </div>
-                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;" class="hover-lift">
-                    <i data-lucide="users" style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee;"
+                    class="hover-lift">
+                    <i data-lucide="users"
+                        style="width: 40px; height: 40px; color: var(--elton-red); margin-bottom: 20px;"></i>
                     <h4 style="color: var(--elton-blue); margin-bottom: 10px;">Impact Local</h4>
-                    <p style="font-size: 0.9rem; color: #666;">Rejoignez une entreprise fière de ses racines et engagée pour sa communauté.</p>
+                    <p style="font-size: 0.9rem; color: #666;">Rejoignez une entreprise fière de ses racines et engagée
+                        pour sa communauté.</p>
                 </div>
             </div>
 
             <!-- Job Listings -->
-            <div style="background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
-                <div style="padding: 30px; border-bottom: 1px solid rgba(26,115,181,0.1); display: flex; justify-content: space-between; align-items: center; background: rgba(26,115,181,0.05);">
-                    <h3 style="margin: 0; color: var(--elton-blue); font-family: 'Ubuntu', sans-serif;">Offres d'emploi actuelles (3)</h3>
+            <div
+                style="background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+                <div
+                    style="padding: 30px; border-bottom: 1px solid rgba(26,115,181,0.1); display: flex; justify-content: space-between; align-items: center; background: rgba(26,115,181,0.05);">
+                    <h3 style="margin: 0; color: var(--elton-blue); font-family: 'Ubuntu', sans-serif;">Offres d'emploi
+                        actuelles (3)</h3>
                     <div style="display: flex; gap: 10px;">
-                        <span style="background: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--elton-blue); border: 1px solid rgba(26,115,181,0.2);">CDI</span>
-                        <span style="background: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--elton-blue); border: 1px solid rgba(26,115,181,0.2);">Dakar</span>
+                        <span
+                            style="background: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--elton-blue); border: 1px solid rgba(26,115,181,0.2);">CDI</span>
+                        <span
+                            style="background: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: var(--elton-blue); border: 1px solid rgba(26,115,181,0.2);">Dakar</span>
                     </div>
                 </div>
 
                 <!-- Job Item 1 -->
-                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.3s;" class="job-item">
+                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.3s;"
+                    class="job-item">
                     <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 50px; height: 50px; background: rgba(26,115,181,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-blue);">
+                        <div
+                            style="width: 50px; height: 50px; background: rgba(26,115,181,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-blue);">
                             <i data-lucide="activity"></i>
                         </div>
                         <div>
-                            <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Analyste Exploitation Pétrolière</h4>
+                            <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Analyste Exploitation
+                                Pétrolière</h4>
                             <div style="display: flex; gap: 15px; margin-top: 5px; color: #888; font-size: 0.85rem;">
-                                <span><i data-lucide="map-pin" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Dakar, Sénégal</span>
-                                <span><i data-lucide="clock" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Il y a 2 jours</span>
+                                <span><i data-lucide="map-pin"
+                                        style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i>
+                                    Dakar, Sénégal</span>
+                                <span><i data-lucide="clock"
+                                        style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i>
+                                    Il y a 2 jours</span>
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="btn-client" style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
+                    <a href="#" class="btn-client"
+                        style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
                 </div>
 
                 <!-- Job Item 2 -->
-                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.3s;" class="job-item">
+                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.3s;"
+                    class="job-item">
                     <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 50px; height: 50px; background: rgba(229,0,61,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-red);">
+                        <div
+                            style="width: 50px; height: 50px; background: rgba(229,0,61,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-red);">
                             <i data-lucide="shield"></i>
                         </div>
                         <div>
                             <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Responsable HSE</h4>
                             <div style="display: flex; gap: 15px; margin-top: 5px; color: #888; font-size: 0.85rem;">
-                                <span><i data-lucide="map-pin" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Dakar, Sénégal</span>
-                                <span><i data-lucide="clock" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Il y a 5 jours</span>
+                                <span><i data-lucide="map-pin"
+                                        style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i>
+                                    Dakar, Sénégal</span>
+                                <span><i data-lucide="clock"
+                                        style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i>
+                                    Il y a 5 jours</span>
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="btn-client" style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
+                    <a href="#" class="btn-client"
+                        style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
                 </div>
 
                 <!-- Job Item 3 -->
-                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;" class="job-item">
+                <div style="padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;"
+                    class="job-item">
                     <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 50px; height: 50px; background: rgba(26,115,181,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-blue);">
+                        <div
+                            style="width: 50px; height: 50px; background: rgba(26,115,181,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--elton-blue);">
                             <i data-lucide="users"></i>
                         </div>
                         <div>
-                            <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Chargé de Clientèle Grands Comptes</h4>
+                            <h4 style="margin: 0; font-size: 1.1rem; color: var(--elton-dark);">Chargé de Clientèle
+                                Grands Comptes</h4>
                             <div style="display: flex; gap: 15px; margin-top: 5px; color: #888; font-size: 0.85rem;">
-                                <span><i data-lucide="map-pin" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Dakar / Remote</span>
-                                <span><i data-lucide="clock" style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i> Il y a 1 semaine</span>
+                                <span><i data-lucide="map-pin"
+                                        style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i>
+                                    Dakar / Remote</span>
+                                <span><i data-lucide="clock"
+                                        style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i>
+                                    Il y a 1 semaine</span>
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="btn-client" style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
+                    <a href="#" class="btn-client"
+                        style="padding: 10px 25px; font-size: 0.85rem; text-decoration: none;">Consulter</a>
                 </div>
             </div>
-            
+
             <p style="text-align: center; margin-top: 40px; color: #666; font-size: 0.95rem;">
-                Vous n'avez pas trouvé d'offre correspondante ? <a href="#" style="color: var(--elton-red); font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s;" onmouseover="this.style.borderBottomColor='var(--elton-red)'" onmouseout="this.style.borderBottomColor='transparent'">Envoyer une candidature spontanée</a>
+                Vous n'avez pas trouvé d'offre correspondante ? <a href="#"
+                    style="color: var(--elton-red); font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s;"
+                    onmouseover="this.style.borderBottomColor='var(--elton-red)'"
+                    onmouseout="this.style.borderBottomColor='transparent'">Envoyer une candidature spontanée</a>
             </p>
         </div>
 
         <style>
-            .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important; }
-            .job-item:hover { background: rgba(26,115,181,0.02); }
+            .hover-lift:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+            }
+
+            .job-item:hover {
+                background: rgba(26, 115, 181, 0.02);
+            }
         </style>
+    </section>
+
     <!-- Assistance & Help Center Section (NEW) -->
     <section id="assistance" class="reveal" style="padding: 100px 5%; background: var(--bg-sections);">
         <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
             <h2 class="section-title">Besoin d'Assistance ?</h2>
-            <p style="color: #666; margin-bottom: 60px; font-family: 'Poppins', sans-serif;">Nos experts sont à votre écoute pour vous accompagner et répondre à toutes vos questions.</p>
-            
+            <p style="color: #666; margin-bottom: 60px; font-family: 'Poppins', sans-serif;">Nos experts sont à
+                votre écoute pour vous accompagner et répondre à toutes vos questions.</p>
+
             <div class="grid" style="grid-template-columns: repeat(4, 1fr); gap: 30px;">
                 <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
-                    <div style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
                         <i data-lucide="help-circle"></i>
                     </div>
                     <h4 style="margin-bottom: 10px;">FAQ</h4>
-                    <p style="font-size: 0.85rem; color: #888;">Obtenez des réponses immédiates aux questions fréquentes.</p>
-                    <a href="#" style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Consulter <i data-lucide="external-link" style="width: 14px; vertical-align: middle;"></i></a>
+                    <p style="font-size: 0.85rem; color: #888;">Obtenez des réponses immédiates aux questions
+                        fréquentes.</p>
+                    <a href="#"
+                        style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Consulter
+                        <i data-lucide="external-link" style="width: 14px; vertical-align: middle;"></i></a>
                 </div>
                 <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
-                    <div style="width: 60px; height: 60px; background: rgba(229,0,61,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-red);">
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(229,0,61,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-red);">
                         <i data-lucide="settings"></i>
                     </div>
                     <h4 style="margin-bottom: 10px;">Support Technique</h4>
-                    <p style="font-size: 0.85rem; color: #888;">Assistance experte pour vos besoins en lubrifiants & carburants.</p>
-                    <a href="#" style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Ouvrir un ticket <i data-lucide="chevron-right" style="width: 14px; vertical-align: middle;"></i></a>
+                    <p style="font-size: 0.85rem; color: #888;">Assistance experte pour vos besoins en lubrifiants &
+                        carburants.</p>
+                    <a href="#"
+                        style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Ouvrir
+                        un ticket <i data-lucide="chevron-right" style="width: 14px; vertical-align: middle;"></i></a>
                 </div>
                 <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
-                    <div style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
                         <i data-lucide="alert-circle"></i>
                     </div>
                     <h4 style="margin-bottom: 10px;">Réclamations</h4>
-                    <p style="font-size: 0.85rem; color: #888;">Votre satisfaction est notre priorité. Écrivez-nous directement.</p>
-                    <a href="#footer" style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Nous contacter <i data-lucide="mail" style="width: 14px; vertical-align: middle;"></i></a>
+                    <p style="font-size: 0.85rem; color: #888;">Votre satisfaction est notre priorité. Écrivez-nous
+                        directement.</p>
+                    <a href="#footer"
+                        style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Nous
+                        contacter <i data-lucide="mail" style="width: 14px; vertical-align: middle;"></i></a>
                 </div>
-                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white; border: 2px solid var(--elton-blue);">
-                    <div style="width: 60px; height: 60px; background: var(--elton-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: white;">
+                <div class="card reveal hover-lift"
+                    style="padding: 30px; text-align: center; background: white; border: 2px solid var(--elton-blue);">
+                    <div
+                        style="width: 60px; height: 60px; background: var(--elton-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: white;">
                         <i data-lucide="message-square"></i>
                     </div>
                     <h4 style="margin-bottom: 10px;">Chat en Direct</h4>
-                    <p style="font-size: 0.85rem; color: #888;">Parlez à un conseiller Elton en temps réel maintenant.</p>
-                    <a href="javascript:void(0)" onclick="toggleChat()" style="color: var(--elton-blue); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Démarrer le chat <i data-lucide="play" style="width: 14px; vertical-align: middle;"></i></a>
+                    <p style="font-size: 0.85rem; color: #888;">Parlez à un conseiller Elton en temps réel
+                        maintenant.</p>
+                    <a href="javascript:void(0)" onclick="toggleChat()"
+                        style="color: var(--elton-blue); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Démarrer
+                        le chat <i data-lucide="play" style="width: 14px; vertical-align: middle;"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Prenez rendez-vous Section (NEW) -->
-    <section id="rendez-vous" style="position: relative; padding: 100px 20px; text-align: center; color: white;">
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('appointment_bg.jpg') no-repeat center center/cover; z-index: 0;"></div>
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(26,115,181,0.9) 0%, rgba(26,115,181,0.7) 100%); z-index: 1;"></div>
-        
+    <section id="rendez-vous" style="position: relative; padding: 100px 20px; text-align: center; color: white;" ;
+        overflow: hidden;">
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('appointment_bg.jpg') no-repeat center center/cover; z-index: 0;">
+        </div>
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(26,115,181,0.9) 0%, rgba(26,115,181,0.7) 100%); z-index: 1;">
+        </div>
+
         <div class="container" style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Ubuntu', sans-serif;">Prenez rendez-vous avec <span style="color: var(--elton-red);">ELTON OIL</span></h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; text-align: center;">Planifiez facilement un rendez-vous avec nos experts et obtenez des conseils personnalisés pour tous vos besoins en produits pétroliers. Choisissez le créneau qui vous convient et laissez-nous vous accompagner dans votre projet.</p>
-            <a href="#" class="btn-client" style="text-decoration: none; padding: 15px 40px; font-size: 1.1rem; background: var(--elton-red);">Réserver maintenant</a>
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Ubuntu', sans-serif;">Prenez
+                rendez-vous avec <span style="color: var(--elton-red);">ELTON OIL</span></h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; text-align: center;">Planifiez
+                facilement un rendez-vous avec nos experts et obtenez des conseils personnalisés pour tous vos
+                besoins en produits pétroliers. Choisissez le créneau qui vous convient et laissez-nous vous
+                accompagner dans votre projet.</p>
+            <a href="#" class="btn-client"
+                style="text-decoration: none; padding: 15px 40px; font-size: 1.1rem; background: var(--elton-red);">Réserver
+                maintenant</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="footer" style="background: url('bg-waves.svg') no-repeat center bottom; background-size: cover; padding: 80px 5% 40px; border-top: 1px solid rgba(0,0,0,0.05); position: relative; margin-top: 50px;">
-        <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; max-width: 1200px; margin: 0 auto 60px auto;">
+    <footer id="footer"
+        style="background: url('bg-waves.svg') no-repeat center bottom; background-size: cover; padding: 80px 5% 40px; border-top: 1px solid rgba(0,0,0,0.05); position: relative; margin-top: 50px;">
+        <div class="footer-grid"
+            style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; max-width: 1200px; margin: 0 auto 60px auto;">
             <div>
-                <img src="elton_logo_official.png" alt="Elton" style="height: 60px; width: auto; background: transparent; margin-bottom: 25px;">
-                <p style="color: #4a5568; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6;">L'énergie de l'émergence. Leader de la distribution pétrolière au Sénégal, nous vous accompagnons avec qualité, innovation et proximité.</p>
+                <img src="elton_logo_official.png" alt="Elton"
+                    style="height: 60px; width: auto; background: transparent; margin-bottom: 25px;">
+                <p style="color: #4a5568; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6;">L'énergie de
+                    l'émergence. Leader de la distribution pétrolière au Sénégal, nous vous accompagnons avec
+                    qualité, innovation et proximité.</p>
                 <div class="social-icons" style="display: flex; gap: 15px;">
-                    <a href="#" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i data-lucide="facebook"></i></a>
-                    <a href="#" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i data-lucide="linkedin"></i></a>
-                    <a href="#" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i data-lucide="instagram"></i></a>
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="facebook"></i></a>
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="linkedin"></i></a>
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="instagram"></i></a>
                 </div>
             </div>
-            
+
             <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
-                <h4 style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">Liens Rapides</h4>
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Liens Rapides</h4>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Accueil</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> À Propos</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Produits</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Carrières</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Accueil</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> À Propos</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Produits</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Carrières</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
-                <h4 style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">Nos Services</h4>
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Nos Services</h4>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> E-Services</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Lubrifiants</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Oasis Elton</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item" style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i data-lucide="chevron-right" style="width: 16px;"></i> Assistance</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> E-Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Lubrifiants</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Oasis Elton</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Assistance</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-contact" style="font-family: 'Poppins', sans-serif;">
-                <h4 style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">Contact & Accès</h4>
-                <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; color: #4a5568; font-size: 0.95rem;">
-                    <div style="display: flex; gap: 10px; align-items: flex-start;"><i data-lucide="map-pin" style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>Siège Elton Group<br>Dakar, Sénégal</span></div>
-                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="phone" style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>+221 33 000 00 00</span></div>
-                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="mail" style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>contact@elton.ci</span></div>
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Contact & Accès</h4>
+                <div
+                    style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; color: #4a5568; font-size: 0.95rem;">
+                    <div style="display: flex; gap: 10px; align-items: flex-start;"><i data-lucide="map-pin"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>Abidjan
+                            Marcory, immeuble rive droite<br>3 rue des brasseurs</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="phone"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>+225 2720
+                            311560</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="mail"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i>
+                        <span>info@elton.sn</span>
+                    </div>
                 </div>
-                <a href="#station-map" class="hover-scale" style="display: inline-flex; align-items: center; gap: 10px; background: var(--elton-red); color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 15px rgba(229,0,61,0.3);">
+                <a href="#station-map" class="hover-scale"
+                    style="display: inline-flex; align-items: center; gap: 10px; background: var(--elton-red); color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 15px rgba(229,0,61,0.3);">
                     <i data-lucide="map"></i> Trouver une station
                 </a>
             </div>
         </div>
-        
-        <div class="footer-bottom-bar" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; color: #666; font-size: 0.9rem;">
+
+        <div class="footer-bottom-bar"
+            style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; color: #666; font-size: 0.9rem;">
             <div>&copy; 2026 Elton Group. L'énergie de l'émergence.</div>
             <div style="display: flex; gap: 20px;">
                 <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Mentions Légales</a>
-                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Politique de Confidentialité</a>
+                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Politique de
+                    Confidentialité</a>
             </div>
         </div>
-        
+
         <style>
-            .social-icons a:hover { background: var(--elton-red) !important; color: white !important; transform: translateY(-5px); }
-            .footer-link-item:hover { color: var(--elton-blue) !important; transform: translateX(5px); }
-            .hover-scale:hover { background: white !important; color: var(--elton-red) !important; transform: scale(1.05); }
+            .social-icons a:hover {
+                background: var(--elton-red) !important;
+                color: white !important;
+                transform: translateY(-5px);
+            }
+
+            .footer-link-item:hover {
+                color: var(--elton-blue) !important;
+                transform: translateX(5px);
+            }
+
+            .hover-scale:hover {
+                background: white !important;
+                color: var(--elton-red) !important;
+                transform: scale(1.05);
+            }
+
             @media (max-width: 768px) {
-                .footer-grid { grid-template-columns: 1fr !important; }
-                .footer-bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+                .footer-grid {
+                    grid-template-columns: 1fr !important;
+                }
+
+                .footer-bottom-bar {
+                    flex-direction: column;
+                    gap: 15px;
+                    text-align: center;
+                }
             }
         </style>
     </footer>
 
-    <!-- Assistance Chat Widget -->
-    <div id="chat-widget" style="position: fixed; bottom: 30px; right: 30px; z-index: 2000; font-family: 'Poppins', sans-serif;">
-        <div id="chat-btn" title="Besoin d'aide ?" style="width: 60px; height: 60px; background: var(--elton-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px rgba(26,115,181,0.4); transition: var(--transition);">
-            <i data-lucide="message-circle" style="color: white; width: 30px; height: 30px;"></i>
-        </div>
-        <div class="chat-window" id="chat-window" style="position: absolute; bottom: 80px; right: 0; width: 350px; background: white; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; animation: slideUp 0.3s ease;">
-            <div style="background: var(--elton-blue); color: white; padding: 20px; display: flex; align-items: center; justify-content: space-between;">
-                <h4 style="margin: 0; font-family: 'Ubuntu', sans-serif; display: flex; align-items: center; gap: 10px;"><i data-lucide="headset"></i> Assistant Elton</h4>
+    <div id="sticky-assistance-container">
+        <div class="chat-window" id="chat-window"
+            style="position: absolute; bottom: 80px; right: 0; width: 350px; background: white; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; animation: slideUp 0.3s ease; max-width: calc(100vw - 40px);">
+            <div
+                style="background: var(--elton-blue); color: white; padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <h4
+                    style="margin: 0; font-family: 'Ubuntu', sans-serif; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="headset"></i> Assistant Elton
+                </h4>
                 <i data-lucide="x" id="chat-close" style="cursor: pointer;"></i>
             </div>
-            <div id="chat-messages" style="padding: 20px; height: 300px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 15px;">
-                <div style="background: var(--elton-secondary); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; color: var(--elton-dark); font-size: 0.9rem;">
+            <div id="chat-messages"
+                style="padding: 20px; height: 300px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 15px;">
+                <div
+                    style="background: var(--elton-secondary); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; color: var(--elton-dark); font-size: 0.9rem;">
                     Bonjour ! 👋 Comment pouvons-nous vous aider aujourd'hui ?
                 </div>
             </div>
             <div style="padding: 15px; background: white; border-top: 1px solid #eee; display: flex; gap: 10px;">
-                <input type="text" id="chat-input" placeholder="Écrivez votre message..." style="flex: 1; border: 1px solid #ddd; padding: 10px 15px; border-radius: 20px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; outline: none;">
-                <button id="chat-send" style="background: var(--elton-red); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer;">
+                <input type="text" id="chat-input" placeholder="Écrivez votre message..."
+                    style="flex: 1; border: 1px solid #ddd; padding: 10px 15px; border-radius: 20px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; outline: none;">
+                <button id="chat-send"
+                    style="background: var(--elton-red); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; flex-shrink: 0;">
                     <i data-lucide="send" style="width: 18px; height: 18px;"></i>
                 </button>
             </div>
         </div>
+
+        <a href="javascript:void(0)" onclick="toggleChat()" id="btn-assistance">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                <path
+                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+            </svg>
+            <span id="assistance-text">ASSISTANCE 24/7</span>
+        </a>
     </div>
 
     <!-- Scripts -->
     <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNavOverlay');
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', mobileNav.classList.contains('active'));
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
         // Initialize Lucide icons with a failsafe
         function initIcons() {
             if (typeof lucide !== 'undefined') {
@@ -1038,7 +1982,7 @@
                 });
             }
         }
-        
+
         // Initial call
         initIcons();
         // Failsafe on DOMContentLoaded
@@ -1047,7 +1991,6 @@
         window.onload = initIcons;
 
         // Chat Widget Logic
-        const chatBtn = document.getElementById('chat-btn');
         const chatWindow = document.getElementById('chat-window');
         const chatClose = document.getElementById('chat-close');
         const chatInput = document.getElementById('chat-input');
@@ -1055,13 +1998,13 @@
         const chatMessages = document.getElementById('chat-messages');
 
         const toggleChat = () => chatWindow.classList.toggle('active');
-        chatBtn.addEventListener('click', toggleChat);
+        window.toggleChat = toggleChat;
         chatClose.addEventListener('click', toggleChat);
 
         const sendMessage = () => {
             const text = chatInput.value.trim();
-            if(!text) return;
-            
+            if (!text) return;
+
             // Add user message
             const userMsg = document.createElement('div');
             userMsg.style.cssText = "background: var(--elton-blue); color: white; padding: 10px 15px; border-radius: 15px 15px 0 15px; max-width: 80%; align-self: flex-end; font-size: 0.9rem;";
@@ -1082,7 +2025,7 @@
 
         chatSend.addEventListener('click', sendMessage);
         chatInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') sendMessage();
+            if (e.key === 'Enter') sendMessage();
         });
 
         // Google Translate Simulation
@@ -1090,7 +2033,7 @@
             // This would normally call the Google Translate API
             console.log("Google Translate Initialized");
         }
-        
+
         // Testimonials Carousel Logic
         const tSlides = document.getElementById('testimonial-slides');
         const tPrev = document.getElementById('slider-prev');
@@ -1109,15 +2052,15 @@
         const goToNext = () => { tIndex = (tIndex + 1) % 3; updateCarousel(); };
         const goToPrev = () => { tIndex = (tIndex - 1 + 3) % 3; updateCarousel(); };
 
-        if(tNext && tPrev) {
+        if (tNext && tPrev) {
             tNext.addEventListener('click', () => { goToNext(); resetInterval(); });
             tPrev.addEventListener('click', () => { goToPrev(); resetInterval(); });
-            tDots.forEach(dot => dot.addEventListener('click', (e) => { 
-                tIndex = parseInt(e.target.dataset.index); 
-                updateCarousel(); 
+            tDots.forEach(dot => dot.addEventListener('click', (e) => {
+                tIndex = parseInt(e.target.dataset.index);
+                updateCarousel();
                 resetInterval();
             }));
-            
+
             const resetInterval = () => {
                 clearInterval(slideInterval);
                 slideInterval = setInterval(goToNext, 6000);
@@ -1140,6 +2083,7 @@
         // Hero Slider Logic
         const hSlides = document.querySelectorAll('.hero-slide');
         const hDots = document.querySelectorAll('.hero-dot');
+        const hVideos = document.querySelectorAll('.hero-video');
         let hIndex = 0;
         let hInterval;
 
@@ -1150,10 +2094,15 @@
             hDots.forEach((dot, i) => {
                 dot.style.background = i === hIndex ? 'var(--elton-red)' : 'rgba(255,255,255,0.3)';
             });
+            if (hVideos.length > 0) {
+                hVideos.forEach((vid, i) => {
+                    vid.classList.toggle('active', i === hIndex);
+                });
+            }
         };
 
         const nextHero = () => { hIndex = (hIndex + 1) % hSlides.length; updateHero(); };
-        
+
         const startHeroRotation = () => {
             hInterval = setInterval(nextHero, 5000);
         };
@@ -1167,7 +2116,147 @@
 
         startHeroRotation();
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        /* ── Floating Assistance Button ── */
+        #sticky-assistance-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        #btn-assistance {
+            background: #e5003d;
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(229, 0, 61, 0.4);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        #btn-assistance:hover {
+            transform: translateY(-5px);
+            background: #c90036;
+            box-shadow: 0 15px 35px rgba(229, 0, 61, 0.5);
+        }
+
+        /* ── Global Responsive Breakpoints ── */
+        @media (max-width: 1024px) {
+            section {
+                padding: 80px 5% !important;
+            }
+
+            .section-title {
+                font-size: 2rem !important;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 4%;
+                height: 70px !important;
+            }
+
+            .logo img {
+                height: 44px !important;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            section {
+                padding: 60px 5% !important;
+            }
+
+            .section-title {
+                font-size: 1.7rem !important;
+            }
+
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-bottom-bar {
+                flex-direction: column !important;
+                gap: 15px !important;
+                text-align: center !important;
+            }
+
+            /* leadership cards */
+            #mot-president,
+            #mot-dg {
+                flex-direction: column !important;
+                min-height: auto !important;
+            }
+
+            #mot-president>div,
+            #mot-dg>div {
+                width: 100% !important;
+            }
+
+            #mot-president>div:first-child,
+            #mot-dg>div:first-child {
+                height: 180px !important;
+            }
+
+            /* floating button collapse */
+            #sticky-assistance-container {
+                bottom: 100px;
+                right: 20px;
+            }
+
+            #assistance-text {
+                display: none;
+            }
+
+            #btn-assistance {
+                padding: 15px;
+                border-radius: 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.4rem !important;
+            }
+
+            section {
+                padding: 40px 4% !important;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem !important;
+            }
+
+            .btn-client {
+                padding: 10px 18px !important;
+                font-size: 0.85rem !important;
+            }
+        }
+    </style>
+
+
 
 </body>
+
 </html>

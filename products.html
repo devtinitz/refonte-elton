@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elton Group - Refonte Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Official Elton Brand Colors (from dev.elton.ci) */
+            --elton-blue: #1a73b5;
+            --elton-red: #e5003d;
+            --elton-secondary: #e7f0f7;
+            --elton-dark: #333333;
+            /* Aliases */
+            --primary-blue: #1a73b5;
+            --accent: #e5003d;
+            --bg-color: #ffffff;
+            --bg-sections: #e7f0f7;
+            --text-color: #333333;
+            --nav-bg: rgba(26, 115, 181, 0.97);
+            --glass-bg: rgba(26, 115, 181, 0.08);
+            --glass-border: rgba(26, 115, 181, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="elton-warm"] {
+            --bg-color: #e7f0f7;
+            --bg-sections: #ffffff;
+            --text-color: #333333;
+            --glass-bg: rgba(26, 115, 181, 0.05);
+            --nav-bg: rgba(26, 115, 181, 0.97);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color) url('bg-waves.svg') repeat-y center top;
+            background-size: 100% auto;
+            background-attachment: fixed;
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .brand {
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            background: white;
+            border-radius: 8px;
+            padding: 4px 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--elton-red);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 200px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            color: var(--primary-blue);
+            text-decoration: none;
+            padding: 10px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            color: var(--elton-red);
+            padding-left: 5px;
+        }
+
+        .btn-client {
+            background: var(--elton-red);
+            color: #ffffff !important;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .btn-client:hover {
+            transform: translateY(-2px);
+            background: #c90036;
+            box-shadow: 0 6px 20px rgba(229, 0, 61, 0.35);
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 100px 10%;
+            position: relative;
+            scroll-margin-top: 100px;
+        }
+
+        .vibrant-bg {
+            background: linear-gradient(135deg, #1a73b5 0%, #0d4f82 100%);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--elton-red);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--elton-blue);
+            box-shadow: 0 12px 30px rgba(26, 115, 181, 0.15);
+        }
+
+        .card icon-box {
+            color: var(--elton-red);
+            margin-bottom: 20px;
+        }
+
+        /* --- CHAT WIDGET --- */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-window.active {
+            display: flex !important;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .color-inputs {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="color"] {
+            border: none;
+            width: 100%;
+            height: 35px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn-reset {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #eee;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-reset:hover {
+            background: #ddd;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #001021;
+            color: white;
+            padding: 80px 10%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--elton-red);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 25px;
+            color: var(--elton-red);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .btn-footer-map {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--elton-red);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            border: none;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .btn-footer-map:hover {
+            background: #c90036;
+        }
+
+        /* --- UTILS --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header .translate {
+            position: absolute;
+            top: 20px;
+            right: 5%;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes heroTextIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero-slide {
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-slide.active {
+            display: block;
+            text-align: center;
+        }
+
+        .icon-box {
+            transition: var(--transition);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.2) rotate(5deg);
+            animation-play-state: paused;
+        }
+
+        /* ─── HAMBURGER MENU ─── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1100;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.35s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(26, 115, 181, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            overflow-y: auto;
+            padding: 100px 20px 40px;
+        }
+
+        .mobile-nav-overlay.active {
+            display: flex;
+        }
+
+        .mobile-nav-overlay a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Ubuntu', sans-serif;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .mobile-nav-overlay a:hover {
+            color: var(--elton-red);
+        }
+
+        .mobile-nav-overlay .mobile-divider {
+            width: 60px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+
+        .mobile-nav-overlay .mobile-section-label {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            section {
+                padding: 80px 5% !important;
+            }
+
+            .section-title {
+                font-size: 2rem !important;
+            }
+
+            #offres .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            #actualites .grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 4%;
+                height: 70px !important;
+            }
+
+            .logo img {
+                height: 44px !important;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav>a.hover-scale {
+                display: none !important;
+            }
+
+            nav>.translate {
+                display: none !important;
+            }
+
+            section {
+                padding: 60px 4% !important;
+            }
+
+            .section-title {
+                font-size: 1.7rem !important;
+            }
+
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-bottom-bar {
+                flex-direction: column !important;
+                gap: 15px !important;
+                text-align: center !important;
+            }
+
+            .btn-client {
+                padding: 6px 14px !important;
+                font-size: 0.75rem !important;
+            }
+
+            #offres .card {
+                flex-direction: column !important;
+                height: auto !important;
+            }
+
+            #offres .card>div {
+                width: 100% !important;
+            }
+
+            #offres .card>div:first-child {
+                height: 180px !important;
+            }
+
+            div[style*="height: 55vh"] {
+                min-height: 300px !important;
+                height: 40vh !important;
+            }
+
+            #station-map div[style*="height: 600px"] {
+                height: 340px !important;
+            }
+
+            .slide p {
+                font-size: 1.1rem !important;
+            }
+
+            .job-item {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 15px !important;
+            }
+
+            #sticky-assistance-container {
+                bottom: 90px;
+                right: 18px;
+            }
+
+            #assistance-text {
+                display: none;
+            }
+
+            #btn-assistance {
+                padding: 15px;
+                border-radius: 50%;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.4rem !important;
+            }
+
+            section {
+                padding: 40px 4% !important;
+            }
+
+            .card {
+                padding: 20px !important;
+            }
+        }
+    </style>
+</head>
+
+<body id="main-body">
+
+    <!-- Header / Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="elton_logo_official.png" alt="Elton Group - Une nouvelle vision du service">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Accueil</a></li>
+            <li class="nav-item">
+                <a href="about.html" class="nav-link">À propos <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="about.html">Qui sommes-nous</a>
+                    <a href="about.html#mot-president">Mot du Président</a>
+                    <a href="about.html#mot-dg">Mot du DG</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="products.html" class="nav-link">Nos Produits <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="products.html#lubrifiants">Lubrifiants</a>
+                    <a href="products.html#carburants">Carburants</a>
+                </div>
+            </li>
+            <li><a href="careers.html" class="nav-link">Carrières</a></li>
+            <li><a href="news.html" class="nav-link">Actualités</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item">
+                <a href="#" class="nav-link btn-client">Espace Client <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="contact.html#assistance">Assistance</a>
+                    <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
+                    <a href="contact.html#station-map">Trouver une station</a>
+                </div>
+            </li>
+        </ul>
+
+        <div id="google_translate_element" style="display: none;"></div>
+        <div class="translate"><i data-lucide="languages" style="color: white; cursor: pointer;"></i></div>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <span class="mobile-section-label">Navigation</span>
+        <a href="index.html">Accueil</a>
+        <div class="mobile-divider"></div>
+        <a href="about.html">À Propos</a>
+        <a href="about.html#mot-president">Mot du Président</a>
+        <a href="about.html#mot-dg">Mot du DG</a>
+        <div class="mobile-divider"></div>
+        <a href="products.html">Nos Produits</a>
+        <a href="products.html#lubrifiants">Lubrifiants</a>
+        <a href="products.html#carburants">Carburants</a>
+        <div class="mobile-divider"></div>
+        <a href="careers.html">Carrières</a>
+        <a href="news.html">Actualités</a>
+        <a href="contact.html">Contact</a>
+        <div class="mobile-divider"></div>
+        <span class="mobile-section-label">Espace Client</span>
+        <a href="contact.html#assistance">Assistance</a>
+        <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
+        <a href="contact.html#station-map">Trouver une station</a>
+    </div>
+
+    <!-- Page Banner -->
+    <div
+        style="position: relative; height: 55vh; min-height: 450px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 0px;">
+        <video autoplay muted loop playsinline
+            style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); z-index: 0; object-fit: cover;">
+            <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518676/6_l5m4s7.mp4" type="video/mp4">
+        </video>
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,16,33,0.8) 0%, rgba(26,115,181,0.6) 100%); z-index: 1;">
+        </div>
+        <div style="position: relative; z-index: 2; text-align: center; color: white; padding-top: 80px; width: 100%;">
+            <h1
+                style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; font-family: 'Ubuntu', sans-serif; text-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 15px; animation: fadeInUp 1s ease;">
+                Nos Produits & Offres</h1>
+            <div
+                style="width: 80px; height: 4px; background: var(--elton-red); margin: 0 auto; border-radius: 2px; box-shadow: 0 2px 10px rgba(229,0,61,0.5);">
+            </div>
+        </div>
+    </div>
+
+    <!-- Lubricants Section -->
+    <section id="lubrifiants" class="reveal" style="padding: 100px 20px; background: var(--bg-sections);">
+        <div class="container"
+            style="text-align: center; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center; max-width: 1200px; margin-left: auto; margin-right: auto;">
+            <h2 class="section-title">Nos Lubrifiants</h2>
+            <br>
+            <h3 style="color: var(--elton-blue); font-family: 'Ubuntu', sans-serif; margin-bottom: 15px;">À quoi sert
+                Huile moteur et Lubrifiant ?</h3>
+            <p
+                style="max-width: 800px; text-align: left; color: var(--elton-dark); font-size: 1.05rem; line-height: 1.6;">
+                Les différentes fonctions que les huiles moteur assurent sont primordiales pour préserver le bon état du
+                moteur de votre véhicule : <br>
+            <ul
+                style="text-align: left; max-width: 800px; color: var(--elton-dark); line-height: 1.6; margin-top: 10px;">
+                <li>Elles protègent contre toutes les causes d’usure, en diminuant les frottements et la corrosion.</li>
+                <li>Elles empêchent l’échauffement de votre moteur.</li>
+                <li>Elles assurent la propreté de votre moteur en empêchant le dépôt d’impuretés diverses.</li>
+            </ul>
+            </p>
+            <br>
+            <a href="#" class="btn-client reveal"
+                style="background: transparent; color: var(--elton-blue) !important; border: 2px solid var(--elton-blue); text-decoration: none;">Commander
+                en ligne</a>
+        </div>
+        <div class="grid" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.1s;">
+                <div style="height: 200px; background: url('lub1.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Haute Performance</h3>
+                    <p style="margin-bottom: 20px;">Nos huiles synthétiques garantissent une protection maximale de
+                        votre moteur dans toutes les conditions.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">Découvrir la gamme
+                        <i data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.2s;">
+                <div style="height: 200px; background: url('lub2.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Protection Longue Durée</h3>
+                    <p style="margin-bottom: 20px;">Une formule unique qui réduit l'usure et prolonge la durée de vie de
+                        vos équipements industriels.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i
+                            data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.3s;">
+                <div style="height: 200px; background: url('lub1.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Économie de Carburant</h3>
+                    <p style="margin-bottom: 20px;">Des lubrifiants optimisés pour réduire les frottements internes et
+                        abaisser votre consommation.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i
+                            data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="card reveal" style="padding: 0; overflow: hidden; transition-delay: 0.4s;">
+                <div style="height: 200px; background: url('lub2.png') center/cover;"></div>
+                <div style="padding: 30px;">
+                    <h3 style="margin-bottom: 15px;">Huiles Industrielles</h3>
+                    <p style="margin-bottom: 20px;">Une gamme complète répondant aux spécifications les plus exigeantes
+                        de l'industrie.</p>
+                    <a href="#" class="nav-link" style="color: var(--elton-red); margin-top: 20px;">En savoir plus <i
+                            data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assistance & Help Center Section (NEW) -->
+    <section id="assistance" class="reveal" style="padding: 100px 5%; background: var(--bg-sections);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title">Besoin d'Assistance ?</h2>
+            <p style="color: #666; margin-bottom: 60px; font-family: 'Poppins', sans-serif;">Nos experts sont à votre
+                écoute pour vous accompagner et répondre à toutes vos questions.</p>
+
+            <div class="grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
+                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
+                        <i data-lucide="help-circle"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">FAQ</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Obtenez des réponses immédiates aux questions
+                        fréquentes.</p>
+                    <a href="#"
+                        style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Consulter
+                        <i data-lucide="external-link" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(229,0,61,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-red);">
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">Support Technique</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Assistance experte pour vos besoins en lubrifiants &
+                        carburants.</p>
+                    <a href="#"
+                        style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Ouvrir
+                        un ticket <i data-lucide="chevron-right" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+                <div class="card reveal hover-lift" style="padding: 30px; text-align: center; background: white;">
+                    <div
+                        style="width: 60px; height: 60px; background: rgba(26,115,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--elton-blue);">
+                        <i data-lucide="alert-circle"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">Réclamations</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Votre satisfaction est notre priorité. Écrivez-nous
+                        directement.</p>
+                    <a href="#footer"
+                        style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Nous
+                        contacter <i data-lucide="mail" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+                <div class="card reveal hover-lift"
+                    style="padding: 30px; text-align: center; background: white; border: 2px solid var(--elton-blue);">
+                    <div
+                        style="width: 60px; height: 60px; background: var(--elton-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: white;">
+                        <i data-lucide="message-square"></i>
+                    </div>
+                    <h4 style="margin-bottom: 10px;">Chat en Direct</h4>
+                    <p style="font-size: 0.85rem; color: #888;">Parlez à un conseiller Elton en temps réel maintenant.
+                    </p>
+                    <a href="javascript:void(0)" onclick="toggleChat()"
+                        style="color: var(--elton-red); font-weight: 700; font-size: 0.85rem; text-decoration: none; margin-top: 15px; display: inline-block;">Démarrer
+                        le chat <i data-lucide="send" style="width: 14px; vertical-align: middle;"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prenez rendez-vous Section (NEW) -->
+    <section id="rendez-vous"
+        style="position: relative; padding: 120px 20px; text-align: center; color: white; overflow: hidden; margin-top: 0;">
+        <video autoplay muted loop playsinline
+            style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); z-index: 0; object-fit: cover;">
+            <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518676/6_l5m4s7.mp4" type="video/mp4">
+        </video>
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(26,115,181,0.9) 0%, rgba(26,115,181,0.7) 100%); z-index: 1;">
+        </div>
+
+        <div class="container" style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Ubuntu', sans-serif;">Prenez rendez-vous
+                avec <span style="color: var(--elton-red);">ELTON OIL</span></h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; text-align: center;">Planifiez
+                facilement un rendez-vous avec nos experts et obtenez des conseils personnalisés pour tous vos besoins
+                en produits pétroliers.</p>
+            <a href="#" class="btn-client"
+                style="text-decoration: none; padding: 15px 40px; font-size: 1.1rem; background: var(--elton-red);">Réserver
+                maintenant</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer"
+        style="background: url('bg-waves.svg') no-repeat center bottom; background-size: cover; padding: 80px 5% 40px; border-top: 1px solid rgba(0,0,0,0.05); position: relative; margin-top: 50px;">
+        <div class="footer-grid"
+            style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; max-width: 1200px; margin: 0 auto 60px auto;">
+            <div>
+                <img src="elton_logo_official.png" alt="Elton"
+                    style="height: 60px; width: auto; background: transparent; margin-bottom: 25px;">
+                <p style="color: #4a5568; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6;">L'énergie de
+                    l'émergence. Leader de la distribution pétrolière au Sénégal, nous vous accompagnons avec qualité,
+                    innovation et proximité.</p>
+                <div class="social-icons" style="display: flex; gap: 15px;">
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="facebook"></i></a>
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="linkedin"></i></a>
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Liens Rapides</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Accueil</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> À Propos</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Produits</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Carrières</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Nos Services</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> E-Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Lubrifiants</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Oasis Elton</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Assistance</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact" style="font-family: 'Poppins', sans-serif;">
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Contact & Accès</h4>
+                <div
+                    style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; color: #4a5568; font-size: 0.95rem;">
+                    <div style="display: flex; gap: 10px; align-items: flex-start;"><i data-lucide="map-pin"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>Abidjan Marcory,
+                            immeuble rive droite<br>3 rue des brasseurs</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="phone"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>+225 2720
+                            311560</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="mail"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i>
+                        <span>info@elton.sn</span>
+                    </div>
+                </div>
+                <a href="#station-map" class="hover-scale"
+                    style="display: inline-flex; align-items: center; gap: 10px; background: var(--elton-red); color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 15px rgba(229,0,61,0.3);">
+                    <i data-lucide="map"></i> Trouver une station
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar"
+            style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; color: #666; font-size: 0.9rem;">
+            <div>&copy; 2026 Elton Group. L'énergie de l'émergence.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Mentions Légales</a>
+                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Politique de
+                    Confidentialité</a>
+            </div>
+        </div>
+
+        <style>
+            .social-icons a:hover {
+                background: var(--elton-red) !important;
+                color: white !important;
+                transform: translateY(-5px);
+            }
+
+            .footer-link-item:hover {
+                color: var(--elton-blue) !important;
+                transform: translateX(5px);
+            }
+
+            .hover-scale:hover {
+                background: white !important;
+                color: var(--elton-red) !important;
+                transform: scale(1.05);
+            }
+
+            @media (max-width: 768px) {
+                .footer-grid {
+                    grid-template-columns: 1fr !important;
+                }
+
+                .footer-bottom-bar {
+                    flex-direction: column;
+                    gap: 15px;
+                    text-align: center;
+                }
+            }
+        </style>
+    </footer>
+
+    <!-- Floating Assistance Button Styles -->
+    <!-- GLOBAL FLOATING ASSISTANCE BUTTON -->
+    <style>
+        #sticky-assistance-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        #btn-assistance {
+            background: #e5003d;
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(229, 0, 61, 0.4);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        #btn-assistance:hover {
+            transform: translateY(-5px);
+            background: #c90036;
+            box-shadow: 0 15px 35px rgba(229, 0, 61, 0.5);
+        }
+
+        @media (max-width: 968px) {
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            section {
+                padding: 60px 5% !important;
+            }
+
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+            }
+
+            /* Product splits */
+            #lubrifiants .grid,
+            #carburants .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            #offres .card {
+                flex-direction: column !important;
+                height: auto !important;
+                min-height: auto !important;
+            }
+
+            #offres .card div {
+                width: 100% !important;
+            }
+
+            #offres .card div:first-child {
+                height: 200px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                height: 70px !important;
+                padding: 0 4% !important;
+            }
+
+            .logo img {
+                height: 44px !important;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            .footer-bottom-bar {
+                flex-direction: column !important;
+                gap: 15px !important;
+                text-align: center !important;
+            }
+
+            #sticky-assistance-container {
+                bottom: 100px;
+                right: 20px;
+            }
+
+            #assistance-text {
+                display: none;
+            }
+
+            #btn-assistance {
+                padding: 15px;
+                border-radius: 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.4rem !important;
+            }
+
+            section {
+                padding: 40px 4% !important;
+            }
+        }
+    </style>
+    <div id="sticky-assistance-container">
+        <div class="chat-window" id="chat-window"
+            style="position: absolute; bottom: 80px; right: 0; width: 350px; background: white; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; animation: slideUp 0.3s ease; max-width: calc(100vw - 40px);">
+            <div
+                style="background: var(--elton-blue); color: white; padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <h4
+                    style="margin: 0; font-family: 'Ubuntu', sans-serif; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="headset"></i> Assistant Elton
+                </h4>
+                <i data-lucide="x" id="chat-close" style="cursor: pointer;"></i>
+            </div>
+            <div id="chat-messages"
+                style="padding: 20px; height: 300px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 15px;">
+                <div
+                    style="background: var(--elton-secondary); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; color: var(--elton-dark); font-size: 0.9rem;">
+                    Bonjour ! 👋 Comment pouvons-nous vous aider aujourd'hui ?
+                </div>
+            </div>
+            <div style="padding: 15px; background: white; border-top: 1px solid #eee; display: flex; gap: 10px;">
+                <input type="text" id="chat-input" placeholder="Écrivez votre message..."
+                    style="flex: 1; border: 1px solid #ddd; padding: 10px 15px; border-radius: 20px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; outline: none;">
+                <button id="chat-send"
+                    style="background: var(--elton-red); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; flex-shrink: 0;">
+                    <i data-lucide="send" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <a href="javascript:void(0)" onclick="toggleChat()" id="btn-assistance">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                <path
+                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+            </svg>
+            <span id="assistance-text">ASSISTANCE 24/7</span>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNavOverlay');
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', mobileNav.classList.contains('active'));
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Initialize Lucide icons with a failsafe
+        function initIcons() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons({
+                    attrs: {
+                        'stroke-width': 2,
+                        'stroke': 'currentColor',
+                        'width': 22,
+                        'height': 22
+                    }
+                });
+            }
+        }
+
+        // Initial call
+        initIcons();
+        // Failsafe on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', initIcons);
+        // Secondary failsafe if window takes time to load (images/etc)
+        window.onload = initIcons;
+
+        // Chat Widget Logic
+        const chatWindow = document.getElementById('chat-window');
+        const chatClose = document.getElementById('chat-close');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+
+        const toggleChat = () => chatWindow.classList.toggle('active');
+        window.toggleChat = toggleChat;
+        chatClose.addEventListener('click', toggleChat);
+
+        const sendMessage = () => {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.style.cssText = "background: var(--elton-blue); color: white; padding: 10px 15px; border-radius: 15px 15px 0 15px; max-width: 80%; align-self: flex-end; font-size: 0.9rem;";
+            userMsg.textContent = text;
+            chatMessages.appendChild(userMsg);
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulate bot reply
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.style.cssText = "background: var(--elton-secondary); color: var(--elton-dark); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; font-size: 0.9rem;";
+                botMsg.textContent = "Merci pour votre message. Un conseiller Elton vous répondra dans un court instant.";
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        };
+
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Google Translate Simulation
+        function googleTranslateElementInit() {
+            // This would normally call the Google Translate API
+            console.log("Google Translate Initialized");
+        }
+
+        // Testimonials Carousel Logic
+        const tSlides = document.getElementById('testimonial-slides');
+        const tPrev = document.getElementById('slider-prev');
+        const tNext = document.getElementById('slider-next');
+        const tDots = document.querySelectorAll('.slide-dot');
+        let tIndex = 0;
+        let slideInterval;
+
+        const updateCarousel = () => {
+            tSlides.style.transform = `translateX(-${tIndex * 100}%)`;
+            tDots.forEach((dot, i) => {
+                dot.style.background = i === tIndex ? 'var(--elton-red)' : 'rgba(255,255,255,0.3)';
+            });
+        };
+
+        const goToNext = () => { tIndex = (tIndex + 1) % 3; updateCarousel(); };
+        const goToPrev = () => { tIndex = (tIndex - 1 + 3) % 3; updateCarousel(); };
+
+        if (tNext && tPrev) {
+            tNext.addEventListener('click', () => { goToNext(); resetInterval(); });
+            tPrev.addEventListener('click', () => { goToPrev(); resetInterval(); });
+            tDots.forEach(dot => dot.addEventListener('click', (e) => {
+                tIndex = parseInt(e.target.dataset.index);
+                updateCarousel();
+                resetInterval();
+            }));
+
+            const resetInterval = () => {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(goToNext, 6000);
+            };
+            resetInterval();
+        }
+
+        // Scroll Reveal Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Hero Slider Logic
+        const hSlides = document.querySelectorAll('.hero-slide');
+        const hDots = document.querySelectorAll('.hero-dot');
+        let hIndex = 0;
+        let hInterval;
+
+        const updateHero = () => {
+            hSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === hIndex);
+            });
+            hDots.forEach((dot, i) => {
+                dot.style.background = i === hIndex ? 'var(--elton-red)' : 'rgba(255,255,255,0.3)';
+            });
+        };
+
+        const nextHero = () => { hIndex = (hIndex + 1) % hSlides.length; updateHero(); };
+
+        const startHeroRotation = () => {
+            hInterval = setInterval(nextHero, 5000);
+        };
+
+        hDots.forEach(dot => dot.addEventListener('click', (e) => {
+            clearInterval(hInterval);
+            hIndex = parseInt(e.target.dataset.index);
+            updateHero();
+            startHeroRotation();
+        }));
+
+        startHeroRotation();
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+</body>
+
+</html>

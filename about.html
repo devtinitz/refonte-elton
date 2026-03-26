@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elton Group - Refonte Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Ubuntu:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Official Elton Brand Colors (from dev.elton.ci) */
+            --elton-blue: #1a73b5;
+            --elton-red: #e5003d;
+            --elton-secondary: #e7f0f7;
+            --elton-dark: #333333;
+            /* Aliases */
+            --primary-blue: #1a73b5;
+            --accent: #e5003d;
+            --bg-color: #ffffff;
+            --bg-sections: #e7f0f7;
+            --text-color: #333333;
+            --nav-bg: rgba(26, 115, 181, 0.97);
+            --glass-bg: rgba(26, 115, 181, 0.08);
+            --glass-border: rgba(26, 115, 181, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="elton-warm"] {
+            --bg-color: #e7f0f7;
+            --bg-sections: #ffffff;
+            --text-color: #333333;
+            --glass-bg: rgba(26, 115, 181, 0.05);
+            --nav-bg: rgba(26, 115, 181, 0.97);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color) url('bg-waves.svg') repeat-y center top;
+            background-size: 100% auto;
+            background-attachment: fixed;
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .brand {
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            background: white;
+            border-radius: 8px;
+            padding: 4px 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--elton-red);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 200px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            color: var(--primary-blue);
+            text-decoration: none;
+            padding: 10px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            color: var(--elton-red);
+            padding-left: 5px;
+        }
+
+        .btn-client {
+            background: var(--elton-red);
+            color: #ffffff !important;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .btn-client:hover {
+            transform: translateY(-2px);
+            background: #c90036;
+            box-shadow: 0 6px 20px rgba(229, 0, 61, 0.35);
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 100px 10%;
+            position: relative;
+        }
+
+        .vibrant-bg {
+            background: linear-gradient(135deg, #1a73b5 0%, #0d4f82 100%);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--elton-red);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--elton-blue);
+            box-shadow: 0 12px 30px rgba(26, 115, 181, 0.15);
+        }
+
+        .card icon-box {
+            color: var(--elton-red);
+            margin-bottom: 20px;
+        }
+
+        /* --- CHAT WIDGET --- */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-window.active {
+            display: flex !important;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .color-inputs {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="color"] {
+            border: none;
+            width: 100%;
+            height: 35px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn-reset {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #eee;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-reset:hover {
+            background: #ddd;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #001021;
+            color: white;
+            padding: 80px 10%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--elton-red);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 25px;
+            color: var(--elton-red);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .btn-footer-map {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--elton-red);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            border: none;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .btn-footer-map:hover {
+            background: #c90036;
+        }
+
+        /* --- UTILS --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header .translate {
+            position: absolute;
+            top: 20px;
+            right: 5%;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes heroTextIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero-slide {
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-slide.active {
+            display: block;
+            text-align: center;
+        }
+
+        .icon-box {
+            transition: var(--transition);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.2) rotate(5deg);
+            animation-play-state: paused;
+        }
+
+        /* ─── HAMBURGER MENU ─── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1100;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.35s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(26, 115, 181, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            overflow-y: auto;
+            padding: 100px 20px 40px;
+        }
+
+        .mobile-nav-overlay.active {
+            display: flex;
+        }
+
+        .mobile-nav-overlay a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Ubuntu', sans-serif;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .mobile-nav-overlay a:hover {
+            color: var(--elton-red);
+        }
+
+        .mobile-nav-overlay .mobile-divider {
+            width: 60px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+
+        .mobile-nav-overlay .mobile-section-label {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* ─── TABLET ─── */
+        @media (max-width: 1024px) {
+            section {
+                padding: 80px 5% !important;
+            }
+
+            .section-title {
+                font-size: 2rem !important;
+            }
+
+            #leadership-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            #activites .grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* ─── MOBILE ─── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 4%;
+                height: 70px !important;
+            }
+
+            .logo img {
+                height: 44px !important;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav>a.hover-scale {
+                display: none !important;
+            }
+
+            nav>.translate {
+                display: none !important;
+            }
+
+            .btn-client {
+                padding: 8px 18px !important;
+                font-size: 0.8rem !important;
+            }
+
+            section {
+                padding: 60px 4% !important;
+            }
+
+            .section-title {
+                font-size: 1.7rem !important;
+            }
+
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-bottom-bar {
+                flex-direction: column !important;
+                gap: 15px !important;
+                text-align: center !important;
+            }
+
+            #mot-president,
+            #mot-dg {
+                flex-direction: column !important;
+                height: auto !important;
+                min-height: auto !important;
+            }
+
+            #mot-president>div,
+            #mot-dg>div {
+                width: 100% !important;
+            }
+
+            #mot-president>div:first-child,
+            #mot-dg>div:first-child {
+                height: 180px !important;
+            }
+
+            /* Histoire section */
+            #histoire .container {
+                flex-direction: column !important;
+            }
+
+            #histoire img {
+                height: 260px !important;
+            }
+
+            /* Page banner */
+            div[style*="height: 55vh"] {
+                min-height: 300px !important;
+                height: 40vh !important;
+            }
+
+            /* Floating btn */
+            #sticky-assistance-container {
+                bottom: 90px;
+                right: 18px;
+            }
+
+            #assistance-text {
+                display: none;
+            }
+
+            #btn-assistance {
+                padding: 15px;
+                border-radius: 50%;
+            }
+
+            /* FAQ details */
+            details {
+                padding: 18px !important;
+            }
+
+            details summary {
+                font-size: 1rem !important;
+            }
+        }
+
+        /* ─── SMALL MOBILE ─── */
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.4rem !important;
+            }
+
+            section {
+                padding: 40px 4% !important;
+            }
+
+            .card {
+                padding: 20px !important;
+            }
+
+            #histoire img {
+                height: 200px !important;
+            }
+
+            #activites .grid>div {
+                min-height: 280px !important;
+            }
+        }
+    </style>
+</head>
+
+<body id="main-body">
+
+    <!-- Header / Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="elton_logo_official.png" alt="Elton Group - Une nouvelle vision du service">
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Accueil</a></li>
+            <li class="nav-item">
+                <a href="about.html" class="nav-link">À propos <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="about.html">Qui sommes-nous</a>
+                    <a href="about.html#mot-president">Mot du Président</a>
+                    <a href="about.html#mot-dg">Mot du DG</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="products.html" class="nav-link">Nos Produits <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="products.html#lubrifiants">Lubrifiants</a>
+                    <a href="products.html#carburants">Carburants</a>
+                    <a href="products.html#offres">Nos Offres</a>
+                </div>
+            </li>
+            <li><a href="careers.html" class="nav-link">Carrières</a></li>
+            <li><a href="news.html" class="nav-link">Actualités</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item">
+                <a href="#" class="nav-link btn-client">Espace Client <i data-lucide="chevron-down"></i></a>
+                <div class="dropdown">
+                    <a href="contact.html#assistance">Assistance</a>
+                    <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
+                    <a href="contact.html#station-map">Trouver une station</a>
+                </div>
+            </li>
+        </ul>
+
+        <!-- <a href="contact.html#assistance"
+            style="background: var(--elton-red); margin-right: 20px; color: white; padding: 10px 25px; border-radius: 30px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(229,0,61,0.3); transition: 0.3s;"
+            class="hover-scale">
+            <i data-lucide="headset" style="width: 20px;"></i> Assistance
+        </a> -->
+        <div id="google_translate_element" style="display: none;"></div>
+        <div class="translate">
+            <i data-lucide="languages" style="color: white; cursor: pointer;"></i>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <span class="mobile-section-label">Navigation</span>
+        <a href="index.html">Accueil</a>
+        <div class="mobile-divider"></div>
+        <a href="about.html">À Propos</a>
+        <a href="about.html#mot-president">Mot du Président</a>
+        <a href="about.html#mot-dg">Mot du DG</a>
+        <div class="mobile-divider"></div>
+        <a href="products.html">Nos Produits</a>
+        <a href="products.html#lubrifiants">Lubrifiants</a>
+        <a href="products.html#carburants">Carburants</a>
+        <div class="mobile-divider"></div>
+        <a href="careers.html">Carrières</a>
+        <a href="news.html">Actualités</a>
+        <a href="contact.html">Contact</a>
+        <div class="mobile-divider"></div>
+        <span class="mobile-section-label">Espace Client</span>
+        <a href="contact.html#assistance">Assistance</a>
+        <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
+        <a href="contact.html#station-map">Trouver une station</a>
+    </div>
+
+    <!-- Page Banner -->
+    <div
+        style="position: relative; height: 55vh; min-height: 450px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 0px;">
+        <video autoplay muted loop playsinline
+            style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); z-index: 0; object-fit: cover;">
+            <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518671/5_mao0nz.mp4" type="video/mp4">
+        </video>
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,16,33,0.8) 0%, rgba(26,115,181,0.6) 100%); z-index: 1;">
+        </div>
+        <div style="position: relative; z-index: 2; text-align: center; color: white; padding-top: 80px; width: 100%;">
+            <h1
+                style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; font-family: 'Ubuntu', sans-serif; text-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 15px; animation: fadeInUp 1s ease;">
+                À Propos de Nous</h1>
+            <div
+                style="width: 80px; height: 4px; background: var(--elton-red); margin: 0 auto; border-radius: 2px; box-shadow: 0 2px 10px rgba(229,0,61,0.5);">
+            </div>
+        </div>
+    </div>
+
+    <!-- Histoire & Introduction -->
+    <section id="histoire" class="reveal" style="padding: 100px 5%; background: var(--bg-color);">
+        <div class="container"
+            style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 60px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <span style="color: var(--elton-red); font-weight: 800; letter-spacing: 2px;">NOTRE HISTOIRE</span>
+                <h2 class="section-title" style="margin-top: 10px; font-size: 2.2rem; line-height: 1.3;">ELTON OIL, un
+                    partenaire qui vous simplifie la vie</h2>
+                <p style="color: #555; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                    En l’an 2000 un groupe d’investisseurs et de professionnels dans la distribution de produits
+                    pétroliers faisait le pari de proposer une offre innovante et diversifiée, à la fois conforme aux
+                    standards internationaux.
+                </p>
+                <p style="color: #555; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                    Tout au long des premières années, nos clients particuliers ou professionnels, nos fournisseurs, nos
+                    partenaires, nous ont honorés de leur confiance.
+                </p>
+                <p style="color: #555; font-size: 1.1rem; line-height: 1.8;">
+                    Nous poursuivons notre essor en restant à votre écoute pour offrir des produits et services de
+                    qualité, en continuant d’innover, en créant de la valeur afin de réinvestir dans nos économies et en
+                    offrant des emplois aux jeunes en qui nous avons confiance.
+                </p>
+            </div>
+            <div style="flex: 1; position: relative; min-width: 300px;">
+                <div
+                    style="position: absolute; top: -20px; left: -20px; width: 100%; height: 100%; border: 4px solid var(--elton-blue); border-radius: 20px; z-index: 0;">
+                </div>
+                <img src="station.png" alt="Histoire Elton"
+                    style="width: 100%; height: 450px; object-fit: cover; border-radius: 20px; position: relative; z-index: 1; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <section id="stats"
+        style="padding: 80px 5%; background: linear-gradient(135deg, var(--elton-blue) 0%, #0a4f82 100%); position: relative;">
+        <div class="grid"
+            style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; text-align: center;">
+            <div class="reveal hover-lift" style="transition-delay: 0.1s;">
+                <div
+                    style="font-size: 4.5rem; font-weight: 800; color: white; line-height: 1; font-family: 'Ubuntu', sans-serif;">
+                    12<span style="color: var(--elton-red);">+</span></div>
+                <div
+                    style="font-size: 1.1rem; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-top: 10px; font-weight: 600; letter-spacing: 1px;">
+                    Ans d'existence</div>
+            </div>
+            <div class="reveal hover-lift" style="transition-delay: 0.2s;">
+                <div
+                    style="font-size: 4.5rem; font-weight: 800; color: white; line-height: 1; font-family: 'Ubuntu', sans-serif;">
+                    45<span style="color: var(--elton-red);">+</span></div>
+                <div
+                    style="font-size: 1.1rem; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-top: 10px; font-weight: 600; letter-spacing: 1px;">
+                    Équipes professionnelles</div>
+            </div>
+            <div class="reveal hover-lift" style="transition-delay: 0.3s;">
+                <div
+                    style="font-size: 4.5rem; font-weight: 800; color: white; line-height: 1; font-family: 'Ubuntu', sans-serif;">
+                    215K<span style="color: var(--elton-red);">+</span></div>
+                <div
+                    style="font-size: 1.1rem; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-top: 10px; font-weight: 600; letter-spacing: 1px;">
+                    Clients satisfaits</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Vision Engagement -->
+    <section id="raison-etre" style="padding: 100px 5%; background: #f9fbfd;">
+        <div style="text-align: center; margin-bottom: 70px;" class="reveal">
+            <span style="color: var(--elton-red); font-weight: 800; letter-spacing: 2px;">POURQUOI NOUS EXISTONS
+                ?</span>
+            <h2 class="section-title" style="margin-top: 10px; display: block;">Notre ADN</h2>
+            <p style="color: #666; max-width: 800px; margin: 0 auto; font-size: 1.1rem;">Notre souci permanent est de
+                mettre tout notre potentiel humain au service exclusif de la satisfaction des besoins de nos clients.
+            </p>
+        </div>
+
+        <div class="grid"
+            style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto;">
+            <!-- Mission -->
+            <div class="card reveal hover-lift"
+                style="background: white; padding: 40px; border-radius: 20px; text-align: center; border-top: 5px solid var(--elton-blue); box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                <div
+                    style="width: 80px; height: 80px; background: rgba(26,115,181,0.1); border-radius: 50%; color: var(--elton-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 25px auto;">
+                    <i data-lucide="target" style="width: 40px; height: 40px;"></i>
+                </div>
+                <h3 style="color: var(--elton-blue); margin-bottom: 15px; font-size: 1.4rem;">Notre Mission</h3>
+                <p style="color: #666; line-height: 1.7; font-size: 1rem;">Offrir à chaque client une énergie fiable et
+                    accessible, tout en garantissant un service de qualité, une sécurité optimale et une satisfaction
+                    durable à travers des solutions adaptées à tous les besoins de mobilité.</p>
+            </div>
+            <!-- Vision -->
+            <div class="card reveal hover-lift test-transform"
+                style="background: white; padding: 40px; border-radius: 20px; text-align: center; border-top: 5px solid var(--elton-red); box-shadow: 0 20px 40px rgba(0,0,0,0.08);">
+                <div
+                    style="width: 80px; height: 80px; background: rgba(229,0,61,0.1); border-radius: 50%; color: var(--elton-red); display: flex; align-items: center; justify-content: center; margin: 0 auto 25px auto;">
+                    <i data-lucide="eye" style="width: 40px; height: 40px;"></i>
+                </div>
+                <h3 style="color: var(--elton-red); margin-bottom: 15px; font-size: 1.4rem;">Notre Vision</h3>
+                <p style="color: #666; line-height: 1.7; font-size: 1rem;">Devenir une référence nationale dans la
+                    distribution d’énergie et de services, en innovant continuellement pour offrir une expérience
+                    moderne, responsable et centrée sur la confiance de nos clients.</p>
+            </div>
+            <!-- Engagement -->
+            <div class="card reveal hover-lift"
+                style="background: white; padding: 40px; border-radius: 20px; text-align: center; border-top: 5px solid var(--elton-blue); box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                <div
+                    style="width: 80px; height: 80px; background: rgba(26,115,181,0.1); border-radius: 50%; color: var(--elton-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 25px auto;">
+                    <i data-lucide="shield-check" style="width: 40px; height: 40px;"></i>
+                </div>
+                <h3 style="color: var(--elton-blue); margin-bottom: 15px; font-size: 1.4rem;">Notre Engagement</h3>
+                <p style="color: #666; line-height: 1.7; font-size: 1rem;">Nous nous engageons à respecter les normes de
+                    qualité et de sécurité, à servir nos clients avec professionnalisme et à contribuer durablement au
+                    développement des communautés que nous accompagnons.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; max-width: 900px; margin: 60px auto 0 auto; color: var(--elton-blue); font-size: 1.1rem; line-height: 1.8; font-style: italic; font-weight: 500;"
+            class="reveal">
+            " Ainsi, nous entendons densifier le maillage de notre couverture régionale par l’ouverture de nouvelles
+            stations, diversifier plus encore nos produits et services, tant pour nos clients particuliers que
+            professionnels, et entamer le processus de certification aux standards internationaux de nos activités. "
+        </div>
+    </section>
+
+    <!-- Nos activités -->
+    <section id="activites" style="padding: 100px 5%; background: white;">
+        <div style="text-align: center; margin-bottom: 70px;" class="reveal">
+            <h2 class="section-title">Nos Activités</h2>
+            <p style="color: #666; max-width: 800px; margin: 0 auto; font-size: 1.1rem;">ELTON est présent au Sénégal au
+                travers de ses activités de distribution de produits pétroliers (Refining & Marketing) et de services.
+            </p>
+        </div>
+
+        <div class="grid"
+            style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto;">
+            <!-- Distribution Area -->
+            <div style="background: url('hero_fallback.jpg') center/cover; padding: 40px; border-radius: 20px; color: white; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; min-height: 450px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);"
+                class="hover-lift reveal">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,16,33,0.95) 0%, rgba(26,115,181,0.5) 100%); z-index: 0;">
+                </div>
+                <div style="position: relative; z-index: 1;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <i data-lucide="truck" style="color: var(--elton-red); width: 45px; height: 45px;"></i>
+                        <h3 style="font-size: 2.2rem; margin: 0; font-family: 'Ubuntu', sans-serif;">Distribution</h3>
+                    </div>
+                    <p style="font-size: 1.05rem; line-height: 1.7; opacity: 0.9; margin-bottom: 25px;">
+                        ELTON opère dans le domaine de la commercialisation des produits issus du raffinage du pétrole.
+                        Les carburants issus des raffineries sont proposés aux clients dans le réseau des
+                        stations-service ELTON.
+                    </p>
+                    <div
+                        style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 0.95rem;">
+                        <i data-lucide="check-circle"
+                            style="color: var(--elton-red); width: 22px; flex-shrink: 0; margin-top: 2px;"></i>
+                        <span>Représentant exclusif de la marque de Lubrifiants Castrol.</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem;">
+                        <i data-lucide="check-circle"
+                            style="color: var(--elton-red); width: 22px; flex-shrink: 0; margin-top: 2px;"></i>
+                        <span>Exporte des produits pétroliers dans la sous-région (Mali, Gambie, Guinée, Guinée
+                            Bissau).</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produits Spéciaux Area -->
+            <div style="background: url('car1.png') center/cover; padding: 40px; border-radius: 20px; color: white; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; min-height: 450px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);"
+                class="hover-lift reveal">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(229,0,61,0.95) 0%, rgba(229,0,61,0.5) 100%); z-index: 0;">
+                </div>
+                <div style="position: relative; z-index: 1;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <i data-lucide="package" style="color: white; width: 45px; height: 45px;"></i>
+                        <h3 style="font-size: 2.2rem; margin: 0; font-family: 'Ubuntu', sans-serif;">Produits Spéciaux
+                        </h3>
+                    </div>
+                    <p style="font-size: 1.05rem; line-height: 1.7; opacity: 0.9; margin-bottom: 25px;">
+                        Les produits spéciaux comme la pompe pêche, les graisses industrielles et lubrifiants de
+                        matériel agricole ainsi que les produits dédiés aux professionnels sont commercialisés par
+                        ELTON.
+                    </p>
+                    <div
+                        style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 0.95rem;">
+                        <i data-lucide="check-circle"
+                            style="color: white; width: 22px; flex-shrink: 0; margin-top: 2px;"></i>
+                        <span>Offre de services diversifiés dans notre réseau de Boutique.</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem;">
+                        <i data-lucide="check-circle"
+                            style="color: white; width: 22px; flex-shrink: 0; margin-top: 2px;"></i>
+                        <span>Fournisseurs de produits et services liés aux carburants et lubrifiants aux industriels
+                            des PME et PMI.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Messages -->
+    <section id="leadership" class="reveal" style="padding: 100px 5%; background: var(--bg-color);">
+        <h2 class="section-title" style="text-align:center; display:block; margin-bottom: 60px;">Notre Leadership</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto;"
+            id="leadership-grid">
+            <!-- President Card -->
+            <div id="mot-president" class="card hover-lift"
+                style="padding: 0; overflow: hidden; display: flex; flex-direction: row; text-align: left; min-height: 300px; background: white; border: none; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                <div
+                    style="width: 40%; background: url('president.png') center/cover; position: relative; color: white; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; text-align: center;">
+                    <div
+                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(0deg, rgba(10,79,130,1) 0%, rgba(10,79,130,0) 100%); z-index: 0;">
+                    </div>
+                    <div style="z-index: 1;">
+                        <div style="font-weight: 800; font-size: 1.1rem; margin-bottom: 5px;">Pr. Papa Madiaw NDIAYE
+                        </div>
+                        <div style="font-size: 0.8rem; opacity: 0.9;">Président du C.A.</div>
+                    </div>
+                </div>
+                <div
+                    style="width: 60%; padding: 40px; position: relative; display: flex; flex-direction: column; justify-content: center;">
+                    <i data-lucide="quote"
+                        style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; color: rgba(229,0,61,0.05);"></i>
+                    <h4
+                        style="color: var(--elton-blue); margin-bottom: 15px; font-family: 'Ubuntu', sans-serif; font-size: 1.2rem;">
+                        Mot du Président</h4>
+                    <p style="font-style: italic; color: #555; line-height: 1.6; font-size: 0.95rem; margin: 0;">"Notre
+                        ambition est de faire d'Elton une référence absolue de l'énergie en Afrique, en alliant
+                        innovation constante et respect de nos engagements historiques envers nos partenaires."</p>
+                </div>
+            </div>
+
+            <!-- DG Card -->
+            <div id="mot-dg" class="card hover-lift"
+                style="padding: 0; overflow: hidden; display: flex; flex-direction: row; text-align: left; min-height: 300px; background: white; border: none; box-shadow: 0 15px 35px rgba(0,0,0,0.05);">
+                <div
+                    style="width: 40%; background: url('director.png') center/cover; position: relative; color: white; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; text-align: center;">
+                    <div
+                        style="position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(0deg, rgba(166,0,41,1) 0%, rgba(166,0,41,0) 100%); z-index: 0;">
+                    </div>
+                    <div style="z-index: 1;">
+                        <div style="font-weight: 800; font-size: 1.1rem; margin-bottom: 5px;">M. Babacar TALL</div>
+                        <div style="font-size: 0.8rem; opacity: 0.9;">Directeur Général</div>
+                    </div>
+                </div>
+                <div
+                    style="width: 60%; padding: 40px; position: relative; display: flex; flex-direction: column; justify-content: center;">
+                    <i data-lucide="quote"
+                        style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; color: rgba(26,115,181,0.05);"></i>
+                    <h4
+                        style="color: var(--elton-red); margin-bottom: 15px; font-family: 'Ubuntu', sans-serif; font-size: 1.2rem;">
+                        Mot du D.G.</h4>
+                    <p style="font-style: italic; color: #555; line-height: 1.6; font-size: 0.95rem; margin: 0;">"Chez
+                        Elton, nous plaçons l'humain au cœur de nos stations. Chaque visiteur doit vivre une expérience
+                        de service unique, fluide et de la plus haute qualité."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section id="faq" style="padding: 100px 5%; background: white;" class="reveal">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 class="section-title">Questions fréquemment posées</h2>
+            <p style="color: #666; font-size: 1.1rem;">Trouvez les réponses à vos questions les plus courantes sur Elton
+                Group.</p>
+        </div>
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+            <details
+                style="background: var(--bg-color); border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); cursor: pointer; border-left: 5px solid var(--elton-blue); transition: 0.3s;"
+                onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                <summary
+                    style="font-weight: 700; color: var(--elton-dark); font-size: 1.15rem; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif;">
+                    Présence d'ELTON en Côte d'Ivoire ? <i data-lucide="chevron-down"
+                        style="color: var(--elton-red);"></i></summary>
+                <div
+                    style="margin-top: 20px; color: #555; line-height: 1.7; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; font-size: 1rem;">
+                    Oui — Elton Oil Company opère aussi en Gambie et Sénégal et possède des filiales dans plusieurs pays
+                    d’Afrique de l’Ouest, avec des services complémentaires dans certaines stations.</div>
+            </details>
+
+            <details
+                style="background: var(--bg-color); border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); cursor: pointer; border-left: 5px solid var(--elton-blue); transition: 0.3s;"
+                onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                <summary
+                    style="font-weight: 700; color: var(--elton-dark); font-size: 1.15rem; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif;">
+                    Est-ce qu’ELTON propose d’autres services qu’une simple pompe à carburant ? <i
+                        data-lucide="chevron-down" style="color: var(--elton-red);"></i></summary>
+                <div
+                    style="margin-top: 20px; color: #555; line-height: 1.7; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; font-size: 1rem;">
+                    Absolument, nos stations sont de véritables "Oasis" proposant boutiques, espaces café, lavage auto
+                    de pointe équipés des dernières technologies à vapeur (Quick Wash Bio), et services financiers par
+                    transfert d'argent.</div>
+            </details>
+
+            <details
+                style="background: var(--bg-color); border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); cursor: pointer; border-left: 5px solid var(--elton-blue); transition: 0.3s;"
+                onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                <summary
+                    style="font-weight: 700; color: var(--elton-dark); font-size: 1.15rem; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif;">
+                    Où se trouvent les stations services d'ELTON ? <i data-lucide="chevron-down"
+                        style="color: var(--elton-red);"></i></summary>
+                <div
+                    style="margin-top: 20px; color: #555; line-height: 1.7; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; font-size: 1rem;">
+                    Notre maillage territorial couvre massivement les principales agglomérations et axes routiers
+                    majeurs. Vous pouvez facilement <a href="contact.html#station-map"
+                        style="color: var(--elton-red); font-weight: 600;">trouver la carte complète ici</a>.</div>
+            </details>
+
+            <details
+                style="background: var(--bg-color); border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); cursor: pointer; border-left: 5px solid var(--elton-blue); transition: 0.3s;"
+                onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                <summary
+                    style="font-weight: 700; color: var(--elton-dark); font-size: 1.15rem; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif;">
+                    Quels types de carburants sont disponibles ? <i data-lucide="chevron-down"
+                        style="color: var(--elton-red);"></i></summary>
+                <div
+                    style="margin-top: 20px; color: #555; line-height: 1.7; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; font-size: 1rem;">
+                    Nous proposons une gamme complète de carburants (Super Sans Plomb, Gasoil) raffinés aux meilleurs
+                    standards internationaux, ainsi que toute la gamme haute performance Castrol.</div>
+            </details>
+
+            <details
+                style="background: var(--bg-color); border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); cursor: pointer; border-left: 5px solid var(--elton-blue); transition: 0.3s;"
+                onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                <summary
+                    style="font-weight: 700; color: var(--elton-dark); font-size: 1.15rem; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif;">
+                    Peut-on payer par carte ou y-a-t-il des services supplémentaires ? <i data-lucide="chevron-down"
+                        style="color: var(--elton-red);"></i></summary>
+                <div
+                    style="margin-top: 20px; color: #555; line-height: 1.7; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; font-size: 1rem;">
+                    Oui, Elton propose sa propre **Carte Elton Oasis** pour les particuliers ou les professionnels,
+                    permettant un suivi digital en temps réel de votre consommation. Nous acceptons également la
+                    majorité des paiements digitaux et des cartes bancaires classiques.</div>
+            </details>
+        </div>
+
+        <style>
+            details>summary::-webkit-details-marker {
+                display: none;
+            }
+
+            details[open] summary i {
+                transform: rotate(180deg);
+            }
+
+            details summary i {
+                transition: transform 0.4s;
+            }
+
+            @media(min-width: 968px) {
+                .test-transform {
+                    transform: translateY(-20px);
+                }
+            }
+        </style>
+    </section>
+
+    <!-- Nos Partenaires Section -->
+    <section id="partenaires" style="padding: 100px 5%; background: var(--bg-color); text-align: center;"
+        class="reveal">
+        <h2 class="section-title">Nos Partenaires</h2>
+        <p style="color: #666; font-size: 1.1rem; margin-bottom: 50px;">Ils nous font confiance au quotidien</p>
+        <div
+            style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%); max-width: 1200px; margin: 0 auto;">
+            <div style="width: 160px; height: 90px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #aaa; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;"
+                onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='translateY(-5px)'"
+                onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='translateY(0)'">
+                <i data-lucide="building" style="margin-right: 10px;"></i> PME/PMI
+            </div>
+            <div style="width: 160px; height: 90px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #aaa; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;"
+                onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='translateY(-5px)'"
+                onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='translateY(0)'">
+                <i data-lucide="car" style="margin-right: 10px;"></i> TOYOTA
+            </div>
+            <div style="width: 160px; height: 90px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #aaa; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;"
+                onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='translateY(-5px)'"
+                onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='translateY(0)'">
+                <i data-lucide="activity" style="margin-right: 10px;"></i> CASTROL
+            </div>
+            <div style="width: 160px; height: 90px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #aaa; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;"
+                onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='translateY(-5px)'"
+                onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='translateY(0)'">
+                <i data-lucide="factory" style="margin-right: 10px;"></i> SAR
+            </div>
+            <div style="width: 160px; height: 90px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #aaa; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;"
+                onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'; this.style.transform='translateY(-5px)'"
+                onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'; this.style.transform='translateY(0)'">
+                <i data-lucide="briefcase" style="margin-right: 10px;"></i> B2B
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer"
+        style="background: url('bg-waves.svg') no-repeat center bottom; background-size: cover; padding: 80px 5% 40px; border-top: 1px solid rgba(0,0,0,0.05); position: relative; margin-top: 50px;">
+        <div class="footer-grid"
+            style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; max-width: 1200px; margin: 0 auto 60px auto;">
+            <div>
+                <img src="elton_logo_official.png" alt="Elton"
+                    style="height: 60px; width: auto; background: transparent; margin-bottom: 25px;">
+                <p style="color: #4a5568; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6;">L'énergie de
+                    l'émergence. Leader de la distribution pétrolière au Sénégal, nous vous accompagnons avec qualité,
+                    innovation et proximité.</p>
+                <div class="social-icons" style="display: flex; gap: 15px;">
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="facebook"></i></a>
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="linkedin"></i></a>
+                    <a href="#"
+                        style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: rgba(26,115,181,0.15); border-radius: 50%; color: var(--elton-blue); text-decoration: none; transition: 0.3s;"><i
+                            data-lucide="instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Liens Rapides</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Accueil</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> À Propos</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Produits</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Carrières</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links" style="font-family: 'Poppins', sans-serif;">
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Nos Services</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> E-Services</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Lubrifiants</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Oasis Elton</a></li>
+                    <li style="margin-bottom: 15px;"><a href="#" class="footer-link-item"
+                            style="color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;"><i
+                                data-lucide="chevron-right" style="width: 16px;"></i> Assistance</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact" style="font-family: 'Poppins', sans-serif;">
+                <h4
+                    style="font-family: 'Ubuntu', sans-serif; font-size: 1.2rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; border-bottom: 2px solid var(--elton-red); display: inline-block; color: var(--elton-blue);">
+                    Contact & Accès</h4>
+                <div
+                    style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; color: #4a5568; font-size: 0.95rem;">
+                    <div style="display: flex; gap: 10px; align-items: flex-start;"><i data-lucide="map-pin"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>Abidjan Marcory,
+                            immeuble rive droite<br>3 rue des brasseurs</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="phone"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i> <span>+225 2720
+                            311560</span></div>
+                    <div style="display: flex; gap: 10px; align-items: center;"><i data-lucide="mail"
+                            style="color: var(--elton-red); width: 20px; flex-shrink: 0;"></i>
+                        <span>info@elton.sn</span>
+                    </div>
+                </div>
+                <a href="#station-map" class="hover-scale"
+                    style="display: inline-flex; align-items: center; gap: 10px; background: var(--elton-red); color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 15px rgba(229,0,61,0.3);">
+                    <i data-lucide="map"></i> Trouver une station
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar"
+            style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; color: #666; font-size: 0.9rem;">
+            <div>&copy; 2026 Elton Group. L'énergie de l'émergence.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Mentions Légales</a>
+                <a href="#" style="color: #666; text-decoration: none; transition: 0.3s;">Politique de
+                    Confidentialité</a>
+            </div>
+        </div>
+
+        <style>
+            .social-icons a:hover {
+                background: var(--elton-red) !important;
+                color: white !important;
+                transform: translateY(-5px);
+            }
+
+            .footer-link-item:hover {
+                color: var(--elton-blue) !important;
+                transform: translateX(5px);
+            }
+
+            .hover-scale:hover {
+                background: white !important;
+                color: var(--elton-red) !important;
+                transform: scale(1.05);
+            }
+
+            @media (max-width: 768px) {
+                .footer-grid {
+                    grid-template-columns: 1fr !important;
+                }
+
+                .footer-bottom-bar {
+                    flex-direction: column;
+                    gap: 15px;
+                    text-align: center;
+                }
+            }
+        </style>
+    </footer>
+
+    <div id="sticky-assistance-container">
+        <div class="chat-window" id="chat-window"
+            style="position: absolute; bottom: 80px; right: 0; width: 350px; background: white; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; animation: slideUp 0.3s ease; max-width: calc(100vw - 40px);">
+            <div
+                style="background: var(--elton-blue); color: white; padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+                <h4
+                    style="margin: 0; font-family: 'Ubuntu', sans-serif; display: flex; align-items: center; gap: 10px;">
+                    <i data-lucide="headset"></i> Assistant Elton
+                </h4>
+                <i data-lucide="x" id="chat-close" style="cursor: pointer;"></i>
+            </div>
+            <div id="chat-messages"
+                style="padding: 20px; height: 300px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 15px;">
+                <div
+                    style="background: var(--elton-secondary); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; color: var(--elton-dark); font-size: 0.9rem;">
+                    Bonjour ! 👋 Comment pouvons-nous vous aider aujourd'hui ?
+                </div>
+            </div>
+            <div style="padding: 15px; background: white; border-top: 1px solid #eee; display: flex; gap: 10px;">
+                <input type="text" id="chat-input" placeholder="Écrivez votre message..."
+                    style="flex: 1; border: 1px solid #ddd; padding: 10px 15px; border-radius: 20px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; outline: none;">
+                <button id="chat-send"
+                    style="background: var(--elton-red); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; flex-shrink: 0;">
+                    <i data-lucide="send" style="width: 18px; height: 18px;"></i>
+                </button>
+            </div>
+        </div>
+
+        <a href="javascript:void(0)" onclick="toggleChat()" id="btn-assistance">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                <path
+                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+            </svg>
+            <span id="assistance-text">ASSISTANCE 24/7</span>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNavOverlay');
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', mobileNav.classList.contains('active'));
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Initialize Lucide icons with a failsafe
+        function initIcons() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons({
+                    attrs: {
+                        'stroke-width': 2,
+                        'stroke': 'currentColor',
+                        'width': 22,
+                        'height': 22
+                    }
+                });
+            }
+        }
+
+        // Initial call
+        initIcons();
+        // Failsafe on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', initIcons);
+        // Secondary failsafe if window takes time to load (images/etc)
+        window.onload = initIcons;
+
+        // Chat Widget Logic
+        const chatWindow = document.getElementById('chat-window');
+        const chatClose = document.getElementById('chat-close');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+
+        const toggleChat = () => chatWindow.classList.toggle('active');
+        window.toggleChat = toggleChat;
+        chatClose.addEventListener('click', toggleChat);
+
+        const sendMessage = () => {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.style.cssText = "background: var(--elton-blue); color: white; padding: 10px 15px; border-radius: 15px 15px 0 15px; max-width: 80%; align-self: flex-end; font-size: 0.9rem;";
+            userMsg.textContent = text;
+            chatMessages.appendChild(userMsg);
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulate bot reply
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.style.cssText = "background: var(--elton-secondary); color: var(--elton-dark); padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 80%; font-size: 0.9rem;";
+                botMsg.textContent = "Merci pour votre message. Un conseiller Elton vous répondra dans un court instant.";
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        };
+
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Google Translate Simulation
+        function googleTranslateElementInit() {
+            // This would normally call the Google Translate API
+            console.log("Google Translate Initialized");
+        }
+
+        // Testimonials Carousel Logic
+        const tSlides = document.getElementById('testimonial-slides');
+        const tPrev = document.getElementById('slider-prev');
+        const tNext = document.getElementById('slider-next');
+        const tDots = document.querySelectorAll('.slide-dot');
+        let tIndex = 0;
+        let slideInterval;
+
+        const updateCarousel = () => {
+            tSlides.style.transform = `translateX(-${tIndex * 100}%)`;
+            tDots.forEach((dot, i) => {
+                dot.style.background = i === tIndex ? 'var(--elton-red)' : 'rgba(255,255,255,0.3)';
+            });
+        };
+
+        const goToNext = () => { tIndex = (tIndex + 1) % 3; updateCarousel(); };
+        const goToPrev = () => { tIndex = (tIndex - 1 + 3) % 3; updateCarousel(); };
+
+        if (tNext && tPrev) {
+            tNext.addEventListener('click', () => { goToNext(); resetInterval(); });
+            tPrev.addEventListener('click', () => { goToPrev(); resetInterval(); });
+            tDots.forEach(dot => dot.addEventListener('click', (e) => {
+                tIndex = parseInt(e.target.dataset.index);
+                updateCarousel();
+                resetInterval();
+            }));
+
+            const resetInterval = () => {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(goToNext, 6000);
+            };
+            resetInterval();
+        }
+
+        // Scroll Reveal Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Hero Slider Logic
+        const hSlides = document.querySelectorAll('.hero-slide');
+        const hDots = document.querySelectorAll('.hero-dot');
+        let hIndex = 0;
+        let hInterval;
+
+        const updateHero = () => {
+            hSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === hIndex);
+            });
+            hDots.forEach((dot, i) => {
+                dot.style.background = i === hIndex ? 'var(--elton-red)' : 'rgba(255,255,255,0.3)';
+            });
+        };
+
+        const nextHero = () => { hIndex = (hIndex + 1) % hSlides.length; updateHero(); };
+
+        const startHeroRotation = () => {
+            hInterval = setInterval(nextHero, 5000);
+        };
+
+        hDots.forEach(dot => dot.addEventListener('click', (e) => {
+            clearInterval(hInterval);
+            hIndex = parseInt(e.target.dataset.index);
+            updateHero();
+            startHeroRotation();
+        }));
+
+        startHeroRotation();
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- GLOBAL FLOATING ASSISTANCE BUTTON -->
+    <style>
+        /* ── Floating Assistance Button ── */
+        #sticky-assistance-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        #btn-assistance {
+            background: #e5003d;
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(229, 0, 61, 0.4);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        #btn-assistance:hover {
+            transform: translateY(-5px);
+            background: #c90036;
+            box-shadow: 0 15px 35px rgba(229, 0, 61, 0.5);
+        }
+
+        /* ── Global Responsive Breakpoints ── */
+        @media (max-width: 1024px) {
+            section {
+                padding: 80px 5% !important;
+            }
+
+            .section-title {
+                font-size: 2rem !important;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 4%;
+                height: 70px !important;
+            }
+
+            .logo img {
+                height: 44px !important;
+            }
+
+            .nav-links {
+                display: none !important;
+            }
+
+            section {
+                padding: 60px 5% !important;
+            }
+
+            .section-title {
+                font-size: 1.7rem !important;
+            }
+
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-bottom-bar {
+                flex-direction: column !important;
+                gap: 15px !important;
+                text-align: center !important;
+            }
+
+            /* leadership cards */
+            #mot-president,
+            #mot-dg {
+                flex-direction: column !important;
+                min-height: auto !important;
+            }
+
+            #mot-president>div,
+            #mot-dg>div {
+                width: 100% !important;
+            }
+
+            #mot-president>div:first-child,
+            #mot-dg>div:first-child {
+                height: 180px !important;
+            }
+
+            /* floating button collapse */
+            #sticky-assistance-container {
+                bottom: 100px;
+                right: 20px;
+            }
+
+            #assistance-text {
+                display: none;
+            }
+
+            #btn-assistance {
+                padding: 15px;
+                border-radius: 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.4rem !important;
+            }
+
+            section {
+                padding: 40px 4% !important;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem !important;
+            }
+
+            .btn-client {
+                padding: 10px 18px !important;
+                font-size: 0.85rem !important;
+            }
+        }
+    </style>
+
+
+
+</body>
+
+</html>
