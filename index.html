@@ -10,7 +10,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Ubuntu:wght@400;500;700&display=swap"
         rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.469.0"></script>
+    <link rel="icon" type="image/png" href="elton_logo_official.png">
     <style>
         :root {
             /* Official Elton Brand Colors (from dev.elton.ci) */
@@ -889,7 +890,7 @@
         </video>
 
         <video autoplay muted loop playsinline class="hero-video" poster="hero_fallback.jpg">
-            <source src=https://res.cloudinary.com/dulkosnbo/video/upload/v1774518671/2_vbxucx.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518671/2_vbxucx.mp4" type="video/mp4">
         </video>
 
         <video autoplay muted loop playsinline class="hero-video" poster="hero_fallback.jpg">
@@ -1986,7 +1987,12 @@
         // Initial call
         initIcons();
         // Failsafe on DOMContentLoaded
-        document.addEventListener('DOMContentLoaded', initIcons);
+        document.addEventListener('DOMContentLoaded', () => {
+            initIcons();
+            // Try again after a short delay to ensure font/script load
+            setTimeout(initIcons, 500);
+            setTimeout(initIcons, 1500);
+        });
         // Secondary failsafe if window takes time to load (images/etc)
         window.onload = initIcons;
 
