@@ -813,89 +813,28 @@
             class="hover-scale">
             <i data-lucide="headset" style="width: 20px;"></i> Assistance
         </a> -->
-      <div class="language-selector"
-    style="position: relative; display: inline-flex; align-items: center; cursor: pointer; color: white; gap: 8px; padding: 5px 12px; background: rgba(255,255,255,0.15); border-radius: 20px; transition: 0.3s; z-index: 1000;"
-    onclick="toggleLanguage()">
-
-    <i data-lucide="languages" style="width: 16px; height: 16px;"></i>
-
-    <div id="lang-display"
-        style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.85rem; font-family: 'Ubuntu', sans-serif;">
-        <span id="lang-flag" style="font-size: 1.1rem; line-height: 1;">🇫🇷</span> 
-        <span id="lang-text">FR</span>
-    </div>
-
-    <i data-lucide="chevron-down" style="width: 12px; height: 12px; opacity: 0.7;"></i>
+              <!-- Bouton Traduire -->
+<div class="translate" style="display:flex; align-items:center; gap:12px; cursor:pointer;" onclick="toggleGoogleTranslate()">
+    <i data-lucide="languages" style="color: white;"></i>
+    <span id="lang-label" style="color:white; font-size:0.85rem; font-weight:700; font-family:'Ubuntu',sans-serif;">EN</span>
 </div>
 
-<div id="google_translate_element" style="position: absolute; left: -9999px; top: -9999px;"></div>
+<script>
+    let translated = false;
+    const originalURL = window.location.href;
+    const proxyBase  = 'https://translate.google.com/translate?sl=fr&tl=en&u=';
 
-<style>
-    /* Masquage définitif de la barre Google */
-    .goog-te-banner-frame, .goog-te-banner, .skiptranslate { display: none !important; }
-    body { top: 0px !important; }
-    #goog-gt-tt { display: none !important; visibility: hidden !important; }
-    .goog-text-highlight { background: none !important; box-shadow: none !important; }
-</style>
-
-<script type="text/javascript">
-    // 1. Initialisation
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'fr',
-            includedLanguages: 'en,fr',
-            autoDisplay: false
-        }, 'google_translate_element');
-        
-        // Vérifier au chargement si on est déjà en anglais (via cookie)
-        if (document.cookie.includes('/fr/en')) {
-            updateUI('en');
-        }
-    }
-
-    function toggleLanguage() {
-        const newLang = (document.getElementById('lang-text').innerText === 'FR') ? 'en' : 'fr';
-        
-        // Mettre à jour l'interface immédiatement
-        updateUI(newLang);
-        
-        // Lancer la traduction
-        applyTranslation(newLang);
-    }
-
-    function updateUI(lang) {
-        const flag = document.getElementById('lang-flag');
-        const text = document.getElementById('lang-text');
-        if (lang === 'en') {
-            flag.innerText = '🇺🇸';
-            text.innerText = 'EN';
+    function toggleGoogleTranslate() {
+        if (!translated) {
+            // Ouvre la page via le proxy Google Translate
+            window.location.href = proxyBase + encodeURIComponent(originalURL);
         } else {
-            flag.innerText = '🇫🇷';
-            text.innerText = 'FR';
+            // Revient à la page originale
+            window.location.href = originalURL;
         }
+        translated = !translated;
     }
-
-    function applyTranslation(langCode) {
-        // On cible le menu déroulant natif de Google
-        const select = document.querySelector('.goog-te-combo');
-        if (select) {
-            select.value = langCode;
-            select.dispatchEvent(new Event('change'));
-        } else {
-            // Si pas encore prêt, on attend un peu
-            setTimeout(() => applyTranslation(langCode), 500);
-        }
-    }
-
-    // Sécurité : Forcer le body à rester en haut (Google essaie de le descendre)
-    setInterval(function() {
-        if (document.body.style.top !== '0px') {
-            document.body.style.top = '0px';
-        }
-    }, 1000);
 </script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <div id="google_translate_element" style="position: absolute; opacity: 0; pointer-events: none; z-index: -1;">
         </div>
 
