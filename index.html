@@ -850,27 +850,29 @@
         </ul>
 
         <!-- Bouton Traduire -->
-<div class="translate" style="display:flex; align-items:center; gap:12px; cursor:pointer;" onclick="toggleGoogleTranslate()">
-    <i data-lucide="languages" style="color: white;"></i>
-    <span id="lang-label" style="color:white; font-size:0.85rem; font-weight:700; font-family:'Ubuntu',sans-serif;">EN</span>
-</div>
+        <div class="translate" style="display:flex; align-items:center; gap:12px; cursor:pointer;"
+            onclick="toggleGoogleTranslate()">
+            <i data-lucide="languages" style="color: white;"></i>
+            <span id="lang-label"
+                style="color:white; font-size:0.85rem; font-weight:700; font-family:'Ubuntu',sans-serif;">EN</span>
+        </div>
 
-<script>
-    let translated = false;
-    const originalURL = window.location.href;
-    const proxyBase  = 'https://translate.google.com/translate?sl=fr&tl=en&u=';
+        <script>
+            let translated = false;
+            const originalURL = window.location.href;
+            const proxyBase = 'https://translate.google.com/translate?sl=fr&tl=en&u=';
 
-    function toggleGoogleTranslate() {
-        if (!translated) {
-            // Ouvre la page via le proxy Google Translate
-            window.location.href = proxyBase + encodeURIComponent(originalURL);
-        } else {
-            // Revient à la page originale
-            window.location.href = originalURL;
-        }
-        translated = !translated;
-    }
-</script>
+            function toggleGoogleTranslate() {
+                if (!translated) {
+                    // Ouvre la page via le proxy Google Translate
+                    window.location.href = proxyBase + encodeURIComponent(originalURL);
+                } else {
+                    // Revient à la page originale
+                    window.location.href = originalURL;
+                }
+                translated = !translated;
+            }
+        </script>
 
         <!-- Hamburger button -->
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -903,15 +905,15 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <video autoplay muted loop playsinline class="hero-video active" poster="hero_fallback.jpg">
+        <video autoplay muted loop playsinline class="hero-video active">
             <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518661/1_qjnrek.mp4" type="video/mp4">
         </video>
 
-        <video autoplay muted loop playsinline class="hero-video" poster="hero_fallback.jpg">
+        <video autoplay muted loop playsinline class="hero-video">
             <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518671/2_vbxucx.mp4" type="video/mp4">
         </video>
 
-        <video autoplay muted loop playsinline class="hero-video" poster="hero_fallback.jpg">
+        <video autoplay muted loop playsinline class="hero-video">
             <source src="https://res.cloudinary.com/dulkosnbo/video/upload/v1774518670/3_drutaa.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
