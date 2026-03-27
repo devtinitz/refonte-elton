@@ -39,6 +39,24 @@
             --nav-bg: rgba(26, 115, 181, 0.97);
         }
 
+        /* 
+        Google Translate – masquer la barre native 
+         */
+        /* Google Translate – masquer la barre native */
+        .skiptranslate iframe,
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        #google_translate_element,
+        .goog-te-gadget {
+            display: none !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -774,9 +792,25 @@
                 </div>
             </li>
         </ul>
+        <div id="google_translate_element" class="hidden"></div>
 
-                <!-- Bouton Traduire -->
-<div class="translate" style="display:flex; align-items:center; gap:12px; cursor:pointer;" onclick="toggleGoogleTranslate()">
+        <div id="lang-trigger" style="position: relative;">
+            <button id="lang-btn"
+                style="display:flex; align-items:center; gap:8px; color:white; background:none; border:none; font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:600; cursor:pointer; padding:8px;">
+                <i data-lucide="languages" style="width:18px; height:18px;"></i>
+                <span id="current-lang">FR</span>
+                <i data-lucide="chevron-down" style="width:14px; height:14px;"></i>
+            </button>
+            <div id="lang-dropdown"
+                style="display:none; position:absolute; right:0; top:100%; width:130px; background:white; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.12); overflow:hidden; z-index:100;">
+                <button class="lang-option" data-lang="fr"
+                    style="width:100%; text-align:left; padding:10px 16px; border:none; background:none; font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:600; color:#333; cursor:pointer;">Français</button>
+                <button class="lang-option" data-lang="en"
+                    style="width:100%; text-align:left; padding:10px 16px; border:none; background:none; font-family:'Poppins',sans-serif; font-size:0.85rem; font-weight:600; color:#333; cursor:pointer;">English</button>
+            </div>
+        </div>
+        <!-- Bouton Traduire -->
+        <!-- <div class="translate" style="display:flex; align-items:center; gap:12px; cursor:pointer;" onclick="toggleGoogleTranslate()">
     <i data-lucide="languages" style="color: white;"></i>
     <span id="lang-label" style="color:white; font-size:0.85rem; font-weight:700; font-family:'Ubuntu',sans-serif;">EN</span>
 </div>
@@ -796,7 +830,7 @@
         }
         translated = !translated;
     }
-</script>
+</script> -->
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
@@ -822,6 +856,12 @@
         <a href="contact.html#assistance">Assistance</a>
         <a href="https://e325981e.mydala.app/" target="_blank">Loyalties</a>
         <a href="contact.html#station-map">Trouver une station</a>
+        <div class="mobile-divider"></div>
+        <span class="mobile-section-label">Langue</span>
+        <button class="lang-option" data-lang="fr"
+            style="background:none; border:none; color:white; font-size:1.2rem; font-weight:700; font-family:'Ubuntu',sans-serif; cursor:pointer;">Français</button>
+        <button class="lang-option" data-lang="en"
+            style="background:none; border:none; color:white; font-size:1.2rem; font-weight:700; font-family:'Ubuntu',sans-serif; cursor:pointer;">English</button>
     </div>
 
     <!-- Page Banner -->
@@ -1427,11 +1467,42 @@
         });
 
         // Google Translate Simulation
-        function googleTranslateElementInit() {
-            // This would normally call the Google Translate API
-            console.log("Google Translate Initialized");
-        }
+        // function googleTranslateElementInit() {
+        //     // This would normally call the Google Translate API
+        //     console.log("Google Translate Initialized");
+        // }
+        // ── Langue dropdown ───────────────────────────────────────
+        const langTrigger = document.getElementById('lang-trigger');
+        const langDropdown = document.getElementById('lang-dropdown');
+        const currentLang = document.getElementById('current-lang');
+        let langTimer = null;
 
+        langTrigger?.addEventListener('mouseenter', () => {
+            clearTimeout(langTimer);
+            langDropdown.style.display = 'block';
+        });
+        langTrigger?.addEventListener('mouseleave', () => {
+            langTimer = setTimeout(() => { langDropdown.style.display = 'none'; }, 150);
+        });
+
+        document.querySelectorAll('.lang-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                const val = '/fr/' + lang;
+                document.cookie = `googtrans=${val}; path=/`;
+                document.cookie = `googtrans=${val}; domain=${location.hostname}; path=/`;
+                if (currentLang) currentLang.textContent = lang.toUpperCase();
+                langDropdown.style.display = 'none';
+                window.location.reload();
+            });
+        });
+
+        // Restaurer la langue active depuis le cookie
+        const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
+        if (match && currentLang) {
+            const parts = match[2].split('/');
+            if (parts.length > 2 && parts[2]) currentLang.textContent = parts[2].toUpperCase();
+        }
         // Testimonials Carousel Logic
         const tSlides = document.getElementById('testimonial-slides');
         const tPrev = document.getElementById('slider-prev');
@@ -1508,9 +1579,21 @@
 
         startHeroRotation();
     </script>
+    <!-- <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+    <div id="google_translate_element" class="hidden"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'fr',
+                includedLanguages: 'en,fr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
     <script type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 
 </body>
 
