@@ -850,57 +850,97 @@
         </ul>
 
         <div class="language-selector"
-    style="position: relative; display: inline-flex; align-items: center; cursor: pointer; color: white; gap: 8px; padding: 5px 12px; background: rgba(255,255,255,0.15); border-radius: 20px; z-index: 1000;"
+    style="position: relative; display: inline-flex; align-items: center; cursor: pointer; color: white; gap: 8px; padding: 5px 12px; background: rgba(255,255,255,0.15); border-radius: 20px; transition: 0.3s; z-index: 10000;"
     onclick="toggleLanguage()">
+
     <i data-lucide="languages" style="width: 16px; height: 16px;"></i>
-    <div id="lang-display" style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.85rem;">
-        <span id="active-flag">🇫🇷</span> <span id="active-text">FR</span>
+
+    <div id="lang-display"
+        style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.85rem; font-family: 'Ubuntu', sans-serif; letter-spacing: 0.5px;">
+        <span id="active-flag" style="font-size: 1.1rem; line-height: 1;">🇫🇷</span> 
+        <span id="active-text">FR</span>
     </div>
+
     <i data-lucide="chevron-down" style="width: 12px; height: 12px; opacity: 0.7;"></i>
 </div>
 
-<div id="google_translate_element" style="position: absolute; top: -9999px; left: -9999px;"></div>
+<div id="google_translate_element" style="position: absolute; top: -999px; left: -999px; visibility: hidden;"></div>
 
 <style>
-    /* Masquer la barre Google et les bordures forcées */
-    .goog-te-banner-frame, .skiptranslate, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
-    body { top: 0px !important; position: static !important; }
-    font { background-color: transparent !important; box-shadow: none !important; }
+    /* Masquage forcé des éléments Google */
+    .goog-te-banner-frame, .goog-te-banner, .skiptranslate, #goog-gt-tt, .goog-te-balloon-frame {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    body { top: 0px !important; }
+    .goog-text-highlight { background: none !important; box-shadow: none !important; }
 </style>
 
 <script type="text/javascript">
-    let currentLang = 'fr';
-
+    // 1. Initialisation
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'fr',
             includedLanguages: 'en,fr',
             autoDisplay: false
         }, 'google_translate_element');
-    }
-
-    function toggleLanguage() {
-        const combo = document.querySelector('.goog-te-combo');
-        if (!combo) return;
-
-        currentLang = (currentLang === 'fr') ? 'en' : 'fr';
         
-        // Mise à jour de l'UI
-        const flag = document.getElementById('active-flag');
-        const text = document.getElementById('active-text');
-        flag.innerHTML = (currentLang === 'en') ? '🇺🇸' : '🇫🇷';
-        text.innerText = (currentLang === 'en') ? 'EN' : 'FR';
-
-        // Commande de traduction
-        combo.value = currentLang;
-        combo.dispatchEvent(new Event('change', { bubbles: true }));
+        // Vérification au chargement si on doit déjà être en Anglais
+        setTimeout(checkStoredLang, 1000);
     }
 
-    // Sécurité pour garder le design propre
-    setInterval(() => { if(document.body.style.top !== '0px') document.body.style.top = '0px'; }, 500);
+    // 2. Basculer la langue
+    function toggleLanguage() {
+        const current = document.getElementById('active-text').innerText;
+        const targetLang = (current === 'FR') ? 'en' : 'fr';
+        
+        applyLangUI(targetLang);
+        executeGoogleTranslate(targetLang);
+    }
+
+    // 3. Appliquer visuellement
+    function applyLangUI(lang) {
+        const display = document.getElementById('lang-display');
+        if (lang === 'en') {
+            display.innerHTML = '<span id="active-flag" style="font-size: 1.1rem; line-height: 1;">🇺🇸</span> <span id="active-text">EN</span>';
+        } else {
+            display.innerHTML = '<span id="active-flag" style="font-size: 1.1rem; line-height: 1;">🇫🇷</span> <span id="active-text">FR</span>';
+        }
+    }
+
+    // 4. Action de traduction
+    function executeGoogleTranslate(langCode) {
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) {
+            combo.value = langCode;
+            combo.dispatchEvent(new Event('change'));
+        } else {
+            setTimeout(() => executeGoogleTranslate(langCode), 500);
+        }
+    }
+
+    // 5. Vérifier le cookie de Google pour synchroniser l'UI
+    function checkStoredLang() {
+        const cookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+        if (cookie && cookie.includes('/fr/en')) {
+            applyLangUI('en');
+        }
+    }
+
+    // 6. NETTOYAGE RADICAL (MutationObserver)
+    // Surveille le document et supprime la barre Google dès qu'elle est injectée
+    const observer = new MutationObserver(() => {
+        const bar = document.querySelector('.goog-te-banner-frame');
+        if (bar) bar.remove();
+        if (document.body.style.top !== '0px') {
+            document.body.style.top = '0px';
+        }
+    });
+
+    observer.observe(document.documentElement, { attributes: true, childList: true, subtree: true });
 </script>
 
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
         <!-- Hamburger button -->
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
