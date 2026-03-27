@@ -813,10 +813,155 @@
             class="hover-scale">
             <i data-lucide="headset" style="width: 20px;"></i> Assistance
         </a> -->
-        <div id="google_translate_element" style="display: none;"></div>
-        <div class="translate">
-            <i data-lucide="languages" style="color: white; cursor: pointer;"></i>
+      <div class="language-selector"
+    style="position: relative; display: inline-flex; align-items: center; cursor: pointer; color: white; gap: 8px; padding: 5px 12px; background: rgba(255,255,255,0.15); border-radius: 20px; transition: 0.3s; z-index: 1000;"
+    onclick="toggleLanguage()">
+
+    <i data-lucide="languages" style="width: 16px; height: 16px;"></i>
+
+    <div id="lang-display"
+        style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.85rem; font-family: 'Ubuntu', sans-serif;">
+        <span id="lang-flag" style="font-size: 1.1rem; line-height: 1;">🇫🇷</span> 
+        <span id="lang-text">FR</span>
+    </div>
+
+    <i data-lucide="chevron-down" style="width: 12px; height: 12px; opacity: 0.7;"></i>
+</div>
+
+<div id="google_translate_element" style="position: absolute; left: -9999px; top: -9999px;"></div>
+
+<style>
+    /* Masquage définitif de la barre Google */
+    .goog-te-banner-frame, .goog-te-banner, .skiptranslate { display: none !important; }
+    body { top: 0px !important; }
+    #goog-gt-tt { display: none !important; visibility: hidden !important; }
+    .goog-text-highlight { background: none !important; box-shadow: none !important; }
+</style>
+
+<script type="text/javascript">
+    // 1. Initialisation
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'fr',
+            includedLanguages: 'en,fr',
+            autoDisplay: false
+        }, 'google_translate_element');
+        
+        // Vérifier au chargement si on est déjà en anglais (via cookie)
+        if (document.cookie.includes('/fr/en')) {
+            updateUI('en');
+        }
+    }
+
+    function toggleLanguage() {
+        const newLang = (document.getElementById('lang-text').innerText === 'FR') ? 'en' : 'fr';
+        
+        // Mettre à jour l'interface immédiatement
+        updateUI(newLang);
+        
+        // Lancer la traduction
+        applyTranslation(newLang);
+    }
+
+    function updateUI(lang) {
+        const flag = document.getElementById('lang-flag');
+        const text = document.getElementById('lang-text');
+        if (lang === 'en') {
+            flag.innerText = '🇺🇸';
+            text.innerText = 'EN';
+        } else {
+            flag.innerText = '🇫🇷';
+            text.innerText = 'FR';
+        }
+    }
+
+    function applyTranslation(langCode) {
+        // On cible le menu déroulant natif de Google
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = langCode;
+            select.dispatchEvent(new Event('change'));
+        } else {
+            // Si pas encore prêt, on attend un peu
+            setTimeout(() => applyTranslation(langCode), 500);
+        }
+    }
+
+    // Sécurité : Forcer le body à rester en haut (Google essaie de le descendre)
+    setInterval(function() {
+        if (document.body.style.top !== '0px') {
+            document.body.style.top = '0px';
+        }
+    }, 1000);
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <div id="google_translate_element" style="position: absolute; opacity: 0; pointer-events: none; z-index: -1;">
         </div>
+
+        <style>
+            /* Masquer les éléments intrusifs de Google */
+            iframe.goog-te-banner-frame {
+                display: none !important;
+            }
+
+            body {
+                top: 0px !important;
+            }
+
+            .goog-te-balloon-frame,
+            #goog-gt-tt {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            font {
+                background-color: transparent !important;
+                box-shadow: none !important;
+            }
+        </style>
+
+        <script type="text/javascript">
+            let currentLang = 'fr';
+
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'fr',
+                    includedLanguages: 'en,fr',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
+
+            function toggleLanguage() {
+                const langDisplay = document.getElementById('lang-display');
+
+                if (currentLang === 'fr') {
+                    currentLang = 'en';
+                    langDisplay.innerHTML = '<span style="font-size: 1.1rem; line-height: 1;">🇺🇸</span> <span>EN</span>';
+                    translateTo('en');
+                } else {
+                    currentLang = 'fr';
+                    langDisplay.innerHTML = '<span style="font-size: 1.1rem; line-height: 1;">🇫🇷</span> <span>FR</span>';
+                    translateTo('fr');
+                }
+            }
+
+            function translateTo(langCode) {
+                const googleCombo = document.querySelector('.goog-te-combo');
+
+                if (googleCombo) {
+                    googleCombo.value = langCode;
+                    // Déclenche l'événement "change" sur l'élément natif de Google
+                    googleCombo.dispatchEvent(new Event('change'));
+                } else {
+                    // Si Google n'est pas encore prêt, on attend un peu
+                    setTimeout(() => translateTo(langCode), 500);
+                }
+            }
+        </script>
+
+        <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
             <span></span><span></span><span></span>
@@ -1130,7 +1275,8 @@
     <section id="faq" style="padding: 100px 5%; background: white;" class="reveal">
         <div style="text-align: center; margin-bottom: 60px;">
             <h2 class="section-title">Questions fréquemment posées</h2>
-            <p style="color: #666; font-size: 1.1rem; text-align: center;">Trouvez les réponses à vos questions les plus courantes sur Elton
+            <p style="color: #666; font-size: 1.1rem; text-align: center;">Trouvez les réponses à vos questions les plus
+                courantes sur Elton
                 Group.</p>
         </div>
         <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
@@ -1229,7 +1375,8 @@
     <section id="partenaires" style="padding: 100px 5%; background: var(--bg-color); text-align: center;"
         class="reveal">
         <h2 class="section-title">Nos Partenaires</h2>
-        <p style="color: #666; font-size: 1.1rem; margin-bottom: 50px; text-align: center;">Ils nous font confiance au quotidien</p>
+        <p style="color: #666; font-size: 1.1rem; margin-bottom: 50px; text-align: center;">Ils nous font confiance au
+            quotidien</p>
         <div
             style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%); max-width: 1200px; margin: 0 auto;">
             <div style="width: 160px; height: 90px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #aaa; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;"
@@ -1348,7 +1495,7 @@
             </div>
         </div>
 
-       <div class="footer-bottom-bar"
+        <div class="footer-bottom-bar"
             style="border-top: 1px solid rgba(0,0,0,0.1); padding: 30px 20px; display: flex; justify-content: center; align-items: center; max-width: 1200px; margin: 0 auto; color: #666; font-size: 0.9rem;">
             <div style="text-align: center;">
                 &copy; 2026 Elton Group. L'énergie de l'émergence.

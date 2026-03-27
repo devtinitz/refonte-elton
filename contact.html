@@ -772,8 +772,89 @@
             </li>
         </ul>
 
-        <div id="google_translate_element" style="display: none;"></div>
-        <div class="translate"><i data-lucide="languages" style="color: white; cursor: pointer;"></i></div>
+        <div class="language-selector"
+    style="position: relative; display: inline-flex; align-items: center; cursor: pointer; color: white; gap: 8px; padding: 5px 12px; background: rgba(255,255,255,0.15); border-radius: 20px; transition: 0.3s; z-index: 1000;"
+    onclick="toggleLanguage()">
+
+    <i data-lucide="languages" style="width: 16px; height: 16px;"></i>
+
+    <div id="lang-display"
+        style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.85rem; font-family: 'Ubuntu', sans-serif;">
+        <span id="lang-flag" style="font-size: 1.1rem; line-height: 1;">🇫🇷</span> 
+        <span id="lang-text">FR</span>
+    </div>
+
+    <i data-lucide="chevron-down" style="width: 12px; height: 12px; opacity: 0.7;"></i>
+</div>
+
+<div id="google_translate_element" style="position: absolute; left: -9999px; top: -9999px;"></div>
+
+<style>
+    /* Masquage définitif de la barre Google */
+    .goog-te-banner-frame, .goog-te-banner, .skiptranslate { display: none !important; }
+    body { top: 0px !important; }
+    #goog-gt-tt { display: none !important; visibility: hidden !important; }
+    .goog-text-highlight { background: none !important; box-shadow: none !important; }
+</style>
+
+<script type="text/javascript">
+    // 1. Initialisation
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'fr',
+            includedLanguages: 'en,fr',
+            autoDisplay: false
+        }, 'google_translate_element');
+        
+        // Vérifier au chargement si on est déjà en anglais (via cookie)
+        if (document.cookie.includes('/fr/en')) {
+            updateUI('en');
+        }
+    }
+
+    function toggleLanguage() {
+        const newLang = (document.getElementById('lang-text').innerText === 'FR') ? 'en' : 'fr';
+        
+        // Mettre à jour l'interface immédiatement
+        updateUI(newLang);
+        
+        // Lancer la traduction
+        applyTranslation(newLang);
+    }
+
+    function updateUI(lang) {
+        const flag = document.getElementById('lang-flag');
+        const text = document.getElementById('lang-text');
+        if (lang === 'en') {
+            flag.innerText = '🇺🇸';
+            text.innerText = 'EN';
+        } else {
+            flag.innerText = '🇫🇷';
+            text.innerText = 'FR';
+        }
+    }
+
+    function applyTranslation(langCode) {
+        // On cible le menu déroulant natif de Google
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = langCode;
+            select.dispatchEvent(new Event('change'));
+        } else {
+            // Si pas encore prêt, on attend un peu
+            setTimeout(() => applyTranslation(langCode), 500);
+        }
+    }
+
+    // Sécurité : Forcer le body à rester en haut (Google essaie de le descendre)
+    setInterval(function() {
+        if (document.body.style.top !== '0px') {
+            document.body.style.top = '0px';
+        }
+    }, 1000);
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
